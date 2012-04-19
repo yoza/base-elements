@@ -33,7 +33,7 @@ register.simple_tag(takes_context=True)(logo_tag)
 
 
 #@register.simple_tag
-def site_param(param, tags=""):
+def site_param(context, param, tags=""):
 
     try:
         entry = SiteParams.objects.values(param).get(site__id=settings.SITE_ID)
@@ -52,7 +52,7 @@ def site_param(param, tags=""):
     except SiteParams.DoesNotExist:
         return ""
 
-register.simple_tag(site_param)
+register.simple_tag(takes_context=True)(site_param)
 
 
 #@register.simple_tag

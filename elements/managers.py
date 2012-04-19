@@ -1,8 +1,7 @@
 import os
 from django.db import models
 from django.conf import settings
-from django.utils.translation import get_language
-from pages.models import Language
+
 try:
     from PIL import Image
 except ImportError:
@@ -79,12 +78,9 @@ class ImageManager(models.Manager):
                 pass
 
 
-    def image_size(self, obj, lang):
-        if not lang:
-            lang = get_language()[:2]
-        lang_id = Language.objects.get(code=lang)
+    def image_size(self, obj):
         try:
-            item = self.get(model=obj,language=lang_id)
+            item = self.get(model=obj)
         except self.model.DoesNotExist:
             item = None
         if item and item.image:
@@ -113,16 +109,13 @@ class ImageManager(models.Manager):
         obj.make_thumbnail(self)
     """
 
-    def image_url(self, obj, lang):
+    def image_url(self, obj):
         """
         Return image path
 
         """
-        if not lang:
-            lang = get_language()[:2]
-        lang_id = Language.objects.get(code=lang)
         try:
-            item = self.get(model=obj,language=lang_id)
+            item = self.get(model=obj)
         except self.model.DoesNotExist:
             item = None
         if item and item.image:
