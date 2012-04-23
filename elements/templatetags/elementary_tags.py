@@ -1,3 +1,4 @@
+import urllib, hashlib
 from django.conf import settings
 from elements.models import SiteParams
 from django import template
@@ -65,3 +66,15 @@ def google_analitics():
         pass
     return mark_safe(code)
 register.simple_tag(google_analitics)
+
+
+def get_gravatar(email, size=40, rating='g', default=None):
+    params = {'s': size, 'r': rating}
+    if default:
+        params['d'] = default
+    # construct the url
+    gravatar_url = "http://www.gravatar.com/avatar/" + hashlib.md5(email.lower()).hexdigest() + "?"
+    gravatar_url += urllib.urlencode(params)
+
+    return gravatar_url
+register.simple_tag(get_gravatar)

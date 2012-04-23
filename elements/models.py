@@ -5,7 +5,7 @@ from django.core.validators import *
 
 class SiteParams(models.Model):
     '''
-    MainPage model
+    SiteParams model
 
     '''
     site = models.ForeignKey(Site, verbose_name=_('Site'))
