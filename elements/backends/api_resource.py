@@ -2,6 +2,7 @@ import urllib2
 import json
 import base64
 
+
 def get_resource(request, authuser=None, authpass=None):
     msg_error = []
     try:
@@ -13,8 +14,10 @@ def get_resource(request, authuser=None, authpass=None):
                 #Next two string for htpass
                 msg_error = []
                 if authuser:
-                    base64string = base64.encodestring('%s:%s' % (authuser, authpass)).replace('\n', '')
-                    request.add_header("Authorization", "Basic %s" % base64string)
+                    base64string = base64.encodestring('%s:%s' % \
+                                       (authuser, authpass)).replace('\n', '')
+                    request.add_header("Authorization",
+                                       "Basic %s" % base64string)
                 opener = urllib2.urlopen(request)
             except urllib2.URLError, e:
                 msg_error = e

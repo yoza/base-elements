@@ -1,6 +1,7 @@
 from django.core import urlresolvers
 from django.conf import settings
-from django.contrib.sites.models import Site, RequestSite
+from django.contrib.sites.models import Site
+
 
 def locator(request):
     r = None
@@ -35,6 +36,7 @@ def locator(request):
         if lang not in dict(settings.LANGUAGES):
             lang = settings.LANGUAGE_CODE
 
-        return {'current_site': site, 'lang': lang, 'debug': settings.DEBUG, 'admin_page': settings.THIS_IS_ADMIN}
+        return {'current_site': site, 'lang': lang, 'debug': settings.DEBUG,
+                'admin_page': settings.THIS_IS_ADMIN}
     else:
-        return { 'current_site': site, 'lang': lang, 'debug': settings.DEBUG}
+        return {'current_site': site, 'lang': lang, 'debug': settings.DEBUG}

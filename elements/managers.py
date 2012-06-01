@@ -1,12 +1,13 @@
 import os
 from django.db import models
 from django.conf import settings
+from django.core.exceptions import ValidationError
+
 
 try:
     from PIL import Image
 except ImportError:
     import Image
-
 
 
 class ImageManager(models.Manager):
@@ -30,18 +31,22 @@ class ImageManager(models.Manager):
         """
         return self.filter(parent__isnull=True)
 
-
     def validate_image(self, value):
         filetype = "." + value.name.split(".")[-1]
-        if not filetype or filetype.lower() not in settings.FILEBROWSER_EXTENSIONS['Image']:
-           raise ValidationError(_(u'Uploaded \'%s\' file is not an image. You can uploade only valid image file!') % filetype)
-
+        if not filetype or filetype.lower() not in \
+                settings.FILEBROWSER_EXTENSIONS['Image']:
+            e = _(u'Uploaded \'%s\' file is not an image.\
+                  You can upload only valid image file!') % filetype
+            raise ValidationError(e)
 
     def make_thumbnail(self, obj):
         if obj.image:
             file_path = os.path.join(settings.MEDIA_ROOT, obj.image.name)
-            file = obj.image.name.split("/")[-1]
-            thumb_path = os.path.join(settings.MEDIA_ROOT, settings.ALBUMS_PATH, self.model.path, settings.IMAGE_THUMB_PREFIX + file)
+            imfile = obj.image.name.split("/")[-1]
+            thumb_path = os.path.join(settings.MEDIA_ROOT,
+                                      settings.ALBUMS_PATH,
+                                      self.model.path,
+                                      settings.IMAGE_THUMB_PREFIX + imfile)
 
             msg = ""
             try:
@@ -52,31 +57,31 @@ class ImageManager(models.Manager):
                 msg = "%s: %s" % (file, _('Thumbnail creation failed.'))
             return msg
 
-
     def delete_thumbnail(self, obj):
         old_obj = self.get(pk=obj.pk)
         if old_obj.image:
-            path = settings.MEDIA_ROOT + "/".join(old_obj.image.name.split("/")[:-1])
-            file = old_obj.image.name.split("/")[-1]
-            thumb_path = os.path.join(path, settings.IMAGE_THUMB_PREFIX + file)
+            path = settings.MEDIA_ROOT + \
+                    "/".join(old_obj.image.name.split("/")[:-1])
+            imfile = old_obj.image.name.split("/")[-1]
+            thumb_path = os.path.join(path,
+                                      settings.IMAGE_THUMB_PREFIX + imfile)
             if os.path.isfile(thumb_path):
                 try:
                     os.unlink(thumb_path)
                 except OSError:
                     pass
 
-
     def delete_image_children(self, obj):
         old_obj = obj.objects.get(pk=self.pk)
-        path = settings.MEDIA_ROOT + "/".join(old_obj.image.name.split("/")[:-1])
-        file = old_obj.image.name.split("/")[-1]
-        thumb_path = os.path.join(path, settings.IMAGE_THUMB_PREFIX + file)
+        path = settings.MEDIA_ROOT + \
+                "/".join(old_obj.image.name.split("/")[:-1])
+        imfile = old_obj.image.name.split("/")[-1]
+        thumb_path = os.path.join(path, settings.IMAGE_THUMB_PREFIX + imfile)
         if os.path.isfile(thumb_path):
             try:
                 os.unlink(thumb_path)
             except OSError:
                 pass
-
 
     def image_size(self, obj):
         try:
@@ -85,12 +90,12 @@ class ImageManager(models.Manager):
             item = None
         if item and item.image:
             try:
-                image = Image.open(os.path.join(settings.MEDIA_ROOT, item.image.name))
+                image = Image.open(os.path.join(settings.MEDIA_ROOT,
+                                                item.image.name))
                 return image.size
             except OSError:
                 pass
-        return (0,0)
-
+        return (0, 0)
 
     """
     def save(self, obj, force_insert=False, force_update=False):

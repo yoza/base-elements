@@ -5,6 +5,7 @@ from django.forms import Widget, Field, BaseForm, Form, ValidationError
 from django.utils import translation
 from django.utils.safestring import mark_safe
 
+
 class RecaptchaWidget(Widget):
     def __init__(self, theme=None, tabindex=None):
         options = {}
@@ -17,8 +18,10 @@ class RecaptchaWidget(Widget):
 
     def render(self, name, value, attrs=None):
         self.options['lang'] = translation.get_language()
-        if len(settings.RECAPTCHA_CUSTOM_TRANSLATIONS[self.options['lang']]) > 0:
-            self.options['custom_translations'] = settings.RECAPTCHA_CUSTOM_TRANSLATIONS[self.options['lang']]
+        if len(settings.RECAPTCHA_CUSTOM_TRANSLATIONS[self.options['lang']]) >\
+                                                                             0:
+            self.options['custom_translations'] = \
+                   settings.RECAPTCHA_CUSTOM_TRANSLATIONS[self.options['lang']]
             options = '%r' % self.options
             options = options.replace("u'", "'")
         else:
@@ -27,7 +30,8 @@ class RecaptchaWidget(Widget):
                     var RecaptchaOptions = %s;
                  </script>""" % options
 
-        result = mark_safe(res + captcha.displayhtml(settings.RECAPTCHA_PUB_KEY))
+        result = mark_safe(res + \
+                           captcha.displayhtml(settings.RECAPTCHA_PUB_KEY))
         return result
 
     def value_from_datadict(self, data, files, name):
@@ -52,7 +56,9 @@ class RecaptchaField(Field):
         value = super(RecaptchaField, self).clean(value)
         challenge, response = value
         if not challenge:
-            raise ValidationError(_('An error occured with the CAPTCHA service. Please try again.'))
+            e = _('An error occured with the CAPTCHA service.\
+                  Please try again.')
+            raise ValidationError(e)
         if not response:
             raise ValidationError(_('Please enter the CAPTCHA solution.'))
 
@@ -62,7 +68,8 @@ class RecaptchaField(Field):
                                        self.remote_ip)
 
         if not check_captcha.is_valid:
-            raise ValidationError(_('An incorrect CAPTCHA solution was entered.'))
+            e = _('An incorrect CAPTCHA solution was entered.')
+            raise ValidationError(e)
         return value
 
 
@@ -76,12 +83,14 @@ class RecaptchaFieldPlaceholder(Field):
         self.args = args
         self.kwargs = kwargs
 
+
 class RecaptchaBaseForm(BaseForm):
     def __init__(self, request, *args, **kwargs):
         for key, field in self.base_fields.items():
             if isinstance(field, RecaptchaFieldPlaceholder):
-                self.base_fields[key] = RecaptchaField(request.META.get('REMOTE_ADDR', ''),
-                                                       *field.args, **field.kwargs)
+                self.base_fields[key] = \
+                        RecaptchaField(request.META.get('REMOTE_ADDR', ''),
+                                       *field.args, **field.kwargs)
         super(RecaptchaBaseForm, self).__init__(*args, **kwargs)
 
 

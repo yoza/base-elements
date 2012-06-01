@@ -2,6 +2,7 @@ from os.path import join
 from django.contrib import admin
 from django.conf import settings
 
+
 class SiteParamsAdmin(admin.ModelAdmin):
     """
     Site params admin
