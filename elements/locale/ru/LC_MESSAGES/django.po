@@ -1,0 +1,135 @@
+# elements russian translate.
+# Copyright (C) 2012 Oleg Pranskevichus
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR Oleg Prans <yozapr@gmail.com>, 2012.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-05 15:40-0400\n"
+"PO-Revision-Date: 2012-06-05 15:34-0500\n"
+"Last-Translator: Oleg Prans <yozapr@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+
+#: managers.py:38
+msgid ""
+"Uploaded '%s' file is not an image. You can upload only valid image file!"
+msgstr ""
+"Загружаемый '%s' файл не является изображением. Вы можете загружать только "
+"разрешенные типы файлов изображений!"
+
+#: managers.py:56
+msgid "Thumbnail creation failed."
+msgstr "Создание иконки закончилось неудачей."
+
+#: models.py:11
+msgid "Site"
+msgstr "Сайт"
+
+#: models.py:12
+msgid "copyright"
+msgstr "копирайт"
+
+#: models.py:14
+msgid "Site copyright"
+msgstr "Копирайт сайта"
+
+#: models.py:15
+msgid "Site title"
+msgstr "Заголовок сайта"
+
+#: models.py:17
+msgid "Put here alternative text for logo image and site name"
+msgstr "Добавьте сюда альтернативный текст для картинки лого и названия сайта"
+
+#: models.py:18
+msgid "slug"
+msgstr "слуг"
+
+#: models.py:20
+msgid "site params slug"
+msgstr "слуг коллекции параметров сайта"
+
+#: models.py:21
+msgid "Site slogan"
+msgstr "Слоган сайта"
+
+#: models.py:23
+msgid "Put here text for site slogan"
+msgstr "Добавьте сюда текст слогана сайта"
+
+#: models.py:25
+msgid "Right block"
+msgstr "Блок справа"
+
+#: models.py:27
+msgid "Show/hide right block on main page"
+msgstr "Показать/скрыть правый блок главной страницы"
+
+#: models.py:28
+msgid "Left block"
+msgstr "Блок слева"
+
+#: models.py:30
+msgid "Show/hide left block on main page"
+msgstr "Показать/скрыть левый блок главной страницы"
+
+#: models.py:31
+msgid "GA code"
+msgstr "GA код"
+
+#: models.py:32
+msgid ""
+"Custom JavaScript: Google Analitics JS code etc. Copy and paste it on this "
+"field."
+msgstr ""
+"Ваш JavaScript: например Google Analitics js код. "
+"Скопируйте его и вставьте в это поле."
+
+#: models.py:35
+msgid "site parameter"
+msgstr "параметр сайта"
+
+#: models.py:36
+msgid "site parameters"
+msgstr "параметры сайта"
+
+#: models.py:42
+msgid "Parameters data for site"
+msgstr "Данные параметров для сайта"
+
+#: multiling.py:111
+msgid "Untitled"
+msgstr "Нет заголовка"
+
+#: admin/widgets.py:47
+msgid ""
+"To allow for insert banner on this place, please insert                   "
+"true 'width' and 'height' on the banner slot before!"
+msgstr ""
+"Для того, чтобы вставить баннер на это место, пожалуйста "
+"предварительно введите правильную 'ширину' и 'высоту' слота баннеров"
+
+#: admin/widgets.py:59 admin/widgets.py:92
+msgid "Change:"
+msgstr "Изменить:"
+
+#: forms/captcha.py:60
+msgid "An error occured with the CAPTCHA service. Please try again."
+msgstr "Ошибка при обращении к CAPTCHA сервису. Пожалуста попробуйте еще раз."
+
+#: forms/captcha.py:63
+msgid "Please enter the CAPTCHA solution."
+msgstr "Пожалуста введите содержание CAPTCHA"
+
+#: forms/captcha.py:71
+msgid "An incorrect CAPTCHA solution was entered."
+msgstr "Введено неправильное содержание CAPTCHA"
+

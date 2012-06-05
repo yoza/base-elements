@@ -35,8 +35,7 @@ class ImageManager(models.Manager):
         filetype = "." + value.name.split(".")[-1]
         if not filetype or filetype.lower() not in \
                 settings.FILEBROWSER_EXTENSIONS['Image']:
-            e = _(u'Uploaded \'%s\' file is not an image.\
-                  You can upload only valid image file!') % filetype
+            e = _(u'Uploaded \'%s\' file is not an image. You can upload only valid image file!') % filetype
             raise ValidationError(e)
 
     def make_thumbnail(self, obj):

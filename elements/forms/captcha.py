@@ -1,9 +1,10 @@
 from django.conf import settings
-from recaptcha.client import captcha
 from django.utils.translation import ugettext_lazy as _
 from django.forms import Widget, Field, BaseForm, Form, ValidationError
 from django.utils import translation
 from django.utils.safestring import mark_safe
+
+from recaptcha.client import captcha
 
 
 class RecaptchaWidget(Widget):
@@ -56,8 +57,7 @@ class RecaptchaField(Field):
         value = super(RecaptchaField, self).clean(value)
         challenge, response = value
         if not challenge:
-            e = _('An error occured with the CAPTCHA service.\
-                  Please try again.')
+            e = _('An error occured with the CAPTCHA service. Please try again.')
             raise ValidationError(e)
         if not response:
             raise ValidationError(_('Please enter the CAPTCHA solution.'))
