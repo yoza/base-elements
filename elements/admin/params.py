@@ -1,10 +1,10 @@
 from os.path import join
 from django.contrib import admin
 from django.conf import settings
-import multilingual
+from hvad.admin import TranslatableAdmin
 
 
-class SiteParamsAdmin(multilingual.ModelAdmin):
+class SiteParamsAdmin(TranslatableAdmin):
     """
     Site params admin
     """
@@ -14,6 +14,6 @@ class SiteParamsAdmin(multilingual.ModelAdmin):
     if not settings.DEBUG:
         exclude = ('ga_code',)
 
-    use_fieldset = (
-        (None, {'fields': ('site', 'rb_section', 'lb_section', 'ga_code', 'slug')}),
-    )
+    #use_fieldset = (
+        #(None, {'fields': ('site', 'rb_section', 'lb_section', 'ga_code', 'slug')}),
+    #)

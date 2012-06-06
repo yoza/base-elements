@@ -14,7 +14,7 @@ def logo_tag(context):
     site_logo = getattr(settings, 'LOGO_IMAGE', ("maipage/img/logo.png",
                                                  "0,0,85,85"))
     try:
-        params = SiteParams.objects.get(site__id=settings.SITE_ID)
+        params = SiteParams.objects.language().get(site__id=settings.SITE_ID)
         tags = 'span p br div sub sup a'
         tags = [re.escape(tag) for tag in tags.split()]
         tags_re = u'(%s)' % u'|'.join(tags)
@@ -40,7 +40,7 @@ register.simple_tag(takes_context=True)(logo_tag)
 def site_param(context, param, tags=""):
 
     try:
-        entry = SiteParams.objects.values(param).get(site__id=settings.SITE_ID)
+        entry = SiteParams.objects.language().values(param).get(site__id=settings.SITE_ID)
         if tags:
             tags = [re.escape(tag) for tag in tags.split()]
             tags_re = u'(%s)' % u'|'.join(tags)
@@ -62,7 +62,7 @@ register.simple_tag(takes_context=True)(site_param)
 def google_analitics():
     code = ""
     try:
-        params = SiteParams.objects.get(site__id=settings.SITE_ID)
+        params = SiteParams.objects.language().get(site__id=settings.SITE_ID)
         code = u"%s" % (params.ga_code)
     except SiteParams.DoesNotExist:
         pass

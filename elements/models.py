@@ -1,15 +1,15 @@
 from django.db import models
 from django.contrib.sites.models import Site
 from django.utils.translation import ugettext_lazy as _
-import multilingual
-from multilingual.manager import MultilingualManager
+from hvad.models import TranslatableModel, TranslatedFields
+from hvad.manager import TranslationManager
 
 
-class SiteParamsMamager(MultilingualManager):
+class SiteParamsMamager(TranslationManager):
     pass
 
 
-class SiteParams(models.Model):
+class SiteParams(TranslatableModel):
     '''
     SiteParams model
 
@@ -33,17 +33,17 @@ class SiteParams(models.Model):
         verbose_name = _('site parameter')
         verbose_name_plural = _('site parameters')
 
-    class Translation(multilingual.Translation):
-
+    translations = TranslatedFields(
         title = models.CharField(_('Site title'), null=True,
                                  blank=True, max_length=512,
-                                 help_text=_('''Put here alternative text for logo image and site name'''))
+                                 help_text=_('''Put here alternative text for logo image and site name''')),
         footer = models.CharField(_('copyright'), null=True,
                                   blank=True, max_length=512,
-                                  help_text=_('''Site copyright'''))
+                                  help_text=_('''Site copyright''')),
         slogan = models.CharField(_('Site slogan'), null=True,
                                   blank=True, max_length=512,
-                                  help_text=_('''Put here text for site slogan'''))
+                                  help_text=_('''Put here text for site slogan''')),
+    )
 
     def invalidate(self):
         pass
