@@ -1,31 +1,19 @@
 from os.path import join
 from django.contrib import admin
 from django.conf import settings
+import multilingual
 
 
-class SiteParamsAdmin(admin.ModelAdmin):
+class SiteParamsAdmin(multilingual.ModelAdmin):
     """
     Site params admin
     """
     save_on_top = True
     actions = None
-    prepopulated_fields = {'slug': ('title', )}
+    use_prepopulated_fields = {'slug': ('title', )}
     if not settings.DEBUG:
         exclude = ('ga_code',)
 
-    class Media:
-        css = {
-            'all': [join(settings.STATIC_URL, path) for path in (
-                #'pages/css/rte.css',
-                #'pages/css/pages.css',
-                #"pages/css/admin_fixform.css",
-            )]
-        }
-        js = [join(settings.STATIC_URL, path) for path in (
-            #'pages/js/adapter.js',
-            #'pages/js/pages.js',
-            #'pages/js/pages_list.js',
-            #'pages/js/inline.js',
-        )]
-
-
+    use_fieldset = (
+        (None, {'fields': ('site', 'rb_section', 'lb_section', 'ga_code', 'slug')}),
+    )
