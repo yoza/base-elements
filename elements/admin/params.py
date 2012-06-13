@@ -10,7 +10,7 @@ class SiteParamsAdmin(TranslatableAdmin):
     """
     save_on_top = True
     actions = None
-    use_prepopulated_fields = {'slug': ('title', )}
+    #use_prepopulated_fields = {'slug': ('title', )}
     if not settings.DEBUG:
         exclude = ('ga_code',)
 
