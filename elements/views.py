@@ -8,8 +8,8 @@ from elements.utils import auto_render
 from elements.forms import handle_form
 
 
-def details(request, page_id=None, slug=None, raise404=True,
-            template_name=settings.DEFAULT_TEMPLATE, lang=None):
+def details(request, lang=None, slug=None, raise404=True,
+            template_name=settings.DEFAULT_TEMPLATE):
 
     context = RequestContext(request)
 
@@ -19,6 +19,9 @@ def details(request, page_id=None, slug=None, raise404=True,
                                context, request.POST['formname'])
         if response:
             return response
+    if 'template_name' not in context:
+        context['template_name'] = template_name
 
     return context['template_name'], context
+
 details = auto_render(details)

@@ -30,13 +30,13 @@ def locator(request):
     lang = settings.LANGUAGE_CODE
     if r:
         (handler, args, kwargs) = r
-
+        slug = kwargs['slug'] if 'slug' in kwargs else None
         if 'lang' in kwargs and kwargs['lang']:
             lang = kwargs['lang'].lower()
         if lang not in dict(settings.LANGUAGES):
             lang = settings.LANGUAGE_CODE
 
-        return {'current_site': site, 'lang': lang, 'debug': settings.DEBUG,
+        return {'current_site': site, 'lang': lang, 'slug': slug, 'debug': settings.DEBUG,
                 'admin_page': settings.THIS_IS_ADMIN}
     else:
         return {'current_site': site, 'lang': lang, 'debug': settings.DEBUG}
