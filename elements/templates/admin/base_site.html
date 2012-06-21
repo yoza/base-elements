@@ -1,0 +1,22 @@
+{% extends "admin/base.html" %}
+{% load static i18n %}
+
+{% block title %}{{ title }} | {{ site_name }}{% endblock %}
+
+{% block extrahead %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static 'elements/css/admin.css' %}" />
+<link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon" />{% endblock %}
+
+{% block branding %}
+    {% if LANGUAGES %}
+    <form action="{% url setlanguage-view %}" method="post" id="lang-form">{% csrf_token %}
+        <h1 id="site-name"><a href="/admin/">{{ site_name }}</a></h1>
+        {% for l in LANGUAGES %}
+            <input type="submit" name="language" value="{{ l.0 }}" />
+        {% endfor %}
+    </form>
+    {% else %}
+        <h1 id="site-name"><a href="/admin/">{{ site_name }}</a></h1>
+    {% endif %}
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

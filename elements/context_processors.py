@@ -3,6 +3,7 @@ from django.conf import settings
 from django.contrib.sites.models import Site
 
 
+
 def locator(request):
     r = None
     try:
@@ -17,18 +18,18 @@ def locator(request):
     except ValueError:
         pass
 
-    site_domain = request.get_host()
-    try:
-        site = Site.objects.get(domain=site_domain)
-    except Site.DoesNotExist:
-        site = Site.objects.all()[0]
-    if site:
-        settings.SITE_ID = site.id
-    else:
-        settings.SITE_ID = 1
-
     lang = settings.LANGUAGE_CODE
     if r:
+        site = request.site
+        site_id = 1
+        if site:
+            try:
+                site = Site.objects.get(domain=site.domain)
+                site_id = site.id
+            except Site.DoesNotExist:
+                pass
+        setattr(settings, 'SITE_ID', site_id)
+
         (handler, args, kwargs) = r
         slug = kwargs['slug'] if 'slug' in kwargs else None
         if 'lang' in kwargs and kwargs['lang']:
@@ -37,6 +38,6 @@ def locator(request):
             lang = settings.LANGUAGE_CODE
 
         return {'current_site': site, 'lang': lang, 'slug': slug, 'debug': settings.DEBUG,
-                'admin_page': settings.THIS_IS_ADMIN}
+                'admin_page': settings.THIS_IS_ADMIN, 'site_name': settings.SITE_NAME}
     else:
-        return {'current_site': site, 'lang': lang, 'debug': settings.DEBUG}
+        return {'lang': lang, 'debug': settings.DEBUG}

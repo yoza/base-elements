@@ -1,0 +1,132 @@
+#header {
+    background: url(../img/header_bg.gif) repeat-x;
+    height: 43px;
+    padding-top: 3px;
+}
+
+#header #site-name {
+    color: white;
+    margin-top: 6px;
+}
+
+#header #site-name a,
+#header #site-name a:hover {
+    text-decoration: none;
+    color: white;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+#header #lang-form {
+    margin: 7px 0 8px 10px;
+}
+
+#header #lang-form h1 {
+    display: inline;
+    padding-right: 30px;
+}
+
+#header #lang-form input {
+    margin-top: -3px;
+}
+
+#header a {
+    text-decoration: none;
+    border-bottom: 1px solid #bbb;
+}
+
+#header a:hover {
+    text-decoration: none;
+    color: #eee;
+}
+
+h1 {
+    font-family: tahoma, arial, verdana, sans-serif;
+    font-weight: normal;
+    font-size: 2em;
+    color: #222;
+}
+
+.module table caption {
+    font-size: 1.3em;
+    background: url(../img/app_header_bg.gif) repeat-x;
+    font-weight: bold;
+}
+
+.module {
+    border-color: #596167;
+    margin-bottom: 1em;
+}
+#changelist table tbody td { border-left: none; }
+
+.module table tbody th a {
+    color: #036;
+    border-bottom: 1px dotted #999;
+}
+
+.module table tbody tr td,
+.module table tbody tr th {
+    padding: 0.7em 0.6em;
+}
+
+
+.module table tbody tr:last-child td,
+.module table tbody tr:last-child th {
+    border-bottom: none;
+}
+
+.fieldsets-table .left-column fieldset,
+.fieldsets-table .right-column fieldset {
+    float: none;
+}
+
+.fieldsets-table td.right-column {
+    width: 100%;
+}
+
+#fieldsets-tabs ul.mootabs_title {
+    margin-top: 1em;
+    display: block;
+    clear: both;
+}
+
+#fieldsets-tabs ul.mootabs_title li {
+    display: inline;
+    list-style: none;
+    padding: 0.5em 1em;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.3em;
+    border: 1px solid #596167;
+    text-decoration: none;
+}
+
+#fieldsets-tabs ul.mootabs_title li.hover {
+    text-decoration: underline;
+}
+
+#fieldsets-tabs ul.mootabs_title li.active {
+    background: #7CA0C7 url(../img/default-bg.gif) repeat-x scroll center top;
+    color: white;
+    text-decoration: none;
+}
+
+.admin-error {
+    color: #A00;
+    font-size: 1.3em;
+    margin: 1em 0;
+}
+
+#id_slug {
+    width: 212px;
+}
+
+#fieldsets-tabs INPUT {
+    width: 790px;
+}
+
+.change-list .filtered TABLE {
+    margin-right: 160px !important;
+    width: auto !important;
+}
