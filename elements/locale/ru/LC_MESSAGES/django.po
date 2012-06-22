@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-05 15:40-0400\n"
+"POT-Creation-Date: 2012-06-22 17:24-0400\n"
 "PO-Revision-Date: 2012-06-05 15:34-0500\n"
 "Last-Translator: Oleg Prans <yozapr@gmail.com>\n"
 "Language-Team: Russian <>\n"
@@ -19,6 +19,7 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
 #: managers.py:38
+#, python-format
 msgid ""
 "Uploaded '%s' file is not an image. You can upload only valid image file!"
 msgstr ""
@@ -29,93 +30,89 @@ msgstr ""
 msgid "Thumbnail creation failed."
 msgstr "Создание иконки закончилось неудачей."
 
-#: models.py:11
+#: models.py:17
 msgid "Site"
 msgstr "Сайт"
 
-#: models.py:12
-msgid "copyright"
-msgstr "копирайт"
-
-#: models.py:14
-msgid "Site copyright"
-msgstr "Копирайт сайта"
-
-#: models.py:15
-msgid "Site title"
-msgstr "Заголовок сайта"
-
-#: models.py:17
-msgid "Put here alternative text for logo image and site name"
-msgstr "Добавьте сюда альтернативный текст для картинки лого и названия сайта"
-
 #: models.py:18
-msgid "slug"
-msgstr "слуг"
-
-#: models.py:20
-msgid "site params slug"
-msgstr "слуг коллекции параметров сайта"
-
-#: models.py:21
-msgid "Site slogan"
-msgstr "Слоган сайта"
-
-#: models.py:23
-msgid "Put here text for site slogan"
-msgstr "Добавьте сюда текст слогана сайта"
-
-#: models.py:25
 msgid "Right block"
 msgstr "Блок справа"
 
-#: models.py:27
+#: models.py:20
 msgid "Show/hide right block on main page"
 msgstr "Показать/скрыть правый блок главной страницы"
 
-#: models.py:28
+#: models.py:21
 msgid "Left block"
 msgstr "Блок слева"
 
-#: models.py:30
+#: models.py:23
 msgid "Show/hide left block on main page"
 msgstr "Показать/скрыть левый блок главной страницы"
 
-#: models.py:31
+#: models.py:24
 msgid "GA code"
 msgstr "GA код"
 
-#: models.py:32
+#: models.py:25
 msgid ""
 "Custom JavaScript: Google Analitics JS code etc. Copy and paste it on this "
 "field."
 msgstr ""
-"Ваш JavaScript: например Google Analitics js код. "
-"Скопируйте его и вставьте в это поле."
+"Ваш JavaScript: например Google Analitics js код. Скопируйте его и вставьте "
+"в это поле."
 
-#: models.py:35
+#: models.py:26
+msgid "slug"
+msgstr "слуг"
+
+#: models.py:28
+msgid "site params slug"
+msgstr "слуг коллекции параметров сайта"
+
+#: models.py:33
 msgid "site parameter"
 msgstr "параметр сайта"
 
-#: models.py:36
+#: models.py:34
 msgid "site parameters"
 msgstr "параметры сайта"
 
+#: models.py:37
+msgid "Site title"
+msgstr "Заголовок сайта"
+
+#: models.py:39
+msgid "Put here alternative text for logo image and site name"
+msgstr "Добавьте сюда альтернативный текст для картинки лого и названия сайта"
+
+#: models.py:40
+msgid "copyright"
+msgstr "копирайт"
+
 #: models.py:42
+msgid "Site copyright"
+msgstr "Копирайт сайта"
+
+#: models.py:43
+msgid "Site slogan"
+msgstr "Слоган сайта"
+
+#: models.py:45
+msgid "Put here text for site slogan"
+msgstr "Добавьте сюда текст слогана сайта"
+
+#: models.py:52
 msgid "Parameters data for site"
 msgstr "Данные параметров для сайта"
-
-#: multiling.py:111
-msgid "Untitled"
-msgstr "Нет заголовка"
 
 #: admin/widgets.py:47
 msgid ""
 "To allow for insert banner on this place, please insert                   "
 "true 'width' and 'height' on the banner slot before!"
 msgstr ""
-"Для того, чтобы вставить баннер на это место, пожалуйста "
-"предварительно введите правильную 'ширину' и 'высоту' слота баннеров"
+"Для того, чтобы вставить баннер на это место, пожалуйста предварительно "
+"введите правильную 'ширину' и 'высоту' слота баннеров"
 
 #: admin/widgets.py:59 admin/widgets.py:92
 msgid "Change:"
@@ -133,3 +130,24 @@ msgstr "Пожалуста введите содержание CAPTCHA"
 msgid "An incorrect CAPTCHA solution was entered."
 msgstr "Введено неправильное содержание CAPTCHA"
 
+#: templates/admin/index.html:18
+#, python-format
+msgid "Models available in the %(name)s application."
+msgstr "Доступны модели в %(name)s приложении."
+
+#: templates/admin/index.html:19
+#, python-format
+msgid "%(name)s"
+msgstr "%(name)s"
+
+#: templates/admin/index.html:29
+msgid "Add"
+msgstr "Добавить"
+
+#: templates/admin/index.html:35
+msgid "Change"
+msgstr "Изменить:"
+
+#: templates/admin/index.html:45
+msgid "You don't have permission to edit anything."
+msgstr "Вы не имеете разрешения на редактирование чего-либо."
