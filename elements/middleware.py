@@ -3,11 +3,7 @@
 from django.utils.cache import patch_vary_headers
 from django.utils import translation
 from django.core import urlresolvers
-from django.contrib.sites.models import *
-from django.contrib.admin.models import *
-from django.template import RequestContext
-from django.http import Http404
-from django.utils.translation import ugettext as _
+from django.contrib.sites.models import Site
 from django.conf import settings
 
 from elements.utils import get_site_from_request
@@ -21,6 +17,7 @@ class LazySite(object):
                 request._cached_site = Site.objects.get(id=settings.SITE_ID)
 
         return request._cached_site
+
 
 class CurrentSiteMiddleware(object):
 

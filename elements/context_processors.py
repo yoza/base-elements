@@ -18,10 +18,11 @@ def locator(request):
         pass
 
     lang = settings.LANGUAGE_CODE
+    debug = getattr(settings, 'DEBUG', False)
     if r:
         site = request.site
         site_id = 1
-        site_name = settings.SITE_NAME
+        site_name = getattr(settings, 'SITE_NAME', '')
         if site:
             try:
                 site = Site.objects.get(domain=site.domain)
@@ -39,7 +40,7 @@ def locator(request):
             lang = settings.LANGUAGE_CODE
 
         return {'current_site': site, 'lang': lang, 'slug': slug,
-                'debug': settings.DEBUG, 'site_name': site_name,
-                'admin_page': settings.THIS_IS_ADMIN }
+                'debug': debug, 'site_name': site_name,
+                'admin_page': settings.THIS_IS_ADMIN}
     else:
-        return {'lang': lang, 'debug': settings.DEBUG}
+        return {'lang': lang, 'debug': debug, 'site_name': site_name}
