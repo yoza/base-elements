@@ -3,7 +3,6 @@ from django.conf import settings
 from django.contrib.sites.models import Site
 
 
-
 def locator(request):
     r = None
     try:
@@ -11,10 +10,10 @@ def locator(request):
     except urlresolvers.Resolver404:
         pass
 
-    settings.THIS_IS_ADMIN = False
+    setattr(settings, 'THIS_IS_ADMIN', False)
     try:
         if 'admin' in request.path_info:
-            settings.THIS_IS_ADMIN = True
+            setattr(settings, 'THIS_IS_ADMIN', True)
     except ValueError:
         pass
 
@@ -22,10 +21,12 @@ def locator(request):
     if r:
         site = request.site
         site_id = 1
+        site_name = settings.SITE_NAME
         if site:
             try:
                 site = Site.objects.get(domain=site.domain)
                 site_id = site.id
+                site_name = site.name
             except Site.DoesNotExist:
                 pass
         setattr(settings, 'SITE_ID', site_id)
@@ -37,7 +38,8 @@ def locator(request):
         if lang not in dict(settings.LANGUAGES):
             lang = settings.LANGUAGE_CODE
 
-        return {'current_site': site, 'lang': lang, 'slug': slug, 'debug': settings.DEBUG,
-                'admin_page': settings.THIS_IS_ADMIN, 'site_name': settings.SITE_NAME}
+        return {'current_site': site, 'lang': lang, 'slug': slug,
+                'debug': settings.DEBUG, 'site_name': site_name,
+                'admin_page': settings.THIS_IS_ADMIN }
     else:
         return {'lang': lang, 'debug': settings.DEBUG}
