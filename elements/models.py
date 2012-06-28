@@ -5,7 +5,7 @@ from hvad.models import TranslatableModel, TranslatedFields
 from hvad.manager import TranslationManager
 
 
-class SiteParamsMamager(TranslationManager):
+class SiteParamsManager(TranslationManager):
     pass
 
 
@@ -27,7 +27,7 @@ class SiteParams(TranslatableModel):
                             max_length=128, unique=True,
                             help_text=_('site params slug'))
 
-    objects = SiteParamsMamager()
+    objects = SiteParamsManager()
 
     class Meta:
         verbose_name = _('site parameter')

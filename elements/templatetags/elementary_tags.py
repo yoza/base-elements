@@ -2,9 +2,11 @@ import re
 import urllib
 import hashlib
 from django.conf import settings
-from elements.models import SiteParams
 from django import template
 from django.utils.safestring import mark_safe
+
+from elements.models import SiteParams
+
 
 register = template.Library()
 
@@ -81,3 +83,15 @@ def get_gravatar(email, size=40, rating='g', default=None):
 
     return gravatar_url
 register.simple_tag(get_gravatar)
+
+
+def footer():
+
+    try:
+        params = SiteParams.objects.get(site__id=settings.SITE_ID)
+        return params.footer
+
+    except SiteParams.DoesNotExist:
+        return ""
+
+register.simple_tag(footer)
