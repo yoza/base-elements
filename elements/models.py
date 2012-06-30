@@ -43,6 +43,8 @@ class SiteParams(TranslatableModel):
         slogan = models.CharField(_('Site slogan'), null=True,
                                   blank=True, max_length=512,
                                   help_text=_('''Put here text for site slogan''')),
+        description = models.TextField(_('description'), null=True, blank=True, help_text=_('''Site Description'''))
+
     )
 
     def invalidate(self):

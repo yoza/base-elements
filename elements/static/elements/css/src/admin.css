@@ -119,7 +119,7 @@ h1 {
 }
 
 #id_slug {
-    width: 212px;
+    width: 300px;
 }
 
 #fieldsets-tabs INPUT {
@@ -129,4 +129,17 @@ h1 {
 .change-list .filtered TABLE {
     margin-right: 160px !important;
     width: auto !important;
+}
+
+#banner_flash {
+    vertical-align: middle;
+}
+
+#result_list TD.nowrap {
+    text-align: right;
+}
+
+.colM .aligned .vLargeTextField,
+.colM .aligned .vTextField {
+    width: 792px;
 }

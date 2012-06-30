@@ -1,3 +1,4 @@
+import os
 import re
 import urllib
 import hashlib
@@ -9,6 +10,7 @@ from elements.models import SiteParams
 
 
 register = template.Library()
+supported = dict(settings.LANGUAGES)
 
 
 def logo_tag(context):
@@ -53,7 +55,7 @@ def site_param(context, param, tags=""):
         else:
             value = entry[param]
 
-        return value
+        return mark_safe(value)
 
     except SiteParams.DoesNotExist:
         return ""
@@ -95,3 +97,68 @@ def footer():
         return ""
 
 register.simple_tag(footer)
+
+
+def site_languages(context, sort=True, fullname=False):
+
+    languages = ""
+    if 'request' in context:
+        request = context['request']
+        lang = None
+        if 'lang' in context:
+            lang = context['lang']
+        if lang == None or lang not in dict(settings.LANGUAGES):
+            lang = settings.LANGUAGE_CODE
+        path = request.META['PATH_INFO']
+        clear_path = "/"
+        if path != clear_path:
+            items = path.split('/')
+            if str(items[1]) not in supported:
+                del items[1]
+            for item in items:
+                clear_path = os.path.join(clear_path, item)
+        try:
+            query_str = request.META['QUERY_STRING']
+        except ValueError:
+            query_str = None
+
+        langs = list(settings.LANGUAGES)
+
+        if sort:
+            langs = sorted(langs, key=lambda p: p[0])
+
+        languages = "<ul>"
+        for i,language in enumerate(langs):
+            if clear_path.split('/')[1] == lang:
+                path = '/' + language[0] + clear_path[3:]
+            else:
+                path = '/' + language[0] + clear_path
+
+            if query_str:
+                path += '?' + iri_to_uri(query_str)
+
+            css_class = ""
+            if i == 0:
+                css_class = "class='first'"
+            if str(language[0]) == lang:
+                if css_class:
+                    css_class = "class='active first'"
+                else:
+                    css_class = "class='active'"
+            if len(langs) - i == 1:
+                if css_class:
+                    css_class = "class='active last'"
+                else:
+                    css_class = "class='last'"
+
+            if fullname:
+                lang_name = language[1]
+            else:
+                lang_name = language[1][:3]
+            languages += "<li %s ><span class='layer1'><span class='layer2'><a %s href='%s'>%s</a></span></span></li>" % (css_class, css_class, path, lang_name)
+        languages += "</ul>"
+
+    return  mark_safe(languages)
+
+register.simple_tag(takes_context=True)(site_languages)
+

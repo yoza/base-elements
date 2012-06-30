@@ -1,9 +1,69 @@
+import re
 import os
+from os.path import join
 from django.conf import settings
 from django.utils.safestring import mark_safe
 from django.contrib.admin.widgets import AdminFileWidget
 from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
 from django.utils.translation import ugettext as _
+from django.forms import Textarea
+from django.template.loader import render_to_string
+
+
+class TinyMCE(Textarea):
+    cleanup_res = {
+        re.compile(r'(\p{Zs}*)class="MsoNormal"', re.I | re.L | re.U) : '',
+        re.compile(r'<p(\p{Zs}*)/>', re.I | re.L | re.U) : '',
+        re.compile(r'<p>(\p{Zs}|&nbsp;)*</p>', re.I | re.L | re.U) : '',
+        re.compile(r'<p>(\p{Zs}|&nbsp;)+', re.I | re.L | re.U) : '<p>',
+        re.compile(r'(\p{Zs}|&nbsp;){2,}', re.I | re.L | re.U) : '',
+    }
+
+    class Media:
+        #if settings.DEBUG:
+            #js = [join(PAGES_MEDIA_URL, path) for path in (
+                #'tiny_mce/tiny_mce_src.js',
+            #)]
+        #else:
+        js = [join(settings.STATIC_URL, path) for path in (
+            'elements/js/tiny_mce/tiny_mce.js',
+        )]
+
+    def __init__(self, language=None, attrs=None):
+        self.language = settings.LANGUAGE_CODE # "en"# XXX language or settings.LANGUAGE_CODE[:2]
+        self.lang_list = ""
+        for lang, name in settings.LANGUAGES:
+            if self.lang_list:
+                self.lang_list += ',' + lang
+            else:
+                self.lang_list = lang
+
+        self.attrs = {'class': 'tinymce'}
+        self.content_css = join(settings.STATIC_URL, 'elements/css/src/editor_content.css')
+        if attrs:
+            self.attrs.update(attrs)
+        super(TinyMCE, self).__init__(attrs)
+
+    def render(self, name, value, attrs=None):
+        rendered = super(TinyMCE, self).render(name, value, attrs)
+        context = {
+            'name':             name,
+            'language':         self.language,
+            'STATIC_URL':       settings.STATIC_URL,
+            'content_css':      self.content_css,
+            'lang_list':        self.lang_list,
+        }
+        return rendered + mark_safe(render_to_string(
+            'admin/elements/tinymce.html', context))
+
+    def do_cleanup(self, content):
+        for pattern, replacement in self.cleanup_res.items():
+            content = pattern.sub(replacement, content)
+        return content
+
+    def value_from_datadict(self, data, files, name):
+        content = data.get(name)
+        return self.do_cleanup(content)
 
 
 class AdminImageWidget(AdminFileWidget):

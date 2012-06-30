@@ -1,0 +1,38 @@
+{% extends 'admin/elements/tinymce_base.html' %}
+{% block tinymce_config %}
+{{ block.super }}
+
+<script type="text/javascript">
+local_tinymce_config = {
+  remove_script_host : true,
+  fix_list_elements : true,
+  height : 431,
+  width : 800,
+  plugins : tinymce_config.plugins + ",style,insertdatetime,nonbreaking,print,emotions,safari,advlink",
+  theme_advanced_buttons1: tinymce_config.theme_advanced_buttons1 + ",forecolor,backcolor,copy,paste,pastetext",
+  theme_advanced_buttons2: tinymce_config.theme_advanced_buttons2 + ",media,print,tablecontrols,justifyleft,justifyright,justifycenter,justifyfull,insertdate,inserttime,preview,anchor,nonbreaking,emotions,code",
+  theme_advanced_blockformats: tinymce_config.theme_advanced_blockformats + ",h1,div,code,pre",
+  valid_elements : tinymce_config.valid_elements +
+    "br," +
+    "-h1," +
+    "-table,-thead,-tbody,-tr,-td,-th," +
+    "-pre," +
+    "-code," +
+    "-div," +
+    "-sub,-sup",
+  extended_valid_elements: tinymce_config.extended_valid_elements +
+    "br[clearfix]," +
+    "div[class|style]," +
+    "span[class|align|style]," +
+    "font[face|size|color|style]," +
+    "p[class|style]," +
+    "table[class|style],td[colspan|style|class],tr[rowspan|class|style],tbody[class|style],thead[class|style],tfoot[class|style]"
+};
+
+// Object.extend(tinymce_config, local_tinymce_config);
+(function($) {
+    $.extend(tinymce_config, local_tinymce_config);
+})(django ? django.jQuery : jQuery);
+</script>
+{% endblock %}
+
