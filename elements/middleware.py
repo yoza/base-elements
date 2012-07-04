@@ -55,13 +55,10 @@ class LocaleMiddleware(object):
             except KeyError:
                 pass
 
-        if not language:
-            language = translation.get_language_from_request(request)
         try:
             translation.activate(str(language))
         except UnicodeEncodeError:
             translation.activate(settings.LANGUAGE_CODE)
-            #raise Http404(_('Site language should by ascii'))
 
         request.LANGUAGE_CODE = translation.get_language()
 
