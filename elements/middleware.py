@@ -55,6 +55,9 @@ class LocaleMiddleware(object):
             except KeyError:
                 pass
 
+        if not language and 'admin' in request.path_info:
+            language = translation.get_language_from_request(request)
+
         try:
             translation.activate(str(language))
         except UnicodeEncodeError:
