@@ -26,7 +26,7 @@ class TinyMCE(Textarea):
             #)]
         #else:
         js = [join(settings.STATIC_URL, path) for path in (
-            'elements/js/tiny_mce/tiny_mce.js',
+            'tiny_mce/tiny_mce.js',
         )]
 
     def __init__(self, language=None, attrs=None):
