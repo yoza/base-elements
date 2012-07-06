@@ -74,6 +74,7 @@ def header_tags(context):
         if 'MSIE' in browser_request:
             if 'MSIE 9.0' not in browser_request:
                     metadata += ' <script type="text/javascript" src="%selements/js/DD_roundies.js"></script>' %  settings.STATIC_URL
+                    metadata += ' <script type="text/javascript" src="%selements/js/html5shiv.js"></script>' %  settings.STATIC_URL
             if ('MSIE 6.0' in browser_request) or ('MSIE 7.0' in browser_request):
                 metadata += '<script type="text/javascript" src="%selements/js/DD_belatedPNG-min.js"></script>'%  settings.STATIC_URL
 
