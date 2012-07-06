@@ -9,6 +9,7 @@ register = template.Library()
 def header_tags(context):
     metadata = ''
     title = ''
+    use_html5_plugins = getattr(settings, 'USE_HTML5_PLUGINS', False)
     if 'request' in context:
         request = context['request']
         if 'lang' in context:
@@ -71,10 +72,13 @@ def header_tags(context):
                     metadata += '<link rel="stylesheet" type="text/css" href="%sfilters_ie.css" charset="utf-8"/>' % css_path
 
         metadata += '<script type="text/javascript" src="%selements/js/jquery.min.js"></script>' % settings.STATIC_URL
+        if use_html5_plugins:
+            metadata += '<script src="%selements/js/jquery.details.min.js"></script>' % settings.STATIC_URL
         if 'MSIE' in browser_request:
             if 'MSIE 9.0' not in browser_request:
                     metadata += ' <script type="text/javascript" src="%selements/js/DD_roundies.js"></script>' %  settings.STATIC_URL
-                    metadata += ' <script type="text/javascript" src="%selements/js/html5shiv.js"></script>' %  settings.STATIC_URL
+                    if use_html5_plugins:
+                        metadata += ' <script type="text/javascript" src="%selements/js/html5shiv.js"></script>' %  settings.STATIC_URL
             if ('MSIE 6.0' in browser_request) or ('MSIE 7.0' in browser_request):
                 metadata += '<script type="text/javascript" src="%selements/js/DD_belatedPNG-min.js"></script>'%  settings.STATIC_URL
 
