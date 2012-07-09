@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-22 17:24-0400\n"
+"POT-Creation-Date: 2012-07-09 16:36-0400\n"
 "PO-Revision-Date: 2012-06-05 15:34-0500\n"
 "Last-Translator: Oleg Prans <yozapr@gmail.com>\n"
 "Language-Team: Russian <>\n"
@@ -102,11 +102,19 @@ msgstr "Слоган сайта"
 msgid "Put here text for site slogan"
 msgstr "Добавьте сюда текст слогана сайта"
 
-#: models.py:52
+#: models.py:46
+msgid "description"
+msgstr "описание"
+
+#: models.py:46
+msgid "Site Description"
+msgstr "Описание сайта"
+
+#: models.py:54
 msgid "Parameters data for site"
 msgstr "Данные параметров для сайта"
 
-#: admin/widgets.py:47
+#: admin/widgets.py:107
 msgid ""
 "To allow for insert banner on this place, please insert                   "
 "true 'width' and 'height' on the banner slot before!"
@@ -114,7 +122,7 @@ msgstr ""
 "Для того, чтобы вставить баннер на это место, пожалуйста предварительно "
 "введите правильную 'ширину' и 'высоту' слота баннеров"
 
-#: admin/widgets.py:59 admin/widgets.py:92
+#: admin/widgets.py:119 admin/widgets.py:152
 msgid "Change:"
 msgstr "Изменить:"
 

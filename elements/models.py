@@ -16,7 +16,7 @@ class SiteParams(TranslatableModel):
     '''
     site = models.ForeignKey(Site, verbose_name=_('Site'))
     rb_section = models.BooleanField(verbose_name=_('Right block'),
-                                     default=True,
+                                     default=False,
                                      help_text=_('''Show/hide right block on main page'''))
     lb_section = models.BooleanField(verbose_name=_('Left block'),
                                      default=False,
