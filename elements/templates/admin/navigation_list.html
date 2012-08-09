@@ -1,0 +1,112 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static options_list %}
+
+{% block extrastyle %}
+{{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/changelists.css' %}" />
+    {% if cl.formset %}
+        <link rel="stylesheet" type="text/css" href="{% static 'admin/css/forms.css' %}" />
+    {% endif %}
+{% endblock %}
+
+{% block extrahead %}{{ block.super }}
+{% if cl.formset %}
+    {% url admin:jsi18n as jsi18nurl %}
+    <script type="text/javascript" src="{{ jsi18nurl|default:'../../jsi18n/' }}"></script>
+{% endif %}
+{{ media }}
+{% if action_form %}{% if actions_on_top or actions_on_bottom %}
+<script type="text/javascript">
+    (function($) {
+        $(document).ready(function(){
+            $("div.border input.action-select").actions();
+        });
+    })(django ? django.jQuery : jQuery);
+</script>
+{% endif %}{% endif %}
+
+{% endblock %}
+
+{% block breadcrumbs %}{% if not is_popup %}
+<div class="breadcrumbs">
+     <a href="../../">{% trans "Home" %}</a> &rsaquo;
+     <a href="../">{{ opts.app_label|capfirst|escape }}</a> &rsaquo;
+     {{ opts.verbose_name|capfirst }}
+</div>
+{% endif %}{% endblock %}
+
+{% block content %}
+<ul class="object-tools"><li><a href="add/" class="addlink">{% trans 'Add' %} {% trans opts.verbose_name %}</a></li></ul>
+<div class="module{% if cl.has_filters %} filtered{% endif %}" id="changelist">
+    {% block search %}{% search_form cl %}{% endblock %}
+    {% block date_hierarchy %}{% date_hierarchy cl %}{% endblock %}
+
+    {% block filters %}
+        {% if cl.has_filters %}
+            <div id="changelist-filter">
+                <h2>
+                    <a href="#" class="expand-collapse expanded">
+                        <span class="collapse" title="{% trans 'Hide an application filter' %}">-</span>
+                        <span class="expand" title="{% trans 'Show an application filter' %}">+</span>
+                        {% trans 'Filter' %}
+                    </a>
+                </h2>
+                <div class="expanded closed" style="display: block;">
+                    {% for spec in cl.filter_specs %}{% admin_list_filter cl spec %}{% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    {% endblock %}
+
+    <form action="." method="post" id="navigation-form">{% csrf_token %}
+        <div id="content-main">
+            <noscript><p class="errornote"><b>{% trans 'Note' %}:</b> {% trans "You will have to activate JavaScript in your browser's settings to be able to reorder the objects." %}</p></noscript>
+            <div id="managepagesinfo">
+                <fieldset class="module aligned">
+                    <h2>{% trans 'Manage' %} {% trans opts.verbose_name_plural %}</h2>
+                    {% if opts.admin_help %}
+                        <div><p class="small">{% trans opts.admin_help %}</p></div>
+                    {% endif %}
+                </fieldset>
+            </div>
+            <div id="content-pages">
+                <div id="managepageslist" class="clearfix"></div>
+                <div id="errors">
+                    {% if error %}
+                    <ul class="errorlist"><li>{{ error }}</li></ul>
+                    {% endif %}
+                </div>
+                {% if cl.formset %}
+                    {{ cl.formset.management_form }}
+                {% endif %}
+                {% if cl %}
+                    {% block result_list %}
+                        {% if action_form and actions_on_top and cl.full_result_count %}{% admin_actions %}{% endif %}
+                        {% if request %}
+                            {% result_list cl item_template request %}
+                        {% endif %}
+                        {% if action_form and actions_on_bottom and cl.full_result_count %}{% admin_actions %}{% endif %}
+                    {% endblock %}
+                    {% block pagination %}{% pagination cl %}{% endblock %}
+                {% else %}
+                    {{ navigation }}
+                {% endif %}
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </form>
+</div>
+{% endblock %}
+{% block extended_scripts %}
+{{ block.super }}
+<script type="text/javascript">
+<!--
+(function($) {
+    $(document).ready(function(){
+    });
+})(django ? django.jQuery : jQuery);
+
+//-->
+</script>
+{% endblock %}
+

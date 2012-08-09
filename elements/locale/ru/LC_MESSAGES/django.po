@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-09 16:36-0400\n"
+"POT-Creation-Date: 2012-08-09 15:41-0400\n"
 "PO-Revision-Date: 2012-06-05 15:34-0500\n"
 "Last-Translator: Oleg Prans <yozapr@gmail.com>\n"
 "Language-Team: Russian <>\n"
@@ -114,6 +114,22 @@ msgstr "Описание сайта"
 msgid "Parameters data for site"
 msgstr "Данные параметров для сайта"
 
+#: admin/hierarhy.py:89
+msgid "The navigation was updated successfully. You may edit it again below."
+msgstr "Навигация была успешно сохранена. Ниже вы ее снова можете редактировать."
+
+#: admin/hierarhy.py:93
+msgid "Save selected changes"
+msgstr "Сохранить вибранные изменения"
+
+#: admin/hierarhy.py:150
+msgid "Database error"
+msgstr "Ошибка базы данных"
+
+#: admin/hierarhy.py:193
+msgid "Edit"
+msgstr "Редактирование"
+
 #: admin/widgets.py:107
 msgid ""
 "To allow for insert banner on this place, please insert                   "
@@ -148,7 +164,7 @@ msgstr "Доступны модели в %(name)s приложении."
 msgid "%(name)s"
 msgstr "%(name)s"
 
-#: templates/admin/index.html:29
+#: templates/admin/index.html:29 templates/admin/navigation_list.html:39
 msgid "Add"
 msgstr "Добавить"
 
@@ -159,3 +175,39 @@ msgstr "Изменить:"
 #: templates/admin/index.html:45
 msgid "You don't have permission to edit anything."
 msgstr "Вы не имеете разрешения на редактирование чего-либо."
+
+#: templates/admin/navigation_list.html:32
+msgid "Home"
+msgstr "Главная"
+
+#: templates/admin/navigation_list.html:49
+msgid "Hide an application filter"
+msgstr "Скрыть фильтр приложения"
+
+#: templates/admin/navigation_list.html:50
+msgid "Show an application filter"
+msgstr "Показать фильтр приложения"
+
+#: templates/admin/navigation_list.html:51
+msgid "Filter"
+msgstr "Фильтр"
+
+#: templates/admin/navigation_list.html:63
+msgid "Note"
+msgstr "Замечание"
+
+#: templates/admin/navigation_list.html:63
+msgid ""
+"You will have to activate JavaScript in your browser's settings to be able "
+"to reorder the objects."
+msgstr ""
+"Вам необходимо активировать JavaScript в настройках вашего браузера "
+"для получения возможности сортировать объекты."
+
+#: templates/admin/navigation_list.html:66
+msgid "Manage"
+msgstr "Управление"
+
+#: templatetags/options_list.py:303
+msgid "All dates"
+msgstr "Все даты"
