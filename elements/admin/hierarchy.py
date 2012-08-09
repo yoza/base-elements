@@ -15,7 +15,7 @@ from django.conf import settings
 from django import template
 from django.utils.safestring import mark_safe
 
-from elements.backends import dynamicforms
+from elements.forms import dynamicforms
 from elements.settings import HIERARHY_STATIC_URL
 
 
