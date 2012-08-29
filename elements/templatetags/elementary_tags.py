@@ -17,6 +17,12 @@ def logo_tag(context):
     logo = ""
     site_logo = getattr(settings, 'LOGO_IMAGE', ("maipage/img/logo.png",
                                                  "0,0,85,85"))
+    lang = None
+    if 'lang' in context:
+        lang = context['lang']
+    if lang == None or lang not in dict(settings.LANGUAGES):
+        lang = settings.LANGUAGE_CODE
+
     try:
         params = SiteParams.objects.language().get(site__id=settings.SITE_ID)
         tags = 'span p br div sub sup a'
@@ -29,10 +35,10 @@ def logo_tag(context):
         logo = u'<div class="logo_layer">\
                     <img usemap ="#logo_map" src="%s" alt="%s" id="img_logo"/>\
                     <map id ="logo_map" name="logo_map">\
-                        <area href="/" target="_self" id="area_logo_map" \
+                        <area href="/%s" target="_self" id="area_logo_map" \
                               shape ="rect" coords ="%s" alt="%s"/>\
                     </map>\
-                </div>' % (site_logo[0], value, site_logo[1], value)
+                </div>' % (site_logo[0], value, lang, site_logo[1], value)
 
     except SiteParams.DoesNotExist:
         pass

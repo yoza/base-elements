@@ -1,6 +1,10 @@
+from os.path import join
+import re
 from django import template
 from django.conf import settings
+
 from elements.models import  SiteParams
+
 
 register = template.Library()
 
@@ -25,8 +29,14 @@ def header_tags(context):
                 title = current_page.title(lang)
         if not current_page or current_page.slug() in ('/','home'):
             try:
-                params = SiteParams.objects.language(lang).get(site__id=settings.SITE_ID)
-                title = params.title
+                tags = 'span p br div sub sup a'
+                entry = SiteParams.objects.language(lang).get(site__id=settings.SITE_ID)
+                tags = [re.escape(tag) for tag in tags.split()]
+                tags_re = u'(%s)' % u'|'.join(tags)
+                starttag_re = re.compile(ur'<%s(/?>|(\s+[^>]*>))' % tags_re, re.U)
+                endtag_re = re.compile(u'</%s>' % tags_re)
+                value = starttag_re.sub(u' - ', entry.title)
+                title = endtag_re.sub(u'', value)
             except SiteParams.DoesNotExist:
                 pass
 
@@ -44,11 +54,11 @@ def header_tags(context):
         metadata += '<meta name="viewport" content="width=device-width; initial-scale=1.0;" />'
 
         if settings.DEBUG:
-            css_path = settings.STATIC_URL + 'store/css/'
+            css_path = join(settings.STATIC_URL, settings.STATIC_SUFFIX) + '/css/'
         else:
-            css_path = settings.STATIC_URL + 'store/css/'
+            css_path = join(settings.STATIC_URL, settings.STATIC_SUFFIX) + '/css/'
 
-        js_path = settings.STATIC_URL + 'store/js/'
+        js_path = join(settings.STATIC_URL, settings.STATIC_SUFFIX) + '/js/'
 
         metadata += '<link rel="stylesheet" type="text/css" href="%sscreen.css" charset="utf-8"/>' % css_path
         browser_label = None
