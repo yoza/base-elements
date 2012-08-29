@@ -143,3 +143,58 @@ h1 {
 .colM .aligned .vTextField {
     width: 792px;
 }
+
+.stacked {
+    width: 570px;
+}
+
+.stacked .selector-chosen,
+.stacked .selector-available,
+.stacked SELECT {
+    width: 560px;
+}
+
+.stacked .selector-available INPUT {
+    width: 520px;
+}
+
+.selector .selector-chosen .selector-filter {
+   text-align: center;
+}
+
+.stacked UL.selector-chooser {
+    margin: 0 0 3px 43%;
+}
+
+.stacked SELECT {
+    height: 16.3em;
+}
+
+.selector {
+    width: 994px;
+}
+
+.selector .selector-available,
+.selector .selector-chosen,
+.selector SELECT {
+    width: 480px;
+}
+
+.selector .selector-available INPUT {
+    width: 430px;
+}
+
+.selector SELECT {
+    height: 16.3em;
+}
+
+A.selector-chooseall,
+A.selector-clearall {
+    width: 120px;
+}
+
+.form-row .qrcode IMG {
+    vertical-align: top;
+    margin-left: 130px;
+}
+
