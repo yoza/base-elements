@@ -1,5 +1,5 @@
 #header {
-    background: url(../../img/header_bg.gif) repeat-x;
+    background: url(/static/elements/img/header_bg.gif) repeat-x;
     height: 43px;
     padding-top: 3px;
 }
@@ -50,7 +50,7 @@ h1 {
 
 .module table caption {
     font-size: 1.3em;
-    background: url(../../img/app_header_bg.gif) repeat-x;
+    background: url(/static/elements/img/app_header_bg.gif) repeat-x;
     font-weight: bold;
 }
 
@@ -107,7 +107,7 @@ h1 {
 }
 
 #fieldsets-tabs ul.mootabs_title li.active {
-    background: #7CA0C7 url(../../img/default-bg.gif) repeat-x scroll center top;
+    background: #7CA0C7 url(/static/elements/img/default-bg.gif) repeat-x scroll center top;
     color: white;
     text-decoration: none;
 }
