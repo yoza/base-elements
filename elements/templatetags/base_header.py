@@ -53,10 +53,7 @@ def header_tags(context):
         metadata += '<meta name="language" content="%s" />' % lang
         metadata += '<meta name="viewport" content="width=device-width; initial-scale=1.0;" />'
 
-        if settings.DEBUG:
-            css_path = join(settings.STATIC_URL, settings.STATIC_SUFFIX) + '/css/'
-        else:
-            css_path = join(settings.STATIC_URL, settings.STATIC_SUFFIX) + '/css/'
+        css_path = join(settings.STATIC_URL, settings.STATIC_SUFFIX) + '/css/'
 
         js_path = join(settings.STATIC_URL, settings.STATIC_SUFFIX) + '/js/'
 
@@ -79,7 +76,7 @@ def header_tags(context):
 
         if 'MSIE' in browser_request:
             if settings.DEBUG:
-                    metadata += '<link rel="stylesheet" type="text/css" href="%sfilters_ie.css" charset="utf-8"/>' % css_path
+                metadata += '<link rel="stylesheet" type="text/css" href="%sfilters_ie.css" charset="utf-8"/>' % (settings.STATIC_URL + '/css/src/')
 
         metadata += '<script type="text/javascript" src="%selements/js/jquery.min.js"></script>' % settings.STATIC_URL
         if use_html5_plugins:
