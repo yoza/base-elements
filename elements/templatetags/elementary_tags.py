@@ -5,6 +5,8 @@ import hashlib
 from django.conf import settings
 from django import template
 from django.utils.safestring import mark_safe
+from django.utils.encoding import iri_to_uri
+from django.utils.translation import ugettext_lazy as _
 
 from elements.models import SiteParams
 
@@ -168,3 +170,29 @@ def site_languages(context, sort=True, fullname=False):
 
 register.simple_tag(takes_context=True)(site_languages)
 
+
+@register.simple_tag
+def search_tag(context):
+    searches = ""
+    if 'request' in context:
+        request = context['request']
+        lang = None
+        if 'lang' in context:
+            lang = context['lang']
+        if lang == None or lang not in dict(settings.LANGUAGES):
+            lang = settings.LANGUAGE_CODE
+
+        csrf_token = request.META.get('CSRF_COOKIE', '')
+        if 'MSIE 6.0' in request.META.get('HTTP_USER_AGENT', '').upper() or 'MSIE 7.0' in request.META.get('HTTP_USER_AGENT', '').upper():
+            btn_img = getattr(settings,'SEARCH_BTN_IMG_IE6', '/static/elements/img/btn_search_ie6.png')
+        else:
+            btn_img = getattr(settings,'SEARCH_BTN_IMG', '/static/elements/img/btn_search.png')
+        searches = u'<div id="search"><form method="get" action="/%s/search" id="searchform">\
+                    <div style="display:none"><input type="hidden" name="csrfmiddlewaretoken" value="%s" /></div>\
+                    <div class="line"><input type="text" name="query" id="query" />\
+                    <input type="image" class="imgbtn" src="%s" alt="Search" />\
+                    <input type="hidden" name="formname" value="search" /></div></form></div>' % (lang, csrf_token, btn_img)
+        searches += u'<script type="text/javascript">jQuery(document).ready(function(){clearInput("#searchform","#query", "%s")});</script>' % (_("Search..."))
+
+    return  mark_safe(searches)
+register.simple_tag(takes_context=True)(search_tag)

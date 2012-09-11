@@ -16,7 +16,7 @@ class SiteParamsAdmin(TranslatableAdmin):
     actions = None
     #use_prepopulated_fields = {'slug': ('title', )}
     if not settings.DEBUG:
-        exclude = ('ga_code',)
+        exclude = ('ga_code')
 
     if getattr(local_settings, 'USE_TINY_MCE', False):
         from elements.admin.widgets import TinyMCE
