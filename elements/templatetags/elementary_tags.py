@@ -184,7 +184,7 @@ def search_tag(context):
 
         csrf_token = request.META.get('CSRF_COOKIE', '')
         if 'MSIE 6.0' in request.META.get('HTTP_USER_AGENT', '').upper() or 'MSIE 7.0' in request.META.get('HTTP_USER_AGENT', '').upper():
-            btn_img = getattr(settings,'SEARCH_BTN_IMG_IE6', '/static/elements/img/btn_search_ie6.png')
+            btn_img = getattr(settings,'SEARCH_BTN_IMG_IE6', '/static/elements/img/btn_search_ie6.gif')
         else:
             btn_img = getattr(settings,'SEARCH_BTN_IMG', '/static/elements/img/btn_search.png')
         searches = u'<div id="search"><form method="get" action="/%s/search" id="searchform">\
@@ -196,3 +196,16 @@ def search_tag(context):
 
     return  mark_safe(searches)
 register.simple_tag(takes_context=True)(search_tag)
+
+
+#@register.simple_tag
+def noscript_warning():
+    warning = u'<noscript>'
+    warning += u'<div class="global-warning">'
+    warning += u'<p class="site-message interface-text-dark">%s</p>' % (unicode(_('Attention! JavaScript must be enabled in order for this page to function properly. However, it seems that you have JavaScript disabled or not supported by your browser.')))
+    warning += u'<p class="site-message interface-text-dark">%s</p>' % (unicode(_('Please enable JavaScript in your browser settings.')))
+    warning += u'</div>'
+    warning += u'</noscript>'
+
+    return  mark_safe(warning)
+register.simple_tag(noscript_warning)

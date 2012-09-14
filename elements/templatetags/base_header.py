@@ -75,8 +75,7 @@ def header_tags(context):
             metadata += '<link rel="stylesheet" type="text/css" href="%s%s.css" charset="utf-8"/>' % (css_path, browser_label)
 
         if 'MSIE' in browser_request:
-            if settings.DEBUG:
-                metadata += '<link rel="stylesheet" type="text/css" href="%sfilters_ie.css" charset="utf-8"/>' % (settings.STATIC_URL + '/css/src/')
+            metadata += '<link rel="stylesheet" type="text/css" href="%sfilters_ie.css" charset="utf-8"/>' % (css_path)
 
         metadata += '<script type="text/javascript" src="%selements/js/jquery.min.js"></script>' % settings.STATIC_URL
         if use_html5_plugins:
