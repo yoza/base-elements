@@ -54,7 +54,10 @@ def header_tags(context):
         metadata += '<meta name="viewport" content="width=device-width; initial-scale=1.0;" />'
 
         css_path = join(settings.STATIC_URL, settings.STATIC_SUFFIX) + '/css/'
-
+        if settings.DEBUG:
+            js_suf = 'js'
+        else:
+            js_suf = 'min.js'
         js_path = join(settings.STATIC_URL, settings.STATIC_SUFFIX) + '/js/'
 
         metadata += '<link rel="stylesheet" type="text/css" href="%sscreen.css" charset="utf-8"/>' % css_path
@@ -84,12 +87,14 @@ def header_tags(context):
             if 'MSIE 9.0' not in browser_request:
                     metadata += ' <script type="text/javascript" src="%selements/js/DD_roundies.js"></script>' %  settings.STATIC_URL
                     if use_html5_plugins:
-                        metadata += ' <script type="text/javascript" src="%selements/js/html5shiv.js"></script>' %  settings.STATIC_URL
+                        metadata += ' <script type="text/javascript" src="%selements/js/html5shiv.js"></script>' % settings.STATIC_URL
             if ('MSIE 6.0' in browser_request) or ('MSIE 7.0' in browser_request):
-                metadata += '<script type="text/javascript" src="%selements/js/DD_belatedPNG-min.js"></script>'%  settings.STATIC_URL
+                metadata += '<script type="text/javascript" src="%selements/js/DD_belatedPNG-min.js"></script>' %  settings.STATIC_URL
 
-        metadata += '<script type="text/javascript" src="%selements/js/elements.js" charset="utf-8"></script>' % settings.STATIC_URL
-        metadata += '<script type="text/javascript" src="%sbase.js" charset="utf-8"></script>'% js_path
+        metadata += '<script type="text/javascript" src="%selements/js/elements.%s" charset="utf-8"></script>' % (settings.STATIC_URL, js_suf)
+
+        metadata += '<script type="text/javascript" src="%sbase.%s" charset="utf-8"></script>' % (js_path, js_suf)
+
         metadata += '<link rel="shortcut icon" href="%sfavicon.ico" type="image/x-icon" />' % settings.STATIC_URL
 
     return metadata
