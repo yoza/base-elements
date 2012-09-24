@@ -79,6 +79,10 @@ def header_tags(context):
 
         if 'MSIE' in browser_request:
             metadata += '<link rel="stylesheet" type="text/css" href="%sfilters_ie.css" charset="utf-8"/>' % (css_path)
+        if settings.DEBUG:
+            metadata += '<link rel="stylesheet" type="text/css" href="%seditor_content.css" charset="utf-8"/>' % (settings.STATIC_URL + 'elements/css/src/')
+        else:
+             metadata += '<link rel="stylesheet" type="text/css" href="%seditor_content.css" charset="utf-8"/>' % (settings.STATIC_URL + 'elements/css/')
 
         metadata += '<script type="text/javascript" src="%selements/js/jquery.min.js"></script>' % settings.STATIC_URL
         if use_html5_plugins:

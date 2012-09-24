@@ -5,6 +5,7 @@ from django.conf import settings
 from hvad.admin import TranslatableAdmin
 
 from elements import settings as local_settings
+from elements.admin.widgets import TinyMCE
 
 
 class SiteParamsAdmin(TranslatableAdmin):
@@ -19,8 +20,6 @@ class SiteParamsAdmin(TranslatableAdmin):
         exclude = ('ga_code')
 
     if getattr(local_settings, 'USE_TINY_MCE', False):
-        from elements.admin.widgets import TinyMCE
-
         def formfield_for_dbfield(self, db_field, **kwargs):
             if db_field.name == 'description':
                 kwargs['widget'] = TinyMCE

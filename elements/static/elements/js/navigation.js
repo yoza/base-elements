@@ -1,3 +1,7 @@
+if (!jQuery) {
+    jQuery = django.jQuery;
+}
+
 var NavigationNested = Nested.extend({
     start: function(event) {
         event = new Event(event);

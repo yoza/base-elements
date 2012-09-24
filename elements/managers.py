@@ -10,7 +10,7 @@ except ImportError:
     import Image
 
 
-class ImageManager(models.Manager):
+class HierarchyManager(models.Manager):
 
     def hierarchy(self, parent=None):
         result = []
@@ -30,6 +30,9 @@ class ImageManager(models.Manager):
         Return a queryset with pages that don't have parents, a.k.a. root.
         """
         return self.filter(parent__isnull=True)
+
+
+class ImageManager(HierarchyManager):
 
     def validate_image(self, value):
         filetype = "." + value.name.split(".")[-1]

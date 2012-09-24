@@ -109,7 +109,7 @@ span.addpadd,
 }
 
 .ac_loading {
-    background: white url('../images/indicator.gif') right center no-repeat;
+    background: white url('../img/indicator.gif') right center no-repeat;
 }
 
 .ac_odd {
@@ -137,36 +137,4 @@ SELECT#id_parent OPTIONS {
 DIV.closed,
 UL.closed {
     display: none;
-}
-
-#changelist {
-    border: none;
-}
-
-#changelist UL {
-    margin-left: 0;
-    margin-right: 0;
-}
-
-#navigation .border SPAN.movespan,
-#navigation .border A.expand-collapse,
-#navigation .border INPUT.action-select {
-    vertical-align: middle;
-}
-
-#navigation .border INPUT.action-select {
-    margin-top: -1px;
-}
-
-#navigation {
-    padding-right: 0;
-}
-
-#content-pages DIV.actions {
-    text-align: left;
-}
-
-#header_forlist SPAN {
-    white-space: nowrap;
-    vertical-align: middle;
 }
