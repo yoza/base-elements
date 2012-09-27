@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-09 15:41-0400\n"
+"POT-Creation-Date: 2012-09-27 18:09-0400\n"
 "PO-Revision-Date: 2012-06-05 15:34-0500\n"
 "Last-Translator: Oleg Prans <yozapr@gmail.com>\n"
 "Language-Team: Russian <>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
-#: managers.py:38
+#: managers.py:41
 #, python-format
 msgid ""
 "Uploaded '%s' file is not an image. You can upload only valid image file!"
@@ -26,7 +26,7 @@ msgstr ""
 "Загружаемый '%s' файл не является изображением. Вы можете загружать только "
 "разрешенные типы файлов изображений!"
 
-#: managers.py:56
+#: managers.py:59
 msgid "Thumbnail creation failed."
 msgstr "Создание иконки закончилось неудачей."
 
@@ -114,19 +114,20 @@ msgstr "Описание сайта"
 msgid "Parameters data for site"
 msgstr "Данные параметров для сайта"
 
-#: admin/hierarhy.py:89
+#: admin/hierarchy.py:89
 msgid "The navigation was updated successfully. You may edit it again below."
-msgstr "Навигация была успешно сохранена. Ниже вы ее снова можете редактировать."
+msgstr ""
+"Навигация была успешно сохранена. Ниже вы ее снова можете редактировать."
 
-#: admin/hierarhy.py:93
+#: admin/hierarchy.py:93
 msgid "Save selected changes"
 msgstr "Сохранить вибранные изменения"
 
-#: admin/hierarhy.py:150
+#: admin/hierarchy.py:150
 msgid "Database error"
 msgstr "Ошибка базы данных"
 
-#: admin/hierarhy.py:193
+#: admin/hierarchy.py:193
 msgid "Edit"
 msgstr "Редактирование"
 
@@ -153,6 +154,22 @@ msgstr "Пожалуста введите содержание CAPTCHA"
 #: forms/captcha.py:71
 msgid "An incorrect CAPTCHA solution was entered."
 msgstr "Введено неправильное содержание CAPTCHA"
+
+#: templates/404.html:5
+msgid "Apologies. The page you requested could not be found"
+msgstr "Извините. Запрошенная вами страница не найдена"
+
+#: templates/404.html:7
+msgid "We apologize for any inconvenience."
+msgstr "Мы извиняемся за причиненные неудобства."
+
+#: templates/404.html:8
+msgid "To return to the home page please click"
+msgstr "Для возврата на главную страницу пожалуста кликните"
+
+#: templates/404.html:8
+msgid "here"
+msgstr "задесь"
 
 #: templates/admin/index.html:18
 #, python-format
@@ -201,12 +218,29 @@ msgid ""
 "You will have to activate JavaScript in your browser's settings to be able "
 "to reorder the objects."
 msgstr ""
-"Вам необходимо активировать JavaScript в настройках вашего браузера "
-"для получения возможности сортировать объекты."
+"Вам необходимо активировать JavaScript в настройках вашего браузера для "
+"получения возможности сортировать объекты."
 
 #: templates/admin/navigation_list.html:66
 msgid "Manage"
 msgstr "Управление"
+
+#: templatetags/elementary_tags.py:195
+msgid "Search..."
+msgstr "Искать..."
+
+#: templatetags/elementary_tags.py:205
+msgid ""
+"Attention! JavaScript must be enabled in order for this page to function "
+"properly. However, it seems that you have JavaScript disabled or not "
+"supported by your browser."
+msgstr ""
+"Внимание! Для правильной работы сайта JavaScript должен быть включен. У "
+"вас JavaScript либо отлючен, либо ваш браузер его не поддерживает."
+
+#: templatetags/elementary_tags.py:206
+msgid "Please enable JavaScript in your browser settings."
+msgstr "Пожалуйста включите поддержку JavaScript в настройках вашего браузера."
 
 #: templatetags/options_list.py:303
 msgid "All dates"
