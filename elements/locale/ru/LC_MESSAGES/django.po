@@ -169,7 +169,7 @@ msgstr "Для возврата на главную страницу пожал�
 
 #: templates/404.html:8
 msgid "here"
-msgstr "задесь"
+msgstr "здесь"
 
 #: templates/admin/index.html:18
 #, python-format
