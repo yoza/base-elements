@@ -116,7 +116,7 @@
     color: #999;
     font-size: 0.9em;
     padding-left: 15px;
-    background: url(../../img/icon_move.gif) 0 0 no-repeat;
+    background: url(/static/elements/img/icon_move.gif) 0 0 no-repeat;
     cursor: move;
 }
 
@@ -135,7 +135,7 @@
     margin-right: 0px;
     color: #999;
     padding-left: 15px;
-    background: url(../../img/selector-addall.gif) 0 0.1em no-repeat;
+    background: url(/static/elements/img/selector-addall.gif) 0 0.1em no-repeat;
 }
 
 #navigation .link_id {
