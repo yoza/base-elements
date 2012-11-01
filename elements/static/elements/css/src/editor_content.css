@@ -66,6 +66,7 @@ IMG.image_center {
 
 UL.bullet_list {
     list-style: inherit;
+    text-indent: 40px;
 }
 
 UL.bullet_list LI {
