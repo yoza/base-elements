@@ -22,13 +22,11 @@ class eCalendar(HTMLCalendar):
             return '<td class="noday">&nbsp;</td>' # day outside month
         elif day in self.active_days:
             dd = date(self.active_year, self.active_month, day)
-            """
-            success_day_url = reverse('events_archive_day',
-                                      args=[dd.strftime('%Y'),
-                                            dd.strftime('%m'),
-                                            dd.strftime('%d')])
-            """
-            success_day_url  = "/"
+            success_day_url = "%s?year=%s&month=%s&day=%s" % (self.success_url,
+                                                              dd.strftime('%Y'),
+                                                              dd.strftime('%m'),
+                                                              dd.strftime('%d'))
+
             return '<td class="%s active"><a href="%s" '\
                    'class="active">%d</a></td>' % (
                 self.cssclasses[weekday], success_day_url, day)
@@ -88,13 +86,14 @@ class eCalendar(HTMLCalendar):
         a('</CAPTION>')
         return mark_safe(''.join(v))
 
-    def formatmonth(self, theyear, themonth, withyear=True, active_days=[]):
+    def formatmonth(self, theyear, themonth, withyear=True, active_days=[], url="/"):
         """
         Return a formatted month as a table.
         """
         self.active_days = active_days
         self.active_year = theyear
         self.active_month = themonth
+        self.success_url = url
 
         v = []
         a = v.append
