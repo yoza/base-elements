@@ -32,4 +32,10 @@
         return isNaN(v) ? 0 : v;
     }
 
+    getParam = function(key) {
+        var value=RegExp(""+key+"[^&]+").exec(window.location.search);
+        return unescape(!!value ? value.toString().replace(/^[^=]+/,"").replace("=","") : "");
+    };
+
+
 })(jQuery.noConflict());

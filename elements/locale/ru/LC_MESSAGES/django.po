@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 18:09-0400\n"
+"POT-Creation-Date: 2012-11-12 12:04-0500\n"
 "PO-Revision-Date: 2012-06-05 15:34-0500\n"
 "Last-Translator: Oleg Prans <yozapr@gmail.com>\n"
 "Language-Team: Russian <>\n"
@@ -165,7 +165,7 @@ msgstr "Мы извиняемся за причиненные неудобств
 
 #: templates/404.html:8
 msgid "To return to the home page please click"
-msgstr "Для возврата на главную страницу пожалуста кликните"
+msgstr "Для возврата на главную страницу пожалуйста кликните"
 
 #: templates/404.html:8
 msgid "here"
@@ -225,6 +225,19 @@ msgstr ""
 msgid "Manage"
 msgstr "Управление"
 
+#: templates/admin/edit_inline/stacked.html:16
+msgid "View on site"
+msgstr ""
+
+#: templates/admin/edit_inline/stacked.html:78
+#, python-format
+msgid "Add another %(verbose_name)s"
+msgstr ""
+
+#: templates/admin/edit_inline/stacked.html:81
+msgid "Remove"
+msgstr ""
+
 #: templatetags/elementary_tags.py:195
 msgid "Search..."
 msgstr "Искать..."
@@ -235,8 +248,8 @@ msgid ""
 "properly. However, it seems that you have JavaScript disabled or not "
 "supported by your browser."
 msgstr ""
-"Внимание! Для правильной работы сайта JavaScript должен быть включен. У "
-"вас JavaScript либо отлючен, либо ваш браузер его не поддерживает."
+"Внимание! Для правильной работы сайта JavaScript должен быть включен. У вас "
+"JavaScript либо отлючен, либо ваш браузер его не поддерживает."
 
 #: templatetags/elementary_tags.py:206
 msgid "Please enable JavaScript in your browser settings."

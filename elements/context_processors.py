@@ -41,6 +41,7 @@ def locator(request):
 
         return {'current_site': site, 'lang': lang, 'slug': slug,
                 'debug': debug, 'site_name': site_name,
+                'url_name': r.url_name,
                 'admin_page': settings.THIS_IS_ADMIN}
     else:
         return {'lang': lang, 'debug': debug, 'site_name': site_name}
