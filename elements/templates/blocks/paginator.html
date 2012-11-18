@@ -1,0 +1,50 @@
+{% load i18n %}
+
+{% if pages.has_other_pages %}
+<div class="pagination">
+    <span class="step-links">
+        {% if pages.has_previous %}
+            <a href="{{url}}?{{page_url}}{% if page_url %}&amp;{% endif %}page={{ pages.previous_page_number }}{%if letter%}&amp;letter={{letter}}{%endif%}">{% trans "previous" %}</a>
+        {% else %}
+            <span>{% trans "previous" %}</span>
+        {% endif %}
+        &nbsp;&nbsp;
+        {% ifequal selected_page 1 %}
+            <span class="selected">1</span>
+        {% else %}
+            {% if 1 not in page_range %}
+                <a href="{{url}}?{{page_url}}{% if page_url %}&amp;{% endif %}page=1{%if letter%}&amp;letter={{letter}}{%endif%}">1</a>
+            {% endif %}
+        {% endifequal %}
+        {% if selected_page not in first_range %}
+            &nbsp;&nbsp;<span class="at_cetera">...</span>
+        {% endif %}
+        <span class="current">
+        {% for num in page_range %}
+            {% ifequal selected_page num %}
+                {% ifnotequal selected_page 1 %}
+                    &nbsp;
+                    <span class="selected">{{num}}</span>
+                {% endifnotequal %}
+            {% else %}
+                &nbsp;
+                <a href="{{url}}?{{page_url}}{% if page_url %}&amp;{% endif %}page={{num}}{%if letter%}&amp;letter={{letter}}{%endif%}">{{num}}</a>
+            {% endifequal %}
+        {% endfor %}
+        </span>
+        {% if page_range and last_page_number not in page_range %}
+            &nbsp;&nbsp;<span class="at_cetera">...</span>
+            {% ifequal selected_page last_page_number %}
+                &nbsp;&nbsp;<span class="selected">{{ last_page_number }}</span>
+            {% else %}
+                &nbsp;&nbsp;<a href="{{url}}?{{page_url}}{% if page_url %}&amp;{% endif %}page={{ pages.paginator.num_pages }}{%if letter%}&amp;letter={{letter}}{%endif%}">{{ last_page_number }}</a>
+            {% endifequal %}
+        {% endif %}
+        {% if pages.has_next %}
+                &nbsp;&nbsp;<a href="{{url}}?{{page_url}}{% if page_url %}&amp;{% endif %}page={{ pages.next_page_number }}{%if letter%}&amp;letter={{letter}}{%endif%}">{% trans "next" %}</a>
+        {% else %}
+            &nbsp;&nbsp;&nbsp;<span>{% trans "next" %}</span>
+        {% endif %}
+    </span>
+</div>
+{% endif %}

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-12 12:04-0500\n"
+"POT-Creation-Date: 2012-11-17 22:04-0500\n"
 "PO-Revision-Date: 2012-06-05 15:34-0500\n"
 "Last-Translator: Oleg Prans <yozapr@gmail.com>\n"
 "Language-Team: Russian <>\n"
@@ -227,16 +227,24 @@ msgstr "Управление"
 
 #: templates/admin/edit_inline/stacked.html:16
 msgid "View on site"
-msgstr ""
+msgstr "Посмотреть на сайте"
 
 #: templates/admin/edit_inline/stacked.html:78
 #, python-format
 msgid "Add another %(verbose_name)s"
-msgstr ""
+msgstr "Добавить ещё %(verbose_name)s"
 
 #: templates/admin/edit_inline/stacked.html:81
 msgid "Remove"
-msgstr ""
+msgstr "Удалить"
+
+#: templates/blocks/paginator.html:7 templates/blocks/paginator.html.py:9
+msgid "previous"
+msgstr "предыдущая"
+
+#: templates/blocks/paginator.html:44 templates/blocks/paginator.html.py:46
+msgid "next"
+msgstr "следующая"
 
 #: templatetags/elementary_tags.py:195
 msgid "Search..."
