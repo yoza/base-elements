@@ -18,6 +18,7 @@ def locator(request):
         pass
 
     lang = settings.LANGUAGE_CODE
+    style = 'screen'
     debug = getattr(settings, 'DEBUG', False)
     if r:
         site = request.site
@@ -33,15 +34,29 @@ def locator(request):
         setattr(settings, 'SITE_ID', site_id)
 
         (handler, args, kwargs) = r
-        slug = kwargs['slug'] if 'slug' in kwargs else None
-        if 'lang' in kwargs and kwargs['lang']:
-            lang = kwargs['lang'].lower()
-        if lang not in dict(settings.LANGUAGES):
-            lang = settings.LANGUAGE_CODE
 
-        return {'current_site': site, 'lang': lang, 'slug': slug,
-                'debug': debug, 'site_name': site_name,
-                'url_name': r.url_name,
-                'admin_page': settings.THIS_IS_ADMIN}
+        slug = kwargs['slug'] if 'slug' in kwargs else None
+
+        if 'lang' in kwargs and kwargs['lang'] and \
+                kwargs['lang'].lower() in dict(settings.LANGUAGES):
+            lang = kwargs['lang'].lower()
+
+        if request.COOKIES.has_key('style'):
+            style = request.COOKIES['style']
+
+        return {'current_site': site,
+               'current_style': style,
+                        'lang': lang,
+                        'slug': slug,
+                       'debug': debug,
+                   'site_name': site_name,
+                    'url_name': r.url_name,
+                  'admin_page': settings.THIS_IS_ADMIN
+               }
     else:
-        return {'lang': lang, 'debug': debug, 'site_name': site_name}
+        return {
+                        'lang': lang,
+                       'debug': debug,
+                   'site_name': site_name,
+               'current_style': style
+               }

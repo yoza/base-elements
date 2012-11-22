@@ -47,7 +47,7 @@ def header_tags(context):
             metadata += '<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />'
         metadata += '<title>%s</title>' % title
 
-        #metadata += '<meta name="keywords" content="sabirov" />'
+        #metadata += '<meta name="keywords" content="any keywords" />'
         metadata += '<meta http-equiv="cache-control" content="public" />'
         metadata += '<meta name="robots" content="follow, all" />'
         metadata += '<meta name="language" content="%s" />' % lang
@@ -60,7 +60,11 @@ def header_tags(context):
             js_suf = 'min.js'
         js_path = join(settings.STATIC_URL, settings.STATIC_SUFFIX) + '/js/'
 
-        metadata += '<link rel="stylesheet" type="text/css" href="%sscreen.css" charset="utf-8"/>' % css_path
+        metadata += '<link rel="stylesheet" type="text/css" href="%sscreen.css" title="screen" media="screen" charset="utf-8"/>' % css_path
+        if settings.ALTERNATE_STYLES:
+            for astyle in settings.ALTERNATE_STYLES:
+                metadata += '<link rel="alternate stylesheet" type="text/css" href="%s%s.css" title="%s" media="screen" charset="utf-8"/>' % (css_path, astyle, astyle)
+
         browser_label = None
         if 'MSIE' in browser_request:
                 browser_label = 'ie'
@@ -79,6 +83,7 @@ def header_tags(context):
 
         if 'MSIE' in browser_request:
             metadata += '<link rel="stylesheet" type="text/css" href="%sfilters_ie.css" charset="utf-8"/>' % (css_path)
+
         if settings.DEBUG:
             metadata += '<link rel="stylesheet" type="text/css" href="%seditor_content.css" charset="utf-8"/>' % (settings.STATIC_URL + 'elements/css/src/')
         else:
@@ -96,6 +101,8 @@ def header_tags(context):
                 metadata += '<script type="text/javascript" src="%selements/js/DD_belatedPNG-min.js"></script>' %  settings.STATIC_URL
 
         metadata += '<script type="text/javascript" src="%selements/js/elements.%s" charset="utf-8"></script>' % (settings.STATIC_URL, js_suf)
+        if settings.ALTERNATE_STYLES:
+            metadata += '<script type="text/javascript" src="%selements/js/stylesheetToggle.%s" charset="utf-8"></script>' % (settings.STATIC_URL, js_suf)
 
         metadata += '<script type="text/javascript" src="%sbase.%s" charset="utf-8"></script>' % (js_path, js_suf)
 

@@ -209,3 +209,36 @@ def noscript_warning():
 
     return  mark_safe(warning)
 register.simple_tag(noscript_warning)
+
+
+def active_path(context):
+    if 'request' in context:
+        request = context['request']
+        lang = ''
+        if 'lang' in context:
+            lang = context['lang'].lower()
+            if not lang or lang not in supported:
+                lang = settings.LANGUAGE_CODE
+        current_path = request.META['PATH_INFO']
+        clear_path = "/"
+        if current_path != clear_path:
+            items = current_path.split('/')
+            if str(items[1]) not in supported:
+                del items[1]
+            for item in items:
+                clear_path = os.path.join(clear_path, item)
+        try:
+            query_str = request.META['QUERY_STRING']
+        except ValueError:
+            query_str = None
+
+        if clear_path.split('/')[1] == lang:
+            current_path = '/' + lang + clear_path[3:]
+        else:
+            current_path = '/' + lang + clear_path
+        if query_str:
+            current_path += '?' + iri_to_uri(query_str)
+
+    return  mark_safe(current_path)
+
+register.simple_tag(takes_context=True)(active_path)

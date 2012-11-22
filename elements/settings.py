@@ -18,3 +18,6 @@ HIERARHY_STATIC_URL = getattr(settings,
 PAGINATOR_PER_PAGE = getattr(settings, 'PAGINATOR_PER_PAGE', 10)
 PAGES_PER_PAGER = getattr(settings, 'PAGES_PER_PAGER', 4)
 # range paginator #
+
+# base header #
+ALTERNATE_STYLES = getattr(settings, 'ALTERNATE_STYLES', ())
