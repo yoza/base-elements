@@ -14,8 +14,12 @@ def paginator(context, content_pages = None, slug = None):
     if content_pages:
         if 'request' in context:
             request = context['request']
+            url_params = request.GET.copy()
+            if 'page' in url_params:
+                del(url_params['page'])
+            get_params = url_params.urlencode()
 
-        page_url = ""
+        page_url = get_params
         if slug:
             for sl in slug.split(','):
                 if page_url:
