@@ -162,7 +162,7 @@ msgstr ""
 
 #: templates/404.html:8
 msgid "here"
-msgstr ""
+msgstr "осында"
 
 #: templates/admin/index.html:18
 #, python-format
@@ -188,7 +188,7 @@ msgstr ""
 
 #: templates/admin/navigation_list.html:32
 msgid "Home"
-msgstr ""
+msgstr "Басты бет"
 
 #: templates/admin/navigation_list.html:49
 msgid "Hide an application filter"
@@ -231,15 +231,15 @@ msgstr ""
 
 #: templates/blocks/paginator.html:7 templates/blocks/paginator.html.py:9
 msgid "previous"
-msgstr ""
+msgstr "алдыңғы"
 
 #: templates/blocks/paginator.html:44 templates/blocks/paginator.html.py:46
 msgid "next"
-msgstr ""
+msgstr "келесі"
 
 #: templatetags/elementary_tags.py:195
 msgid "Search..."
-msgstr ""
+msgstr "Іздеу..."
 
 #: templatetags/elementary_tags.py:205
 msgid ""
