@@ -52,17 +52,18 @@ def header_tags(context):
         metadata += '<meta name="robots" content="follow, all" />'
         metadata += '<meta name="language" content="%s" />' % lang
         metadata += '<meta name="viewport" content="width=device-width; initial-scale=1.0;" />'
-
-        css_path = join(settings.STATIC_URL, settings.STATIC_SUFFIX) + '/css/'
+        static_suffix =  getattr(settings, 'STATIC_SUFFIX', '')
+        css_path = join(settings.STATIC_URL, static_suffix) + '/css/'
         if settings.DEBUG:
             js_suf = 'js'
         else:
             js_suf = 'min.js'
-        js_path = join(settings.STATIC_URL, settings.STATIC_SUFFIX) + '/js/'
+        js_path = join(settings.STATIC_URL, static_suffix) + '/js/'
 
         metadata += '<link rel="stylesheet" type="text/css" href="%sscreen.css" title="screen" media="screen" charset="utf-8"/>' % css_path
-        if settings.ALTERNATE_STYLES:
-            for astyle in settings.ALTERNATE_STYLES:
+        alternate_styles = getattr(settings, 'ALTERNATE_STYLES', ())
+        if len(alternate_styles):
+            for astyle in alternate_styles:
                 metadata += '<link rel="alternate stylesheet" type="text/css" href="%s%s.css" title="%s" media="screen" charset="utf-8"/>' % (css_path, astyle, astyle)
 
         browser_label = None
@@ -83,11 +84,11 @@ def header_tags(context):
 
         if 'MSIE' in browser_request:
             metadata += '<link rel="stylesheet" type="text/css" href="%sfilters_ie.css" charset="utf-8"/>' % (css_path)
-
-        if settings.DEBUG:
-            metadata += '<link rel="stylesheet" type="text/css" href="%seditor_content.css" charset="utf-8"/>' % (settings.STATIC_URL + 'elements/css/src/')
-        else:
-             metadata += '<link rel="stylesheet" type="text/css" href="%seditor_content.css" charset="utf-8"/>' % (settings.STATIC_URL + 'elements/css/')
+        if getattr(settings, 'USE_TINY_MCE', False):
+            if settings.DEBUG:
+                metadata += '<link rel="stylesheet" type="text/css" href="%seditor_content.css" charset="utf-8"/>' % (settings.STATIC_URL + 'elements/css/src/')
+            else:
+                metadata += '<link rel="stylesheet" type="text/css" href="%seditor_content.css" charset="utf-8"/>' % (settings.STATIC_URL + 'elements/css/')
 
         metadata += '<script type="text/javascript" src="%selements/js/jquery.min.js"></script>' % settings.STATIC_URL
         if use_html5_plugins:
@@ -101,12 +102,12 @@ def header_tags(context):
                 metadata += '<script type="text/javascript" src="%selements/js/DD_belatedPNG-min.js"></script>' %  settings.STATIC_URL
 
         metadata += '<script type="text/javascript" src="%selements/js/elements.%s" charset="utf-8"></script>' % (settings.STATIC_URL, js_suf)
-        if settings.ALTERNATE_STYLES:
+        if alternate_styles:
             metadata += '<script type="text/javascript" src="%selements/js/stylesheetToggle.%s" charset="utf-8"></script>' % (settings.STATIC_URL, js_suf)
 
         metadata += '<script type="text/javascript" src="%sbase.%s" charset="utf-8"></script>' % (js_path, js_suf)
 
-        metadata += '<link rel="shortcut icon" href="%sfavicon.ico" type="image/x-icon" />' % settings.STATIC_URL
+        metadata += '<link rel="shortcut icon" href="%s/favicon.ico" type="image/x-icon"/>' % settings.STATIC_URL
 
     return metadata
 

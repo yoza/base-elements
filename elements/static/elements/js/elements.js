@@ -2,28 +2,29 @@
     clearInput = function(form_id, field_id, label) {
         var label = label;
         var field = $(field_id);
+        if ($(field).attr('type') != 'password') {
 
-        $(document).ready(function() {
-            if (!field.val() || field.val() == label) {
-                field.val(label).addClass("empty");
-            }
-        });
-        $(form_id).submit(function() {
-            if (field.val() == label) {
-                field.val("");
-            }
-        });
-        field.focus(function() {
-            if ($(this).val() == label) {
-                $(this).val("").removeClass("empty");
-            }
-        });
-        field.blur(function() {
-            if ($(this).val() == "") {
-                $(field).val(label).addClass("empty");
-            }
-        });
-
+            $(document).ready(function() {
+                if (!field.val() || field.val() == label) {
+                    field.val(label).addClass("empty");
+                }
+            });
+            $(form_id).submit(function() {
+                if (field.val() == label) {
+                    field.val("");
+                }
+            });
+            field.focus(function() {
+                if ($(this).val() == label) {
+                    $(this).val("").removeClass("empty");
+                }
+            });
+            field.blur(function() {
+                if ($(this).val() == "") {
+                    $(field).val(label).addClass("empty");
+                }
+            });
+        }
         return false;
     }
 

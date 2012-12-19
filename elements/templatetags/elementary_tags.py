@@ -19,12 +19,11 @@ def logo_tag(context):
     logo = ""
     site_logo = getattr(settings, 'LOGO_IMAGE', ("maipage/img/logo.png",
                                                  "0,0,85,85"))
-    lang = None
-    if 'lang' in context:
+    lang = ''
+    if 'lang' in context and len(supported) > 1:
         lang = context['lang']
-    if lang == None or lang not in dict(settings.LANGUAGES):
-        lang = settings.LANGUAGE_CODE
-
+        if lang == None or lang not in supported:
+            lang = settings.LANGUAGE_CODE
     try:
         params = SiteParams.objects.language().get(site__id=settings.SITE_ID)
         tags = 'span p br div sub sup a'
@@ -215,7 +214,7 @@ def active_path(context):
     if 'request' in context:
         request = context['request']
         lang = ''
-        if 'lang' in context:
+        if 'lang' in context  and len(supported) > 1:
             lang = context['lang'].lower()
             if not lang or lang not in supported:
                 lang = settings.LANGUAGE_CODE
