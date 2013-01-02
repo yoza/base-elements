@@ -21,14 +21,15 @@ def locator(request):
     style = 'screen'
     debug = getattr(settings, 'DEBUG', False)
     if r:
-        site = request.site
-        site_id = 1
+        site_id = getattr(settings, 'SITE_ID', 1)
         site_name = getattr(settings, 'SITE_NAME', '')
+        site = request.site
         if site:
             try:
-                site = Site.objects.get(domain=site.domain)
-                site_id = site.id
-                site_name = site.name
+                site = Site.objects.filter(domain=site.domain)
+                if site.count():
+                    site_id = site[0].id
+                    site_name = site[0].name
             except Site.DoesNotExist:
                 pass
         setattr(settings, 'SITE_ID', site_id)
