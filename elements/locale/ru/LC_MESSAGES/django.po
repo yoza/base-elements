@@ -121,7 +121,7 @@ msgstr ""
 
 #: admin/hierarchy.py:93
 msgid "Save selected changes"
-msgstr "Сохранить вибранные изменения"
+msgstr "Сохранить выбранные изменения"
 
 #: admin/hierarchy.py:150
 msgid "Database error"
