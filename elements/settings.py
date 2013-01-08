@@ -2,6 +2,7 @@
 from os.path import join
 
 from django.conf import settings
+from django.utils.translation import ugettext_lazy as _
 
 
 # tiny_mce #
@@ -21,3 +22,5 @@ PAGES_PER_PAGER = getattr(settings, 'PAGES_PER_PAGER', 4)
 
 # base header #
 ALTERNATE_STYLES = getattr(settings, 'ALTERNATE_STYLES', ())
+
+settings.SEARCH_LABEL = getattr(settings, 'SEARCH_LABEL', unicode(_("Search...")))

@@ -186,13 +186,12 @@ def search_tag(context):
             btn_img = getattr(settings,'SEARCH_BTN_IMG_IE6', '/static/elements/img/btn_search_ie6.gif')
         else:
             btn_img = getattr(settings,'SEARCH_BTN_IMG', '/static/elements/img/btn_search.png')
-        searches = u'<div id="search"><form method="get" action="/%s/search" id="searchform">\
+        searches = u'<div id="search"><form method="get" action="/%s/search" id="searchform" autocomplete="off">\
                     <div style="display:none"><input type="hidden" name="csrfmiddlewaretoken" value="%s" /></div>\
                     <div class="line"><input type="text" name="query" id="query" />\
                     <input type="image" class="imgbtn" src="%s" alt="Search" />\
                     <input type="hidden" name="formname" value="search" /></div></form></div>' % (lang, csrf_token, btn_img)
-        searches += u'<script type="text/javascript">jQuery(document).ready(function(){clearInput("#searchform","#query", "%s")});</script>' % (_("Search..."))
-
+        searches += u'<script type="text/javascript">jQuery(document).ready(function(){clearInput("#searchform","#query", "%s")});</script>' % settings.SEARCH_LABEL
     return  mark_safe(searches)
 register.simple_tag(takes_context=True)(search_tag)
 
