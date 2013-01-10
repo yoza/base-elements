@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.sites.models import Site
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from hvad.models import TranslatableModel, TranslatedFields
 from hvad.manager import TranslationManager
@@ -26,12 +27,18 @@ class SiteParams(TranslatableModel):
     slug = models.SlugField(_(u'slug'), null=False, blank=False,
                             max_length=128, unique=True,
                             help_text=_('site params slug'))
+    last_update = models.DateTimeField(_('last update time'),
+                                       editable=False,
+                                       db_column='last_update_time',
+                                       default=timezone.now)
+
 
     objects = SiteParamsManager()
 
     class Meta:
         verbose_name = _('site parameter')
         verbose_name_plural = _('site parameters')
+        db_table = u'element_siteparam'
 
     translations = TranslatedFields(
         title = models.CharField(_('Site title'), null=True,
@@ -53,3 +60,8 @@ class SiteParams(TranslatableModel):
     def __unicode__(self):
         prefix = _('Parameters data for site')
         return prefix + ' - ' + self.title + ' (' + self.site.domain + ')'
+
+    def save(self, force_insert=False, force_update=False):
+        self.last_update = timezone.now()
+        super(SiteParams, self).save(force_insert, force_update)
+    save.alters_data = True
