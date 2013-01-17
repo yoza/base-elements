@@ -20,9 +20,9 @@ def locator(request):
     lang = settings.LANGUAGE_CODE
     style = 'screen'
     debug = getattr(settings, 'DEBUG', False)
+    site_id = getattr(settings, 'SITE_ID', 1)
+    site_name = getattr(settings, 'SITE_NAME', '')
     if r:
-        site_id = getattr(settings, 'SITE_ID', 1)
-        site_name = getattr(settings, 'SITE_NAME', '')
         site = request.site
         if site:
             try:
