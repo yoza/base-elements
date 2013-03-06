@@ -21,20 +21,20 @@ local_tinymce_config = {
     "-div," +
     "-sub,-sup",
   extended_valid_elements: tinymce_config.extended_valid_elements +
-    "details[open|class]," +
-    "summary[aria-expanded|style|role|tabindex|class]," +
     "br[clearfix]," +
     "div[class|style]," +
+    "p[class|style]," +
     "span[class|align|style]," +
     "font[face|size|color|style]," +
-    "p[class|style]," +
-    "table[class|style],td[colspan|style|class],tr[rowspan|class|style],tbody[class|style],thead[class|style],tfoot[class|style]"
+    "table[class|style],td[rowspan|colspan|style|class]," +
+    "th[rowspan|colspan|style|class],tr[class|style]," +
+    "tbody[class|style],thead[class|style],tfoot[class|style]" +
+    "h2[class<clearfix],h3[class<clearfix],h4[class<clearfix]," +
+    "ul[class],ol[class]"
 };
 
-// Object.extend(tinymce_config, local_tinymce_config);
 (function($) {
     $.extend(tinymce_config, local_tinymce_config);
 })(django ? django.jQuery : jQuery);
 </script>
 {% endblock %}
-
