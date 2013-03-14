@@ -30,7 +30,7 @@ class TinyMCE(Textarea):
         )]
 
     def __init__(self, language=None, attrs=None):
-        self.language = settings.LANGUAGE_CODE # "en"# XXX language or settings.LANGUAGE_CODE[:2]
+        self.language = settings.LANGUAGE_CODE
         self.lang_list = ""
         for lang, name in settings.LANGUAGES:
             if self.lang_list:
@@ -39,7 +39,8 @@ class TinyMCE(Textarea):
                 self.lang_list = lang
 
         self.attrs = {'class': 'tinymce'}
-        self.content_css = join(settings.STATIC_URL, 'elements/css/src/editor_content.css')
+        self.content_css = join(settings.STATIC_URL,
+                                'elements/css/src/editor_content.css')
         if attrs:
             self.attrs.update(attrs)
         super(TinyMCE, self).__init__(attrs)

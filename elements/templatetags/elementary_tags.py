@@ -19,6 +19,7 @@ def logo_tag(context):
     logo = ""
     site_logo = getattr(settings, 'LOGO_IMAGE', ("maipage/img/logo.png",
                                                  "0,0,85,85"))
+    logo_text = getattr(settings, 'LOGO_TEXT', '')
     lang = ''
     if 'lang' in context and len(supported) > 1:
         lang = context['lang']
@@ -39,8 +40,9 @@ def logo_tag(context):
                         <area href="/%s" target="_self" id="area_logo_map" \
                               shape ="rect" coords ="%s" alt="%s"/>\
                     </map>\
-                </div>' % (site_logo[0], value, lang, site_logo[1], value)
-
+                    <span class="logo-text">%s</span>\
+                </div>' % (site_logo[0], value, lang, site_logo[1], value,
+                           logo_text)
     except SiteParams.DoesNotExist:
         pass
 
