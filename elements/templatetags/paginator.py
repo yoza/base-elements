@@ -18,7 +18,8 @@ def paginator(context, content_pages = None, slug = None):
             if 'page' in url_params:
                 del(url_params['page'])
             get_params = url_params.urlencode()
-
+        if request.is_ajax():
+            url = request.path
         page_url = get_params
         if slug:
             for sl in slug.split(','):
