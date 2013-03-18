@@ -4,6 +4,7 @@ from elements.backends.range_pagination import rangePagenation
 
 register = template.Library()
 
+TEMPLATE_PAGINATOR_PATH = getattr(settings, 'TEMPLATE_PAGINATOR_PATH', 'blocks')
 
 def paginator(context, content_pages = None, slug = None):
     """
@@ -33,17 +34,19 @@ def paginator(context, content_pages = None, slug = None):
 
         letter = request.GET.get('letter', None)
 
-        pager_per = getattr(settings, 'PAGES_PER_PAGER', content_pages.paginator.per_page)
+        pager_per = getattr(settings, 'PAGES_PER_PAGER',
+                            content_pages.paginator.per_page)
 
         first_range = range(1, pager_per + 1)
 
         last_page_number = content_pages.paginator.num_pages
 
-        page_range = rangePagenation(selected_page, content_pages, pager_per).page_range
+        page_range = rangePagenation(selected_page,
+                                     content_pages, pager_per).page_range
 
         pages = content_pages
 
     return locals()
 
-paginator = register.inclusion_tag('blocks/paginator.html',
-                                            takes_context=True)(paginator)
+register.inclusion_tag('%s/paginator.html' % TEMPLATE_PAGINATOR_PATH,
+                                    takes_context=True)(paginator)

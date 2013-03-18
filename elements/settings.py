@@ -24,3 +24,5 @@ PAGES_PER_PAGER = getattr(settings, 'PAGES_PER_PAGER', 4)
 ALTERNATE_STYLES = getattr(settings, 'ALTERNATE_STYLES', ())
 
 settings.SEARCH_LABEL = getattr(settings, 'SEARCH_LABEL', unicode(_("Search...")))
+
+TEMPLATE_PAGINATOR_PATH = getattr(settings, 'TEMPLATE_PAGINATOR', 'block')
