@@ -139,6 +139,7 @@ h1 {
     text-align: right;
 }
 
+.colM .aligned .vURLField,
 .colM .aligned .vLargeTextField,
 .colM .aligned .vTextField {
     width: 792px;
