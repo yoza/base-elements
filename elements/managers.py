@@ -86,10 +86,11 @@ class ImageManager(HierarchyManager):
                 pass
 
     def image_size(self, obj):
-        try:
-            item = self.get(model=obj)
-        except self.model.DoesNotExist:
-            item = None
+        #try:
+            #item = self.get(model=obj)
+        #except self.model.DoesNotExist:
+            #item = None
+        item = obj
         if item and item.image:
             try:
                 image = Image.open(os.path.join(settings.MEDIA_ROOT,
