@@ -242,3 +242,22 @@ def active_path(context):
     return  mark_safe(current_path)
 
 register.simple_tag(takes_context=True)(active_path)
+
+
+#@register.simple_tag
+def button_more(href="", alt="", label=_("In detail"), target="", aclass="btn_more", button_id = ""):
+    """
+    This tag for use in IE7-IE8
+
+    """
+    btn_id = ""
+    if button_id:
+        btn_id = "id=%s" % button_id
+    if label:
+        label = unicode(_(label))
+    code = u'<a href="%s" alt="%s" %s class="%s" %s>' % (href, alt, target, aclass, btn_id)
+    code += u'<span class="btn_right"><span class="btn_left"><span class="button_more">%s</span></span></span>' % label
+    code += u'</a>'
+
+    return mark_safe(code)
+register.simple_tag(button_more)
