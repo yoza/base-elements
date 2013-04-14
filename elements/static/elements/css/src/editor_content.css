@@ -86,3 +86,7 @@ OL.ordered_list LI {
     list-style-type: decimal;
     vertical-align: middle;
 }
+
+STRONG {
+    font-weight: bold;
+}
