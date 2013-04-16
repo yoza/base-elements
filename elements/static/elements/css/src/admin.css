@@ -52,6 +52,7 @@ h1 {
     font-size: 1.3em;
     background: url("/static/elements/img/app_header_bg.gif") repeat-x;
     font-weight: bold;
+    white-space: nowrap;
 }
 
 .module {
