@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django import template
 from django.utils import timezone
 from django.utils.translation import ungettext_lazy
@@ -8,7 +10,8 @@ register = template.Library()
 
 @register.filter(name='ago')
 def ago(last_update, d=None):
-    d = timezone.now() - last_update
+
+    d =  datetime.utcnow() - last_update
     hours = d.seconds / 3600
     minutes = d.seconds / 60
     if d.days >= 1:
