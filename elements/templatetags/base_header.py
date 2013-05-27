@@ -1,9 +1,12 @@
+"""
+simple site header
+"""
 from os.path import join
 import re
 from django import template
 from django.conf import settings
 
-from elements.models import  SiteParams
+from elements.models import SiteParams
 
 
 register = template.Library()
@@ -11,6 +14,9 @@ register = template.Library()
 
 #@register.simple_tag
 def header_tags(context):
+    """
+    header tag
+    """
     metadata = ''
     title = ''
     use_html5_plugins = getattr(settings, 'USE_HTML5_PLUGINS', False)
@@ -20,25 +26,29 @@ def header_tags(context):
             lang = context['lang']
         else:
             lang = None
-        if lang == None or lang not in dict(settings.LANGUAGES):
+        if lang is None or lang not in dict(settings.LANGUAGES):
             lang = settings.LANGUAGE_CODE
         current_page = None
         if 'current_page' in context:
             current_page = context['current_page']
             if current_page:
                 title = current_page.title(lang)
-        if not current_page or current_page.slug() in ('/','home'):
+        if not current_page or current_page.slug() in ('/', 'home'):
+            entry = []
             try:
+                entry = SiteParams.objects.language(lang)
+                entry = entry.get(site__id=settings.SITE_ID)
+            except SiteParams.DoesNotExist:
+                pass
+            if entry:
                 tags = 'span p br div sub sup a'
-                entry = SiteParams.objects.language(lang).get(site__id=settings.SITE_ID)
                 tags = [re.escape(tag) for tag in tags.split()]
                 tags_re = u'(%s)' % u'|'.join(tags)
-                starttag_re = re.compile(ur'<%s(/?>|(\s+[^>]*>))' % tags_re, re.U)
+                starttag_re = \
+                    re.compile(ur'<%s(/?>|(\s+[^>]*>))' % tags_re, re.U)
                 endtag_re = re.compile(u'</%s>' % tags_re)
                 value = starttag_re.sub(u' - ', entry.title)
                 title = endtag_re.sub(u'', value)
-            except SiteParams.DoesNotExist:
-                pass
 
         browser_request = request.META.get('HTTP_USER_AGENT', '').upper()
 
@@ -46,13 +56,18 @@ def header_tags(context):
         if 'MSIE 8.0' in browser_request:
             metadata += '<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />'
         metadata += '<title>%s</title>' % title
-
-        #metadata += '<meta name="keywords" content="any keywords" />'
+        if entry:
+            metadata += '<meta name="description" content="%s" />' % entry.mdescrip
+            if 'extra_keywords' in context:
+                keywords = "%s, %s" % (entry.mkeyword, context['extra_keywords'])
+            else:
+                keywords = entry.mkeyword
+            metadata += '<meta name="keywords" content="%s" />' % keywords
         metadata += '<meta http-equiv="cache-control" content="public" />'
         metadata += '<meta name="robots" content="follow, all" />'
         metadata += '<meta name="language" content="%s" />' % lang
         metadata += '<meta name="viewport" content="width=device-width; initial-scale=1.0;" />'
-        static_suffix =  getattr(settings, 'STATIC_SUFFIX', '')
+        static_suffix = getattr(settings, 'STATIC_SUFFIX', '')
         css_path = join(settings.STATIC_URL, static_suffix) + '/css/'
         if settings.DEBUG:
             js_suf = 'js'
@@ -68,9 +83,9 @@ def header_tags(context):
 
         browser_label = None
         if 'MSIE' in browser_request:
-                browser_label = 'ie'
-                if 'MSIE 9.0' in browser_request:
-                    browser_label += "_9"
+            browser_label = 'ie'
+            if 'MSIE 9.0' in browser_request:
+                browser_label += "_9"
 
         elif 'KONQUEROR' in browser_request:
             browser_label = 'konqueror'
