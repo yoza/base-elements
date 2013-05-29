@@ -33,8 +33,8 @@ def header_tags(context):
             current_page = context['current_page']
             if current_page:
                 title = current_page.title(lang)
+        entry = []
         if not current_page or current_page.slug() in ('/', 'home'):
-            entry = []
             try:
                 entry = SiteParams.objects.language(lang)
                 entry = entry.get(site__id=settings.SITE_ID)
