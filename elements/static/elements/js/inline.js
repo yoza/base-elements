@@ -37,7 +37,7 @@
         }
 
         // let's start event delegation
-    change_content.click(function (e) {
+        change_content.click(function (e) {
             var target = $(e.target);
             var link = target.closest('a').andSelf().filter('a');
 

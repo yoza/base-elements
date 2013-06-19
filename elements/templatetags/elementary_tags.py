@@ -60,7 +60,7 @@ def site_param(context, param, tags=""):
             starttag_re = re.compile(ur'<%s(/?>|(\s+[^>]*>))' % tags_re, re.U)
             endtag_re = re.compile(u'</%s>' % tags_re)
             value = starttag_re.sub(u' - ', entry[param])
-            value = endtag_re.sub(u'', value)
+            value = endtag_re.sub(u' ', value)
         else:
             value = entry[param]
 

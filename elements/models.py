@@ -70,7 +70,7 @@ class SiteParams(TranslatableModel):
 
     def invalidate(self):
         """
-        not nesessary
+        invalidate
         """
         pass
 
