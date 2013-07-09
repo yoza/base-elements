@@ -17,7 +17,7 @@ supported = dict(settings.LANGUAGES)
 
 def logo_tag(context):
     logo = ""
-    site_logo = getattr(settings, 'LOGO_IMAGE', ("maipage/img/logo.png",
+    site_logo = getattr(settings, 'LOGO_IMAGE', ("../img/logo.png",
                                                  "0,0,85,85"))
     logo_text = getattr(settings, 'LOGO_TEXT', '')
     lang = ''

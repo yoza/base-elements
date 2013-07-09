@@ -1,0 +1,21 @@
+{% load i18n options_list %}
+
+{% spaceless %}
+<div class="border">
+    <input type="hidden" name="id.{{ page.id }}" value="{{ page.id }}" />
+    {% if cl %}
+        {% checkbox_active_actions cl page.id %}
+    {% endif %}
+    {% if page.children.count %}
+        <a href="#" class="expand-collapse {% if page.expanded %}expanded{% endif %}" id="c{{ page.id }}">
+            <span class="expand">+</span>
+            <span class="collapse">-</span>
+        </a>
+    {% else %}
+        <span class="addpadd">&nbsp;</span>
+    {% endif %}
+    <span class="movespan" id="navigation_page_{{ page.id }}">{% trans 'Move' %}</span>
+    <span><a href="{{ url }}{{ page.id }}/">{{ page.name }}</a></span>
+    <span style="padding-left:10px">{{ page.slot }}</a></span>
+</div>
+{% endspaceless %}
