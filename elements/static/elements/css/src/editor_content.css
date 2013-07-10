@@ -60,15 +60,16 @@ H4 {
 }
 
 UL.bullet_list {
-    list-style: inherit;
-    text-indent: 40px;
+    padding-left: 15px;
 }
 
 UL.bullet_list LI {
     display: list-item!important;
-    list-style: inside;
+    list-style-position: outside;
     list-style-type: disc;
     vertical-align: middle;
+    line-height: normal;
+    clear: both;
 }
 
 OL.ordered_list {
@@ -77,9 +78,10 @@ OL.ordered_list {
 
 OL.ordered_list LI {
     display: list-item!important;
-    list-style: inside;
+    list-style-position: inside;
     list-style-type: decimal;
     vertical-align: middle;
+    line-height: normal;
 }
 
 STRONG {
@@ -87,7 +89,6 @@ STRONG {
 }
 
 UL.inline_list {
-    list-style-type: none;
     list-style-type: none;
     width: 100%;
     margin: 0;
