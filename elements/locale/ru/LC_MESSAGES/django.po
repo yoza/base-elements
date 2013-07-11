@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-21 08:35-0400\n"
+"POT-Creation-Date: 2013-07-10 16:36-0400\n"
 "PO-Revision-Date: 2012-06-05 15:34-0500\n"
 "Last-Translator: Oleg Prans <yozapr@gmail.com>\n"
 "Language-Team: Russian <>\n"
@@ -30,31 +30,31 @@ msgstr ""
 msgid "Thumbnail creation failed."
 msgstr "Создание иконки закончилось неудачей."
 
-#: models.py:18
+#: models.py:23
 msgid "Site"
 msgstr "Сайт"
 
-#: models.py:19
+#: models.py:24
 msgid "Right block"
 msgstr "Блок справа"
 
-#: models.py:21
-msgid "Show/hide right block on main page"
+#: models.py:26
+msgid "Show/hide right block on the main page"
 msgstr "Показать/скрыть правый блок главной страницы"
 
-#: models.py:22
+#: models.py:28
 msgid "Left block"
 msgstr "Блок слева"
 
-#: models.py:24
-msgid "Show/hide left block on main page"
+#: models.py:30
+msgid "Show/hide left block on the main page"
 msgstr "Показать/скрыть левый блок главной страницы"
 
-#: models.py:25
+#: models.py:32
 msgid "GA code"
 msgstr "GA код"
 
-#: models.py:26
+#: models.py:33
 msgid ""
 "Custom JavaScript: Google Analitics JS code etc. Copy and paste it on this "
 "field."
@@ -62,59 +62,75 @@ msgstr ""
 "Ваш JavaScript: например Google Analitics js код. Скопируйте его и вставьте "
 "в это поле."
 
-#: models.py:27
+#: models.py:36
 msgid "slug"
 msgstr "слуг"
 
-#: models.py:29
+#: models.py:38
 msgid "site params slug"
 msgstr "слуг коллекции параметров сайта"
 
-#: models.py:30
-msgid "last update time"
-msgstr ""
-
 #: models.py:39
+msgid "last update time"
+msgstr "дата последнего обновления"
+
+#: models.py:46
 msgid "site parameter"
 msgstr "параметр сайта"
 
-#: models.py:40
+#: models.py:47
 msgid "site parameters"
 msgstr "параметры сайта"
 
-#: models.py:44
+#: models.py:51
 msgid "Site title"
 msgstr "Заголовок сайта"
 
-#: models.py:46
+#: models.py:53
 msgid "Put here alternative text for logo image and site name"
 msgstr "Добавьте сюда альтернативный текст для картинки лого и названия сайта"
 
-#: models.py:47
+#: models.py:55
 msgid "copyright"
 msgstr "копирайт"
 
-#: models.py:49
+#: models.py:57
 msgid "Site copyright"
 msgstr "Копирайт сайта"
 
-#: models.py:50
+#: models.py:58
 msgid "Site slogan"
 msgstr "Слоган сайта"
 
-#: models.py:52
+#: models.py:60
 msgid "Put here text for site slogan"
 msgstr "Добавьте сюда текст слогана сайта"
 
-#: models.py:53
+#: models.py:61
 msgid "description"
 msgstr "описание"
 
-#: models.py:53
+#: models.py:62
 msgid "Site Description"
 msgstr "Описание сайта"
 
-#: models.py:61
+#: models.py:63
+msgid "Meta description"
+msgstr "Мета описание"
+
+#: models.py:64
+msgid "The site meta description"
+msgstr "Описание сайта"
+
+#: models.py:65
+msgid "Meta keywords"
+msgstr "Мета ключи"
+
+#: models.py:67
+msgid "Site meta keywords. Please write a comma separated."
+msgstr "Мета ключи сайта. Пожалуйста пишите разделяя запятой."
+
+#: models.py:81
 msgid "Parameters data for site"
 msgstr "Данные параметров для сайта"
 
@@ -122,20 +138,27 @@ msgstr "Данные параметров для сайта"
 msgid "Search..."
 msgstr "Искать..."
 
-#: admin/hierarchy.py:89
+#: admin/hierarchy.py:134
 msgid "The navigation was updated successfully. You may edit it again below."
 msgstr ""
 "Навигация была успешно сохранена. Ниже вы ее снова можете редактировать."
 
-#: admin/hierarchy.py:93
+#: admin/hierarchy.py:139
 msgid "Save selected changes"
 msgstr "Сохранить выбранные изменения"
 
-#: admin/hierarchy.py:150
+#: admin/hierarchy.py:205
 msgid "Database error"
 msgstr "Ошибка базы данных"
 
-#: admin/hierarchy.py:193
+#: admin/hierarchy.py:228
+msgid ""
+"Items must be selected in order to perform actions on them. No items have "
+"been changed."
+msgstr ""
+"Для исполнения акции элемент должен быть выбран. Нет элементов для изменения."
+
+#: admin/hierarchy.py:274
 msgid "Edit"
 msgstr "Редактирование"
 
@@ -155,29 +178,29 @@ msgstr "Изменить:"
 #, python-format
 msgid "%(count)i day ago"
 msgid_plural "%(count)i days ago"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%(count)i день назад"
+msgstr[1] "%(count)i дня назад"
+msgstr[2] "%(count)i дней назад"
 
 #: filters/ago.py:24
 #, python-format
 msgid "%(count)i hour ago"
 msgid_plural "%(count)i hours ago"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%(count)i час назад"
+msgstr[1] "%(count)i часа назад"
+msgstr[2] "%(count)i часов назад"
 
 #: filters/ago.py:29
 #, python-format
 msgid "%(count)i minute ago"
 msgid_plural "%(count)i minutes ago"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%(count)i минуту назад"
+msgstr[1] "%(count)i минуты назад"
+msgstr[2] "%(count)i минут назад"
 
 #: filters/ago.py:33
 msgid "few seconds ago"
-msgstr ""
+msgstr "несколько секунд назад"
 
 #: forms/captcha.py:60
 msgid "An error occured with the CAPTCHA service. Please try again."
@@ -217,7 +240,7 @@ msgstr "Доступны модели в %(name)s приложении."
 msgid "%(name)s"
 msgstr "%(name)s"
 
-#: templates/admin/index.html:30 templates/admin/navigation_list.html:51
+#: templates/admin/index.html:30 templates/admin/navigation_list.html:55
 msgid "Add"
 msgstr "Добавить"
 
@@ -229,27 +252,31 @@ msgstr "Изменить:"
 msgid "You don't have permission to edit anything."
 msgstr "Вы не имеете разрешения на редактирование чего-либо."
 
-#: templates/admin/navigation_list.html:44
+#: templates/admin/nav_item.html:17
+msgid "Move"
+msgstr "Переместить"
+
+#: templates/admin/navigation_list.html:48
 msgid "Home"
 msgstr "Главная"
 
-#: templates/admin/navigation_list.html:61
+#: templates/admin/navigation_list.html:65
 msgid "Hide an application filter"
 msgstr "Скрыть фильтр приложения"
 
-#: templates/admin/navigation_list.html:62
+#: templates/admin/navigation_list.html:66
 msgid "Show an application filter"
 msgstr "Показать фильтр приложения"
 
-#: templates/admin/navigation_list.html:63
+#: templates/admin/navigation_list.html:67
 msgid "Filter"
 msgstr "Фильтр"
 
-#: templates/admin/navigation_list.html:75
+#: templates/admin/navigation_list.html:79
 msgid "Note"
-msgstr "Замечание"
+msgstr "Заметка"
 
-#: templates/admin/navigation_list.html:75
+#: templates/admin/navigation_list.html:79
 msgid ""
 "You will have to activate JavaScript in your browser's settings to be able "
 "to reorder the objects."
@@ -257,7 +284,7 @@ msgstr ""
 "Вам необходимо активировать JavaScript в настройках вашего браузера для "
 "получения возможности сортировать объекты."
 
-#: templates/admin/navigation_list.html:78
+#: templates/admin/navigation_list.html:82
 msgid "Manage"
 msgstr "Управление"
 
@@ -284,7 +311,7 @@ msgstr "следующая"
 
 #: templatetags/adminelem.py:19 templatetags/adminelem.py:21
 msgid "File-Browser"
-msgstr ""
+msgstr "Файл-браузер"
 
 #: templatetags/elementary_tags.py:205
 msgid ""
@@ -301,7 +328,7 @@ msgstr "Пожалуйста включите поддержку JavaScript в �
 
 #: templatetags/elementary_tags.py:248
 msgid "In detail"
-msgstr ""
+msgstr "Подробней"
 
 #: templatetags/options_list.py:303
 msgid "All dates"

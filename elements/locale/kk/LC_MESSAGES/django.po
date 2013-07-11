@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-21 08:35-0400\n"
+"POT-Creation-Date: 2013-07-10 16:36-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,89 +28,105 @@ msgstr ""
 msgid "Thumbnail creation failed."
 msgstr ""
 
-#: models.py:18
+#: models.py:23
 msgid "Site"
 msgstr ""
 
-#: models.py:19
+#: models.py:24
 msgid "Right block"
 msgstr ""
 
-#: models.py:21
-msgid "Show/hide right block on main page"
+#: models.py:26
+msgid "Show/hide right block on the main page"
 msgstr ""
 
-#: models.py:22
+#: models.py:28
 msgid "Left block"
 msgstr ""
 
-#: models.py:24
-msgid "Show/hide left block on main page"
+#: models.py:30
+msgid "Show/hide left block on the main page"
 msgstr ""
 
-#: models.py:25
+#: models.py:32
 msgid "GA code"
 msgstr ""
 
-#: models.py:26
+#: models.py:33
 msgid ""
 "Custom JavaScript: Google Analitics JS code etc. Copy and paste it on this "
 "field."
 msgstr ""
 
-#: models.py:27
+#: models.py:36
 msgid "slug"
 msgstr ""
 
-#: models.py:29
+#: models.py:38
 msgid "site params slug"
 msgstr ""
 
-#: models.py:30
+#: models.py:39
 msgid "last update time"
 msgstr ""
 
-#: models.py:39
+#: models.py:46
 msgid "site parameter"
 msgstr ""
 
-#: models.py:40
+#: models.py:47
 msgid "site parameters"
 msgstr ""
 
-#: models.py:44
+#: models.py:51
 msgid "Site title"
 msgstr ""
 
-#: models.py:46
+#: models.py:53
 msgid "Put here alternative text for logo image and site name"
 msgstr ""
 
-#: models.py:47
+#: models.py:55
 msgid "copyright"
 msgstr ""
 
-#: models.py:49
+#: models.py:57
 msgid "Site copyright"
 msgstr ""
 
-#: models.py:50
+#: models.py:58
 msgid "Site slogan"
 msgstr ""
 
-#: models.py:52
+#: models.py:60
 msgid "Put here text for site slogan"
 msgstr ""
 
-#: models.py:53
+#: models.py:61
 msgid "description"
 msgstr ""
 
-#: models.py:53
+#: models.py:62
 msgid "Site Description"
 msgstr ""
 
-#: models.py:61
+#: models.py:63
+msgid "Meta description"
+msgstr ""
+
+#: models.py:64
+msgid "The site meta description"
+msgstr ""
+
+#: models.py:65
+msgid "Meta keywords"
+msgstr ""
+
+#: models.py:67
+msgid "Site meta keywords. Please write a comma separated."
+msgstr ""
+
+#: models.py:81
 msgid "Parameters data for site"
 msgstr ""
 
@@ -118,19 +134,25 @@ msgstr ""
 msgid "Search..."
 msgstr "Іздеу..."
 
-#: admin/hierarchy.py:89
+#: admin/hierarchy.py:134
 msgid "The navigation was updated successfully. You may edit it again below."
 msgstr ""
 
-#: admin/hierarchy.py:93
+#: admin/hierarchy.py:139
 msgid "Save selected changes"
 msgstr ""
 
-#: admin/hierarchy.py:150
+#: admin/hierarchy.py:205
 msgid "Database error"
 msgstr ""
 
-#: admin/hierarchy.py:193
+#: admin/hierarchy.py:228
+msgid ""
+"Items must be selected in order to perform actions on them. No items have "
+"been changed."
+msgstr ""
+
+#: admin/hierarchy.py:274
 msgid "Edit"
 msgstr ""
 
@@ -204,7 +226,7 @@ msgstr ""
 msgid "%(name)s"
 msgstr ""
 
-#: templates/admin/index.html:30 templates/admin/navigation_list.html:51
+#: templates/admin/index.html:30 templates/admin/navigation_list.html:55
 msgid "Add"
 msgstr ""
 
@@ -216,33 +238,37 @@ msgstr ""
 msgid "You don't have permission to edit anything."
 msgstr ""
 
-#: templates/admin/navigation_list.html:44
+#: templates/admin/nav_item.html:17
+msgid "Move"
+msgstr ""
+
+#: templates/admin/navigation_list.html:48
 msgid "Home"
 msgstr "Басты бет"
 
-#: templates/admin/navigation_list.html:61
+#: templates/admin/navigation_list.html:65
 msgid "Hide an application filter"
 msgstr ""
 
-#: templates/admin/navigation_list.html:62
+#: templates/admin/navigation_list.html:66
 msgid "Show an application filter"
 msgstr ""
 
-#: templates/admin/navigation_list.html:63
+#: templates/admin/navigation_list.html:67
 msgid "Filter"
 msgstr ""
 
-#: templates/admin/navigation_list.html:75
+#: templates/admin/navigation_list.html:79
 msgid "Note"
 msgstr ""
 
-#: templates/admin/navigation_list.html:75
+#: templates/admin/navigation_list.html:79
 msgid ""
 "You will have to activate JavaScript in your browser's settings to be able "
 "to reorder the objects."
 msgstr ""
 
-#: templates/admin/navigation_list.html:78
+#: templates/admin/navigation_list.html:82
 msgid "Manage"
 msgstr ""
 
