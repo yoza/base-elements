@@ -3,6 +3,7 @@
 var pages = {};
 
 pages.cookie = function(name, value, options) {
+    jQuery = jQuery || $ || django.jQuery;
     if (typeof value != 'undefined') { // name and value given, set cookie
         options = options || {};
         if (value === null) {

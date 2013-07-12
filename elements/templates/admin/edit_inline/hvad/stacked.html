@@ -32,6 +32,18 @@
 <script type="text/javascript">
 (function($) {
     $(document).ready(function() {
+        // use cookie to show expanded rows 
+        var expanded = pages.cookie('inline_expanded');
+        var cookies = expanded ? expanded.split(',') : [];
+        $("A.expand-collapse").each(function(){
+            for(var i=0;i < cookies.length;i++){
+                if ($(this).attr('id') == cookies[i]) {
+                    $(this).toggleClass('expanded');
+                    $(this).parent().parent().find('div.closed')
+                        .css('display','block');
+                }
+            }
+        });
         var rows = "#{{ inline_admin_formset.formset.prefix }}-group .inline-related";
         var updateInlineLabel = function(row) {
             $(rows).find(".inline_label").each(function(i) {

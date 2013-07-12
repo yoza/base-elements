@@ -1,3 +1,8 @@
+/*
+ * name: expand - collapse inline row. use cookie
+ * 
+ */
+
 (function() {
     var jQuery = jQuery || $ || django.jQuery;
     jQuery(function ($) {
@@ -17,7 +22,8 @@
             var expanded = get_expanded();
             var index = $.inArray(id, expanded);
             if (index != -1) {
-                // The following code is based on J. Resig's optimized array remove
+                // The following code is based
+                // on J. Resig's optimized array remove
                 var rest = expanded.slice(index+1);
                 expanded.length = index;
                 expanded.push.apply(expanded, rest);
@@ -33,7 +39,9 @@
 
         // Save the list of expanded page ids to the cookie
         function set_expanded(array) {
-            pages.cookie('inline_expanded', array.join(','), { 'expires': 14 }); // expires after 12 days
+            pages.cookie('inline_expanded',
+                         array.join(','),
+                         { 'expires': 3 }); // expires after 3 days
         }
 
         // let's start event delegation
@@ -46,9 +54,13 @@
                 if (link.hasClass('expand-collapse')) {
                     var id = link.attr('id');
                     if (link.toggleClass('expanded').hasClass('expanded')) {
-                        $(link).parent().parent().find('div.closed').css('display','block');
+                        $(link).parent().parent().find('div.closed')
+                            .css('display','block');
+                        add_expanded(id);
                     } else {
-                        $(link).parent().parent().find('div.closed').css('display','none');
+                        $(link).parent().parent().find('div.closed')
+                            .css('display','none');
+                        rem_expanded(id);
                     }
                     return false;
                 }

@@ -136,8 +136,7 @@ class HierarhyModelAdmin(admin.ModelAdmin):
 
             return HttpResponseRedirect(path)
 
-    save_changed.short_description = _("Save selected changes")
-
+    save_changed.short_description = unicode(_("Save selected changes"))
     ordering = ["position"]
     item_template = 'admin/nav_item.html'
 
@@ -265,8 +264,8 @@ class HierarhyModelAdmin(admin.ModelAdmin):
 
         media.add_js((
             HIERARHY_STATIC_URL + "js/mootools.js",
-            HIERARHY_STATIC_URL + "js/nested.js",
-            HIERARHY_STATIC_URL + "js/navigation.js",
+            HIERARHY_STATIC_URL + "js/nested.min.js",
+            HIERARHY_STATIC_URL + "js/navigation.min.js",
         ))
 
         context = {
