@@ -2,7 +2,8 @@
 elements models
 """
 from datetime import datetime
-
+from django.utils import timezone
+from django.conf import settings
 from django.db import models
 from django.contrib.sites.models import Site
 
@@ -20,6 +21,11 @@ class SiteParams(TranslatableModel):
     SiteParams model
 
     '''
+    if settings.USE_TZ:
+        date_time_now = timezone.now()
+    else:
+        date_time_now = datetime.utcnow()
+
     site = models.ForeignKey(Site, verbose_name=_('Site'))
     rb_section = models.BooleanField(verbose_name=_('Right block'),
                                      default=False,
@@ -39,7 +45,7 @@ class SiteParams(TranslatableModel):
     last_update = models.DateTimeField(_('last update time'),
                                        editable=False,
                                        db_column='last_update_time',
-                                       default=datetime.utcnow())
+                                       default=date_time_now)
     objects = SiteParamsManager()
 
     class Meta:
@@ -85,6 +91,6 @@ class SiteParams(TranslatableModel):
         """
         save
         """
-        self.last_update = datetime.utcnow()
+        self.last_update = self.date_time_now
         super(SiteParams, self).save(*args, **kwargs)
     save.alters_data = True

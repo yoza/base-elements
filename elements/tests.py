@@ -1,16 +1,26 @@
 """
-This file demonstrates writing tests using the unittest module. These will pass
-when you run "manage.py test".
+elements unit tests
 
-Replace this with more appropriate tests for your application.
 """
-
+from django.conf import settings
 from django.test import TestCase
 
+from elements.models import SiteParams
 
-class SimpleTest(TestCase):
-    def test_basic_addition(self):
+
+class SiteParamsTestCase(TestCase):
+    """
+    simple unit test params
+    """
+    def setUp(self):
         """
-        Tests that 1 + 1 always equals 2.
+        sutup
         """
-        self.assertEqual(1 + 1, 2)
+        SiteParams.objects.create(site_id=settings.SITE_ID, slug="slugtest")
+
+    def test_params_read(self):
+        """
+        check params read
+        """
+        params = SiteParams.objects.get(site_id=settings.SITE_ID)
+        print params.last_update
