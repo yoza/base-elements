@@ -66,7 +66,7 @@ def header_tags(context):
         metadata += '<meta http-equiv="cache-control" content="public" />'
         metadata += '<meta name="robots" content="follow, all" />'
         metadata += '<meta name="language" content="%s" />' % lang
-        metadata += '<meta name="viewport" content="width=device-width; initial-scale=1.0;" />'
+        metadata += '<meta name="viewport" content="width=device-width, initial-scale=1.0" />'
         static_suffix = getattr(settings, 'STATIC_SUFFIX', '')
         css_path = join(settings.STATIC_URL, static_suffix) + '/css/'
         if settings.DEBUG:
@@ -122,8 +122,9 @@ def header_tags(context):
 
         metadata += '<script type="text/javascript" src="%sbase.%s" charset="utf-8"></script>' % (js_path, js_suf)
 
-        metadata += '<link rel="shortcut icon" href="%s/favicon.ico" type="image/x-icon"/>' % settings.STATIC_URL
-
+        metadata += '<link rel="shortcut icon" href="%sfavicon.ico" type="image/x-icon"/>' % settings.STATIC_URL
+        metadata += '<link rel="apple-touch-icon" href="%sapple_icon.png"/>' % settings.STATIC_URL
+        
     return metadata
 
 register.simple_tag(takes_context=True)(header_tags)
