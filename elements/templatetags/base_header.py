@@ -63,7 +63,7 @@ def header_tags(context):
             else:
                 keywords = entry.mkeyword
             metadata += '<meta name="keywords" content="%s" />' % keywords
-        metadata += '<meta http-equiv="cache-control" content="public" />'
+        metadata += '<meta http-equiv="cache-control" content="no-cache" />'
         metadata += '<meta name="robots" content="follow, all" />'
         metadata += '<meta name="language" content="%s" />' % lang
         metadata += '<meta name="viewport" content="width=device-width, initial-scale=1.0" />'

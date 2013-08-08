@@ -1,9 +1,11 @@
 {% extends 'elements/main.html' %}
 {% load i18n %}
 
+{% get_current_language as LANGUAGE_CODE %}
+
 {% block maincontent %}
 <h1>{% blocktrans %}Apologies. The page you requested could not be found{% endblocktrans %}</h1>
 
 <p>{% blocktrans %}We apologize for any inconvenience.{% endblocktrans%}</p>
-<p>{% blocktrans %}To return to the home page please click{% endblocktrans %} <a href="/">{%trans "here"%}</a>.</p>
+<p>{% blocktrans %}To return to the home page please click{% endblocktrans %} <a href="/{{LANGUAGE_CODE}}/">{%trans "here"%}</a>.</p>
 {% endblock %}
