@@ -73,11 +73,11 @@ def header_tags(context):
             js_suf = 'min.js'
         js_path = join(settings.STATIC_URL, static_suffix) + '/js/'
 
-        metadata += '<link rel="stylesheet" type="text/css" href="%sscreen.css" title="screen" media="screen" charset="utf-8"/>' % css_path
+        metadata += '<link rel="stylesheet" type="text/css" href="%sscreen.css" title="screen" media="screen"/>' % css_path
         alternate_styles = getattr(settings, 'ALTERNATE_STYLES', ())
         if len(alternate_styles):
             for astyle in alternate_styles:
-                metadata += '<link rel="alternate stylesheet" type="text/css" href="%s%s.css" title="%s" media="screen" charset="utf-8"/>' % (css_path, astyle, astyle)
+                metadata += '<link rel="alternate stylesheet" type="text/css" href="%s%s.css" title="%s" media="screen"/>' % (css_path, astyle, astyle)
 
         browser_label = None
         if 'MSIE' in browser_request:
@@ -93,15 +93,15 @@ def header_tags(context):
             browser_label = 'opera'
 
         if browser_label:
-            metadata += '<link rel="stylesheet" type="text/css" href="%s%s.css" charset="utf-8"/>' % (css_path, browser_label)
+            metadata += '<link rel="stylesheet" type="text/css" href="%s%s.css"/>' % (css_path, browser_label)
 
         if 'MSIE' in browser_request:
-            metadata += '<link rel="stylesheet" type="text/css" href="%sfilters_ie.css" charset="utf-8"/>' % (css_path)
+            metadata += '<link rel="stylesheet" type="text/css" href="%sfilters_ie.css"/>' % (css_path)
         if getattr(settings, 'USE_TINY_MCE', False):
             if settings.DEBUG:
-                metadata += '<link rel="stylesheet" type="text/css" href="%seditor_content.css" charset="utf-8"/>' % (settings.STATIC_URL + 'elements/css/src/')
+                metadata += '<link rel="stylesheet" type="text/css" href="%seditor_content.css"/>' % (settings.STATIC_URL + 'elements/css/src/')
             else:
-                metadata += '<link rel="stylesheet" type="text/css" href="%seditor_content.css" charset="utf-8"/>' % (settings.STATIC_URL + 'elements/css/')
+                metadata += '<link rel="stylesheet" type="text/css" href="%seditor_content.css"/>' % (settings.STATIC_URL + 'elements/css/')
 
         metadata += '<script type="text/javascript" src="%selements/js/jquery.min.js"></script>' % settings.STATIC_URL
         if use_html5_plugins:
