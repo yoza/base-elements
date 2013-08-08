@@ -63,9 +63,7 @@ def header_tags(context):
             else:
                 keywords = entry.mkeyword
             metadata += '<meta name="keywords" content="%s" />' % keywords
-        #metadata += '<meta http-equiv="Cache-Control" content="no-cache" />'
         metadata += '<meta name="robots" content="follow, all" />'
-        metadata += '<meta name="language" content="%s" />' % lang
         metadata += '<meta name="viewport" content="width=device-width, initial-scale=1.0" />'
         static_suffix = getattr(settings, 'STATIC_SUFFIX', '')
         css_path = join(settings.STATIC_URL, static_suffix) + '/css/'
