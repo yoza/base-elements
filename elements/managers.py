@@ -1,9 +1,13 @@
+"""
+app managers
+"""
 import os
+import warnings
+
 from django.db import models
 from django.conf import settings
 from django.core.exceptions import ValidationError
-
-
+from django.utils.translation import ugettext_lazy as _
 try:
     from PIL import Image
 except ImportError:
@@ -11,8 +15,13 @@ except ImportError:
 
 
 class HierarchyManager(models.Manager):
-
+    """
+    hierarhy manager
+    """
     def hierarchy(self, parent=None):
+        """
+        hierarhy
+        """
         result = []
 
         if parent is None:
@@ -25,7 +34,7 @@ class HierarchyManager(models.Manager):
 
         return result
 
-    def root(self, site=None):
+    def root(self):
         """
         Return a queryset with pages that don't have parents, a.k.a. root.
         """
@@ -33,37 +42,43 @@ class HierarchyManager(models.Manager):
 
 
 class ImageManager(HierarchyManager):
-
+    """
+    image manager
+    """
     def validate_image(self, value):
+        """
+        image validator
+        """
         filetype = "." + value.name.split(".")[-1]
         if not filetype or filetype.lower() not in \
                 settings.FILEBROWSER_EXTENSIONS['Image']:
-            e = _(u'Uploaded \'%s\' file is not an image. You can upload only valid image file!') % filetype
-            raise ValidationError(e)
-
+            err = _(u'Uploaded \'%s\' file is not an image. '
+                    'You can upload only valid image file!') % filetype
+            raise ValidationError(err)
+    
     def make_thumbnail(self, obj):
+        """
+        make custom thumbnail
+        """
         if obj.image:
-            file_path = os.path.join(settings.MEDIA_ROOT, obj.image.name)
             imfile = obj.image.name.split("/")[-1]
-            thumb_path = os.path.join(settings.MEDIA_ROOT,
-                                      settings.ALBUMS_PATH,
-                                      self.model.path,
-                                      settings.IMAGE_THUMB_PREFIX + imfile)
-
-            msg = ""
+            path = "/".join(obj.image.path.split("/")[:-1])
             try:
-                im = Image.open(file_path)
-                im.thumbnail((settings.IMAGE_THUMB_SIZE), Image.ANTIALIAS)
-                im.save(thumb_path)
+                img = Image.open(obj.image.path)
+                img.thumbnail((settings.IMAGE_THUMB_SIZE), Image.ANTIALIAS)
+                img.save(os.path.join(path,
+                                      settings.IMAGE_THUMB_PREFIX + imfile))
             except IOError:
                 msg = "%s: %s" % (file, _('Thumbnail creation failed.'))
             return msg
 
     def delete_thumbnail(self, obj):
+        """
+        delete thumbnail
+        """
         old_obj = self.get(pk=obj.pk)
         if old_obj.image:
-            path = settings.MEDIA_ROOT + \
-                    "/".join(old_obj.image.name.split("/")[:-1])
+            path = "/".join(old_obj.image.path.split("/")[:-1])
             imfile = old_obj.image.name.split("/")[-1]
             thumb_path = os.path.join(path,
                                       settings.IMAGE_THUMB_PREFIX + imfile)
@@ -74,61 +89,32 @@ class ImageManager(HierarchyManager):
                     pass
 
     def delete_image_children(self, obj):
-        old_obj = obj.objects.get(pk=self.pk)
-        path = settings.MEDIA_ROOT + \
-                "/".join(old_obj.image.name.split("/")[:-1])
-        imfile = old_obj.image.name.split("/")[-1]
-        thumb_path = os.path.join(path, settings.IMAGE_THUMB_PREFIX + imfile)
-        if os.path.isfile(thumb_path):
-            try:
-                os.unlink(thumb_path)
-            except OSError:
-                pass
+        """
+        deprecated
+        """
+        obj = self.get(pk=obj.pk)
+        warnings.warn('delete_image_children is deprecated. '
+                      'Please use the new sections.py templatetags.',
+                      category=DeprecationWarning)
 
     def image_size(self, obj):
-        #try:
-            #item = self.get(model=obj)
-        #except self.model.DoesNotExist:
-            #item = None
-        item = obj
-        if item and item.image:
+        """
+        retur image size
+        """
+        if obj and obj.image:
             try:
-                image = Image.open(os.path.join(settings.MEDIA_ROOT,
-                                                item.image.name))
+                image = Image.open(obj.image.path)
                 return image.size
             except OSError:
                 pass
         return (0, 0)
-
-    """
-    def save(self, obj, force_insert=False, force_update=False):
-        try:
-            if self.pk:
-                old_obj = obj.objects.get(pk=self.pk)
-                if old_obj.image and old_obj.image.path != self.image.path:
-                    try:
-                        old_obj.image.delete()
-                    except ValueError:
-                        pass
-                    obj.delete_thumbnail(self)
-        except self.model.DoesNotExist:
-            pass
-        super(self.model, self).save(force_insert, force_update)
-        obj.make_thumbnail(self)
-    """
 
     def image_url(self, obj):
         """
         Return image path
 
         """
-        try:
-            item = self.get(model=obj)
-        except self.model.DoesNotExist:
-            item = None
-        if item and item.image:
-            path = os.path.join(settings.MEDIA_ROOT, item.image.name)
-            if os.path.isfile(path):
-                return unicode(settings.MEDIA_URL + item.image.name)
+        if os.path.isfile(obj.image.path):
+            return unicode(settings.MEDIA_URL + obj.image.name)
 
         return None
