@@ -84,7 +84,8 @@ def header_tags(context):
             browser_label = 'ie'
             if 'MSIE 9.0' in browser_request:
                 browser_label += "_9"
-
+            elif 'MSIE 10.0' in browser_request:
+                browser_label += "_10"
         elif 'KONQUEROR' in browser_request:
             browser_label = 'konqueror'
         elif 'WEBKIT' in browser_request:
