@@ -13,7 +13,6 @@ from django.utils.translation import ugettext_lazy as _
 
 from elements.models import SiteParams
 
-
 register = template.Library()
 SUPPORTED = dict(settings.LANGUAGES)
 
@@ -216,9 +215,10 @@ def search_tag(context):
             btn_img = getattr(settings,
                               'SEARCH_BTN_IMG',
                               '/static/elements/img/btn_search.png')
-        placeholder = getattr(settings, 'SEARCH_PLACEHOLDER', '')
+        placeholder = getattr(settings, 'SEARCH_PLACEHOLDER', "")
+        plhol = ""
         if placeholder:
-            plhol = 'placeholder="%s"' % unicode(placeholder)
+            plhol = 'placeholder="%s"' % unicode(_(placeholder))
         searches = u'<div id="search">'\
                    '<form method="get" action="/%s/search" id="searchform"'\
                    'autocomplete="off">'\
