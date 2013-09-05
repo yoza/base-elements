@@ -1,3 +1,6 @@
+"""
+site params tags
+"""
 import os
 import re
 import urllib
@@ -12,18 +15,22 @@ from elements.models import SiteParams
 
 
 register = template.Library()
-supported = dict(settings.LANGUAGES)
+SUPPORTED = dict(settings.LANGUAGES)
 
 
+@register.simple_tag(takes_context=True)
 def logo_tag(context):
+    """
+    logo tag
+    """
     logo = ""
     site_logo = getattr(settings, 'LOGO_IMAGE', ("../img/logo.png",
                                                  "0,0,85,85"))
     logo_text = getattr(settings, 'LOGO_TEXT', '')
     lang = ''
-    if 'lang' in context and len(supported) > 1:
+    if 'lang' in context and len(SUPPORTED) > 1:
         lang = context['lang']
-        if lang == None or lang not in supported:
+        if lang is None or lang not in SUPPORTED:
             lang = settings.LANGUAGE_CODE
     try:
         params = SiteParams.objects.language().get(site__id=settings.SITE_ID)
@@ -37,7 +44,7 @@ def logo_tag(context):
         logo = u'<div class="logo_layer">\
                     <img usemap ="#logo_map" src="%s" alt="%s" id="img_logo"/>\
                     <map id ="logo_map" name="logo_map">\
-                        <area href="/%s" target="_self" id="area_logo_map" \
+                        <area href="/%s/" target="_self" id="area_logo_map" \
                               shape ="rect" coords ="%s" alt="%s"/>\
                     </map>\
                     <span class="logo-text">%s</span>\
@@ -46,14 +53,17 @@ def logo_tag(context):
     except SiteParams.DoesNotExist:
         pass
 
-    return  mark_safe(logo)
-register.simple_tag(takes_context=True)(logo_tag)
+    return mark_safe(logo)
 
 
-def site_param(context, param, tags=""):
-
+@register.simple_tag
+def site_param(param, tags=""):
+    """
+    site param tag
+    """
     try:
-        entry = SiteParams.objects.language().values(param).get(site__id=settings.SITE_ID)
+        s_id = settings.SITE_ID
+        entry = SiteParams.objects.language().values(param).get(site__id=s_id)
         if tags:
             tags = [re.escape(tag) for tag in tags.split()]
             tags_re = u'(%s)' % u'|'.join(tags)
@@ -69,10 +79,12 @@ def site_param(context, param, tags=""):
     except SiteParams.DoesNotExist:
         return ""
 
-register.simple_tag(takes_context=True)(site_param)
 
-
+@register.simple_tag
 def google_analitics():
+    """
+    google analitics tag
+    """
     code = ""
     try:
         params = SiteParams.objects.language().get(site__id=settings.SITE_ID)
@@ -80,10 +92,13 @@ def google_analitics():
     except SiteParams.DoesNotExist:
         pass
     return mark_safe(code)
-register.simple_tag(google_analitics)
 
 
+@register.simple_tag
 def get_gravatar(email, size=40, rating='g', default=None):
+    """
+    gravatar tag
+    """
     params = {'s': size, 'r': rating}
     if default:
         params['d'] = default
@@ -93,11 +108,13 @@ def get_gravatar(email, size=40, rating='g', default=None):
     gravatar_url += urllib.urlencode(params)
 
     return gravatar_url
-register.simple_tag(get_gravatar)
 
 
+@register.simple_tag
 def footer():
-
+    """
+    footer tag
+    """
     try:
         params = SiteParams.objects.get(site__id=settings.SITE_ID)
         return params.footer
@@ -105,24 +122,25 @@ def footer():
     except SiteParams.DoesNotExist:
         return ""
 
-register.simple_tag(footer)
 
-
+@register.simple_tag(takes_context=True)
 def site_languages(context, sort=True, fullname=False):
-
+    """
+    site language tag
+    """
     languages = ""
     if 'request' in context:
         request = context['request']
         lang = None
         if 'lang' in context:
             lang = context['lang']
-        if lang == None or lang not in dict(settings.LANGUAGES):
+        if lang is None or lang not in dict(settings.LANGUAGES):
             lang = settings.LANGUAGE_CODE
         path = request.META['PATH_INFO']
         clear_path = "/"
         if path != clear_path:
             items = path.split('/')
-            if str(items[1]) not in supported:
+            if str(items[1]) not in SUPPORTED:
                 del items[1]
             for item in items:
                 clear_path = os.path.join(clear_path, item)
@@ -137,7 +155,7 @@ def site_languages(context, sort=True, fullname=False):
             langs = sorted(langs, key=lambda p: p[0])
 
         languages = "<ul>"
-        for i,language in enumerate(langs):
+        for i, language in enumerate(langs):
             if clear_path.split('/')[1] == lang:
                 path = '/' + language[0] + clear_path[3:]
             else:
@@ -164,66 +182,98 @@ def site_languages(context, sort=True, fullname=False):
                 lang_name = language[1]
             else:
                 lang_name = language[1][:3]
-            languages += "<li %s ><span class='layer1'><span class='layer2'><a %s href='%s'>%s</a></span></span></li>" % (css_class, css_class, path, lang_name)
+            languages += "<li %s ><span class='layer1'><span class='layer2'>"\
+                         "<a %s href='%s'>%s</a></span></span></li>" % \
+                         (css_class, css_class, path, lang_name)
         languages += "</ul>"
 
-    return  mark_safe(languages)
-
-register.simple_tag(takes_context=True)(site_languages)
+    return mark_safe(languages)
 
 
-@register.simple_tag
+@register.simple_tag(takes_context=True)
 def search_tag(context):
+    """
+    search tag
+    """
     searches = ""
     if 'request' in context:
         request = context['request']
         lang = None
         if 'lang' in context:
             lang = context['lang']
-        if lang == None or lang not in dict(settings.LANGUAGES):
+        if lang is None or lang not in dict(settings.LANGUAGES):
             lang = settings.LANGUAGE_CODE
 
         csrf_token = request.META.get('CSRF_COOKIE', '')
-        if 'MSIE 6.0' in request.META.get('HTTP_USER_AGENT', '').upper() or 'MSIE 7.0' in request.META.get('HTTP_USER_AGENT', '').upper():
-            btn_img = getattr(settings,'SEARCH_BTN_IMG_IE6', '/static/elements/img/btn_search_ie6.gif')
+        if ('MSIE 6.0' in request.META.get('HTTP_USER_AGENT',
+                                           '').upper() or
+            'MSIE 7.0') in request.META.get('HTTP_USER_AGENT',
+                                            '').upper():
+            btn_img = getattr(settings,
+                              'SEARCH_BTN_IMG_IE6',
+                              '/static/elements/img/btn_search_ie6.gif')
         else:
-            btn_img = getattr(settings,'SEARCH_BTN_IMG', '/static/elements/img/btn_search.png')
-        searches = u'<div id="search"><form method="get" action="/%s/search" id="searchform" autocomplete="off">\
-                    <div style="display:none"><input type="hidden" name="csrfmiddlewaretoken" value="%s" /></div>\
-                    <div class="line"><input type="text" name="query" id="query" />\
-                    <input type="image" class="imgbtn" src="%s" alt="Search" />\
-                    <input type="hidden" name="formname" value="search" /></div></form></div>' % (lang, csrf_token, btn_img)
-        searches += u'<script type="text/javascript">jQuery(document).ready(function(){clearInput("#searchform","#query", "%s")});</script>' % settings.SEARCH_LABEL
-    return  mark_safe(searches)
-register.simple_tag(takes_context=True)(search_tag)
+            btn_img = getattr(settings,
+                              'SEARCH_BTN_IMG',
+                              '/static/elements/img/btn_search.png')
+        placeholder = getattr(settings, 'SEARCH_PLACEHOLDER', '')
+        if placeholder:
+            plhol = 'placeholder="%s"' % unicode(placeholder)
+        searches = u'<div id="search">'\
+                   '<form method="get" action="/%s/search" id="searchform"'\
+                   'autocomplete="off">'\
+                   '<div style="display:none"><input type="hidden" '\
+                   'name="csrfmiddlewaretoken" value="%s" /></div>'\
+                   '<div class="line"><input type="search" name="query" '\
+                   'id="query" %s /><input type="image" class="imgbtn" '\
+                   'src="%s" alt="Search" />'\
+                   '<input type="hidden" name="formname" value="search" />'\
+                   '</div></form></div>' % (lang, csrf_token, plhol, btn_img)
+        if getattr(settings, 'SEARCH_LABEL', None):
+            searches += u'<script type="text/javascript">'\
+                        'jQuery(document).ready(function(){clearInput('\
+                        '"#searchform","#query", "%s")});</script>' \
+                        % settings.SEARCH_LABEL
+    return mark_safe(searches)
 
 
-#@register.simple_tag
+@register.simple_tag
 def noscript_warning():
+    """
+    noscript warning
+    """
     warning = u'<noscript>'
     warning += u'<div class="global-warning">'
-    warning += u'<p class="site-message interface-text-dark">%s</p>' % (unicode(_('Attention! JavaScript must be enabled in order for this page to function properly. However, it seems that you have JavaScript disabled or not supported by your browser.')))
-    warning += u'<p class="site-message interface-text-dark">%s</p>' % (unicode(_('Please enable JavaScript in your browser settings.')))
+    warning += u'<p class="site-message interface-text-dark">%s</p>' % \
+               (unicode(_('Attention! JavaScript must be enabled in order '
+                'for this page to function properly. However, '
+                'it seems that you have JavaScript disabled or not '
+                'supported by your browser.')))
+    warning += u'<p class="site-message interface-text-dark">%s</p>' % \
+        (unicode(_('Please enable JavaScript in your browser settings.')))
     warning += u'</div>'
     warning += u'</noscript>'
 
-    return  mark_safe(warning)
-register.simple_tag(noscript_warning)
+    return mark_safe(warning)
 
 
+@register.simple_tag(takes_context=True)
 def active_path(context):
+    """
+    active path
+    """
     if 'request' in context:
         request = context['request']
         lang = ''
-        if 'lang' in context  and len(supported) > 1:
+        if 'lang' in context and len(SUPPORTED) > 1:
             lang = context['lang'].lower()
-            if not lang or lang not in supported:
+            if not lang or lang not in SUPPORTED:
                 lang = settings.LANGUAGE_CODE
         current_path = request.META['PATH_INFO']
         clear_path = "/"
         if current_path != clear_path:
             items = current_path.split('/')
-            if str(items[1]) not in supported:
+            if str(items[1]) not in SUPPORTED:
                 del items[1]
             for item in items:
                 clear_path = os.path.join(clear_path, item)
@@ -239,13 +289,12 @@ def active_path(context):
         if query_str:
             current_path += '?' + iri_to_uri(query_str)
 
-    return  mark_safe(current_path)
-
-register.simple_tag(takes_context=True)(active_path)
+    return mark_safe(current_path)
 
 
-#@register.simple_tag
-def button_more(href="", alt="", label=_("In detail"), target="", aclass="btn_more", button_id = ""):
+@register.simple_tag
+def button_more(href="", alt="", label=_("In detail"), target="",
+                aclass="btn_more", button_id=""):
     """
     This tag for use in IE7-IE8
 
@@ -255,9 +304,13 @@ def button_more(href="", alt="", label=_("In detail"), target="", aclass="btn_mo
         btn_id = "id=%s" % button_id
     if label:
         label = unicode(_(label))
-    code = u'<a href="%s" alt="%s" %s class="%s" %s>' % (href, alt, target, aclass, btn_id)
-    code += u'<span class="btn_right"><span class="btn_left"><span class="button_more">%s</span></span></span>' % label
+    code = u'<a href="%s" alt="%s" %s class="%s" %s>' % (href,
+                                                         alt,
+                                                         target,
+                                                         aclass,
+                                                         btn_id)
+    code += u'<span class="btn_right"><span class="btn_left">'\
+            '<span class="button_more">%s</span></span></span>' % label
     code += u'</a>'
 
     return mark_safe(code)
-register.simple_tag(button_more)

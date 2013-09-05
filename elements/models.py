@@ -13,6 +13,9 @@ from hvad.manager import TranslationManager
 
 
 class SiteParamsManager(TranslationManager):
+    """
+    manager
+    """
     pass
 
 
