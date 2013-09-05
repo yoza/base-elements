@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-10 16:36-0400\n"
+"POT-Creation-Date: 2013-09-05 16:26-0400\n"
 "PO-Revision-Date: 2012-06-05 15:34-0500\n"
 "Last-Translator: Oleg Prans <yozapr@gmail.com>\n"
 "Language-Team: Russian <>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
-#: managers.py:41
+#: managers.py:55
 #, python-format
 msgid ""
 "Uploaded '%s' file is not an image. You can upload only valid image file!"
@@ -26,35 +26,35 @@ msgstr ""
 "Загружаемый '%s' файл не является изображением. Вы можете загружать только "
 "разрешенные типы файлов изображений!"
 
-#: managers.py:59
+#: managers.py:72
 msgid "Thumbnail creation failed."
 msgstr "Создание иконки закончилось неудачей."
 
-#: models.py:23
+#: models.py:32
 msgid "Site"
 msgstr "Сайт"
 
-#: models.py:24
+#: models.py:33
 msgid "Right block"
 msgstr "Блок справа"
 
-#: models.py:26
+#: models.py:35
 msgid "Show/hide right block on the main page"
 msgstr "Показать/скрыть правый блок главной страницы"
 
-#: models.py:28
+#: models.py:37
 msgid "Left block"
 msgstr "Блок слева"
 
-#: models.py:30
+#: models.py:39
 msgid "Show/hide left block on the main page"
 msgstr "Показать/скрыть левый блок главной страницы"
 
-#: models.py:32
+#: models.py:41
 msgid "GA code"
 msgstr "GA код"
 
-#: models.py:33
+#: models.py:42
 msgid ""
 "Custom JavaScript: Google Analitics JS code etc. Copy and paste it on this "
 "field."
@@ -62,75 +62,75 @@ msgstr ""
 "Ваш JavaScript: например Google Analitics js код. Скопируйте его и вставьте "
 "в это поле."
 
-#: models.py:36
+#: models.py:45
 msgid "slug"
 msgstr "слуг"
 
-#: models.py:38
+#: models.py:47
 msgid "site params slug"
 msgstr "слуг коллекции параметров сайта"
 
-#: models.py:39
+#: models.py:48
 msgid "last update time"
 msgstr "дата последнего обновления"
 
-#: models.py:46
+#: models.py:55
 msgid "site parameter"
 msgstr "параметр сайта"
 
-#: models.py:47
+#: models.py:56
 msgid "site parameters"
 msgstr "параметры сайта"
 
-#: models.py:51
+#: models.py:60
 msgid "Site title"
 msgstr "Заголовок сайта"
 
-#: models.py:53
+#: models.py:62
 msgid "Put here alternative text for logo image and site name"
 msgstr "Добавьте сюда альтернативный текст для картинки лого и названия сайта"
 
-#: models.py:55
+#: models.py:64
 msgid "copyright"
 msgstr "копирайт"
 
-#: models.py:57
+#: models.py:66
 msgid "Site copyright"
 msgstr "Копирайт сайта"
 
-#: models.py:58
+#: models.py:67
 msgid "Site slogan"
 msgstr "Слоган сайта"
 
-#: models.py:60
+#: models.py:69
 msgid "Put here text for site slogan"
 msgstr "Добавьте сюда текст слогана сайта"
 
-#: models.py:61
+#: models.py:70
 msgid "description"
 msgstr "описание"
 
-#: models.py:62
+#: models.py:71
 msgid "Site Description"
 msgstr "Описание сайта"
 
-#: models.py:63
+#: models.py:72
 msgid "Meta description"
 msgstr "Мета описание"
 
-#: models.py:64
+#: models.py:73
 msgid "The site meta description"
 msgstr "Описание сайта"
 
-#: models.py:65
+#: models.py:74
 msgid "Meta keywords"
 msgstr "Мета ключи"
 
-#: models.py:67
+#: models.py:76
 msgid "Site meta keywords. Please write a comma separated."
 msgstr "Мета ключи сайта. Пожалуйста пишите разделяя запятой."
 
-#: models.py:81
+#: models.py:90
 msgid "Parameters data for site"
 msgstr "Данные параметров для сайта"
 
@@ -147,18 +147,18 @@ msgstr ""
 msgid "Save selected changes"
 msgstr "Сохранить выбранные изменения"
 
-#: admin/hierarchy.py:205
+#: admin/hierarchy.py:204
 msgid "Database error"
 msgstr "Ошибка базы данных"
 
-#: admin/hierarchy.py:228
+#: admin/hierarchy.py:227
 msgid ""
 "Items must be selected in order to perform actions on them. No items have "
 "been changed."
 msgstr ""
 "Для исполнения акции элемент должен быть выбран. Нет элементов для изменения."
 
-#: admin/hierarchy.py:274
+#: admin/hierarchy.py:273
 msgid "Edit"
 msgstr "Редактирование"
 
@@ -208,25 +208,25 @@ msgstr "Ошибка при обращении к CAPTCHA сервису. Пож
 
 #: forms/captcha.py:63
 msgid "Please enter the CAPTCHA solution."
-msgstr "Пожалуста введите содержание CAPTCHA"
+msgstr "Пожалуйста введите содержание CAPTCHA"
 
 #: forms/captcha.py:71
 msgid "An incorrect CAPTCHA solution was entered."
 msgstr "Введено неправильное содержание CAPTCHA"
 
-#: templates/404.html:5
+#: templates/404.html:7
 msgid "Apologies. The page you requested could not be found"
 msgstr "Извините. Запрошенная вами страница не найдена"
 
-#: templates/404.html:7
+#: templates/404.html:9
 msgid "We apologize for any inconvenience."
 msgstr "Мы извиняемся за причиненные неудобства."
 
-#: templates/404.html:8
+#: templates/404.html:10
 msgid "To return to the home page please click"
 msgstr "Для возврата на главную страницу пожалуйста кликните"
 
-#: templates/404.html:8
+#: templates/404.html:10
 msgid "here"
 msgstr "здесь"
 
@@ -289,17 +289,20 @@ msgid "Manage"
 msgstr "Управление"
 
 #: templates/admin/edit_inline/stacked.html:16
+#: templates/admin/edit_inline/hvad/stacked.html:17
 msgid "View on site"
 msgstr "Посмотреть на сайте"
 
-#: templates/admin/edit_inline/stacked.html:78
+#: templates/admin/edit_inline/stacked.html:35
+#: templates/admin/edit_inline/hvad/stacked.html:93
+msgid "Remove"
+msgstr "Удалить"
+
+#: templates/admin/edit_inline/stacked.html:36
+#: templates/admin/edit_inline/hvad/stacked.html:90
 #, python-format
 msgid "Add another %(verbose_name)s"
 msgstr "Добавить ещё %(verbose_name)s"
-
-#: templates/admin/edit_inline/stacked.html:81
-msgid "Remove"
-msgstr "Удалить"
 
 #: templates/blocks/paginator.html:7 templates/blocks/paginator.html.py:9
 msgid "previous"
@@ -313,7 +316,7 @@ msgstr "следующая"
 msgid "File-Browser"
 msgstr "Файл-браузер"
 
-#: templatetags/elementary_tags.py:205
+#: templatetags/elementary_tags.py:248
 msgid ""
 "Attention! JavaScript must be enabled in order for this page to function "
 "properly. However, it seems that you have JavaScript disabled or not "
@@ -322,11 +325,11 @@ msgstr ""
 "Внимание! Для правильной работы сайта JavaScript должен быть включен. У вас "
 "JavaScript либо отлючен, либо ваш браузер его не поддерживает."
 
-#: templatetags/elementary_tags.py:206
+#: templatetags/elementary_tags.py:253
 msgid "Please enable JavaScript in your browser settings."
 msgstr "Пожалуйста включите поддержку JavaScript в настройках вашего браузера."
 
-#: templatetags/elementary_tags.py:248
+#: templatetags/elementary_tags.py:296
 msgid "In detail"
 msgstr "Подробней"
 

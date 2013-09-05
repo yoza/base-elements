@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-10 16:36-0400\n"
+"POT-Creation-Date: 2013-09-05 16:26-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,115 +18,115 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 
-#: managers.py:41
+#: managers.py:55
 #, python-format
 msgid ""
 "Uploaded '%s' file is not an image. You can upload only valid image file!"
 msgstr ""
 
-#: managers.py:59
+#: managers.py:72
 msgid "Thumbnail creation failed."
 msgstr ""
 
-#: models.py:23
+#: models.py:32
 msgid "Site"
 msgstr ""
 
-#: models.py:24
+#: models.py:33
 msgid "Right block"
 msgstr ""
 
-#: models.py:26
+#: models.py:35
 msgid "Show/hide right block on the main page"
 msgstr ""
 
-#: models.py:28
+#: models.py:37
 msgid "Left block"
 msgstr ""
 
-#: models.py:30
+#: models.py:39
 msgid "Show/hide left block on the main page"
 msgstr ""
 
-#: models.py:32
+#: models.py:41
 msgid "GA code"
 msgstr ""
 
-#: models.py:33
+#: models.py:42
 msgid ""
 "Custom JavaScript: Google Analitics JS code etc. Copy and paste it on this "
 "field."
 msgstr ""
 
-#: models.py:36
+#: models.py:45
 msgid "slug"
 msgstr ""
 
-#: models.py:38
+#: models.py:47
 msgid "site params slug"
 msgstr ""
 
-#: models.py:39
+#: models.py:48
 msgid "last update time"
 msgstr ""
 
-#: models.py:46
+#: models.py:55
 msgid "site parameter"
 msgstr ""
 
-#: models.py:47
+#: models.py:56
 msgid "site parameters"
 msgstr ""
 
-#: models.py:51
+#: models.py:60
 msgid "Site title"
 msgstr ""
 
-#: models.py:53
+#: models.py:62
 msgid "Put here alternative text for logo image and site name"
 msgstr ""
 
-#: models.py:55
+#: models.py:64
 msgid "copyright"
 msgstr ""
 
-#: models.py:57
+#: models.py:66
 msgid "Site copyright"
 msgstr ""
 
-#: models.py:58
+#: models.py:67
 msgid "Site slogan"
 msgstr ""
 
-#: models.py:60
+#: models.py:69
 msgid "Put here text for site slogan"
 msgstr ""
 
-#: models.py:61
+#: models.py:70
 msgid "description"
 msgstr ""
 
-#: models.py:62
+#: models.py:71
 msgid "Site Description"
 msgstr ""
 
-#: models.py:63
+#: models.py:72
 msgid "Meta description"
 msgstr ""
 
-#: models.py:64
+#: models.py:73
 msgid "The site meta description"
 msgstr ""
 
-#: models.py:65
+#: models.py:74
 msgid "Meta keywords"
 msgstr ""
 
-#: models.py:67
+#: models.py:76
 msgid "Site meta keywords. Please write a comma separated."
 msgstr ""
 
-#: models.py:81
+#: models.py:90
 msgid "Parameters data for site"
 msgstr ""
 
@@ -142,17 +142,17 @@ msgstr ""
 msgid "Save selected changes"
 msgstr ""
 
-#: admin/hierarchy.py:205
+#: admin/hierarchy.py:204
 msgid "Database error"
 msgstr ""
 
-#: admin/hierarchy.py:228
+#: admin/hierarchy.py:227
 msgid ""
 "Items must be selected in order to perform actions on them. No items have "
 "been changed."
 msgstr ""
 
-#: admin/hierarchy.py:274
+#: admin/hierarchy.py:273
 msgid "Edit"
 msgstr ""
 
@@ -200,19 +200,19 @@ msgstr ""
 msgid "An incorrect CAPTCHA solution was entered."
 msgstr ""
 
-#: templates/404.html:5
+#: templates/404.html:7
 msgid "Apologies. The page you requested could not be found"
 msgstr ""
 
-#: templates/404.html:7
+#: templates/404.html:9
 msgid "We apologize for any inconvenience."
 msgstr ""
 
-#: templates/404.html:8
+#: templates/404.html:10
 msgid "To return to the home page please click"
 msgstr ""
 
-#: templates/404.html:8
+#: templates/404.html:10
 msgid "here"
 msgstr "осында"
 
@@ -273,16 +273,19 @@ msgid "Manage"
 msgstr ""
 
 #: templates/admin/edit_inline/stacked.html:16
+#: templates/admin/edit_inline/hvad/stacked.html:17
 msgid "View on site"
 msgstr ""
 
-#: templates/admin/edit_inline/stacked.html:78
-#, python-format
-msgid "Add another %(verbose_name)s"
+#: templates/admin/edit_inline/stacked.html:35
+#: templates/admin/edit_inline/hvad/stacked.html:93
+msgid "Remove"
 msgstr ""
 
-#: templates/admin/edit_inline/stacked.html:81
-msgid "Remove"
+#: templates/admin/edit_inline/stacked.html:36
+#: templates/admin/edit_inline/hvad/stacked.html:90
+#, python-format
+msgid "Add another %(verbose_name)s"
 msgstr ""
 
 #: templates/blocks/paginator.html:7 templates/blocks/paginator.html.py:9
@@ -297,18 +300,18 @@ msgstr "келесі"
 msgid "File-Browser"
 msgstr ""
 
-#: templatetags/elementary_tags.py:205
+#: templatetags/elementary_tags.py:248
 msgid ""
 "Attention! JavaScript must be enabled in order for this page to function "
 "properly. However, it seems that you have JavaScript disabled or not "
 "supported by your browser."
 msgstr ""
 
-#: templatetags/elementary_tags.py:206
+#: templatetags/elementary_tags.py:253
 msgid "Please enable JavaScript in your browser settings."
 msgstr ""
 
-#: templatetags/elementary_tags.py:248
+#: templatetags/elementary_tags.py:296
 msgid "In detail"
 msgstr ""
 
