@@ -203,7 +203,6 @@ def search_tag(context):
         if lang is None or lang not in dict(settings.LANGUAGES):
             lang = settings.LANGUAGE_CODE
 
-        csrf_token = request.META.get('CSRF_COOKIE', '')
         if ('MSIE 6.0' in request.META.get('HTTP_USER_AGENT',
                                            '').upper() or
             'MSIE 7.0') in request.META.get('HTTP_USER_AGENT',
@@ -222,13 +221,10 @@ def search_tag(context):
         searches = u'<div id="search">'\
                    '<form method="get" action="/%s/search" id="searchform"'\
                    'autocomplete="off">'\
-                   '<div style="display:none"><input type="hidden" '\
-                   'name="csrfmiddlewaretoken" value="%s" /></div>'\
                    '<div class="line"><input type="search" name="query" '\
-                   'id="query" %s /><input type="image" class="imgbtn" '\
+                   'id="query" %s /><input type="image" value = "" class="imgbtn" '\
                    'src="%s" alt="Search" />'\
-                   '<input type="hidden" name="formname" value="search" />'\
-                   '</div></form></div>' % (lang, csrf_token, plhol, btn_img)
+                   '</div></form></div>' % (lang, plhol, btn_img)
         if getattr(settings, 'SEARCH_LABEL', None):
             searches += u'<script type="text/javascript">'\
                         'jQuery(document).ready(function(){clearInput('\
