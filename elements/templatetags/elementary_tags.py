@@ -219,10 +219,10 @@ def search_tag(context):
         if placeholder:
             plhol = 'placeholder="%s"' % unicode(_(placeholder))
         searches = u'<div id="search">'\
-                   '<form method="get" action="/%s/search" id="searchform"'\
+                   '<form method="get" action="/%s/search" id="searchform" '\
                    'autocomplete="off">'\
                    '<div class="line"><input type="search" name="query" '\
-                   'id="query" %s /><input type="image" value = "" class="imgbtn" '\
+                   'id="query" %s /><input type="image" class="imgbtn" '\
                    'src="%s" alt="Search" />'\
                    '</div></form></div>' % (lang, plhol, btn_img)
         if getattr(settings, 'SEARCH_LABEL', None):
