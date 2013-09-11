@@ -230,6 +230,14 @@ def search_tag(context):
                         'jQuery(document).ready(function(){clearInput('\
                         '"#searchform","#query", "%s")});</script>' \
                         % settings.SEARCH_LABEL
+        elif ('MSIE' in request.META.get('HTTP_USER_AGENT',
+                                       '').upper() and
+              'MSIE 10.0' not in request.META.get('HTTP_USER_AGENT',
+                                                 '').upper()):
+            searches += u'<script type="text/javascript">'\
+                        'jQuery(document).ready(function(){clearInput('\
+                        '"#searchform","#query", "%s")});</script>' \
+                        % placeholder
     return mark_safe(searches)
 
 

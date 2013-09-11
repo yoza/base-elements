@@ -51,7 +51,7 @@ def header_tags(context):
                 title = endtag_re.sub(u'', value)
 
         browser_request = request.META.get('HTTP_USER_AGENT', '').upper()
-
+        print browser_request
         metadata += '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />'
         if 'MSIE 8.0' in browser_request:
             metadata += '<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />'
@@ -90,9 +90,10 @@ def header_tags(context):
             browser_label = 'konqueror'
         elif 'WEBKIT' in browser_request:
             browser_label = 'webkit'
+            if 'IPHONE' in browser_request:
+                browser_label = 'iphone'    
         elif 'OPERA' in browser_request:
             browser_label = 'opera'
-
         if browser_label:
             metadata += '<link rel="stylesheet" type="text/css" href="%s%s.css"/>' % (css_path, browser_label)
 
