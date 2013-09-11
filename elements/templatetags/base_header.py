@@ -51,7 +51,7 @@ def header_tags(context):
                 title = endtag_re.sub(u'', value)
 
         browser_request = request.META.get('HTTP_USER_AGENT', '').upper()
-        print browser_request
+
         metadata += '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />'
         if 'MSIE 8.0' in browser_request:
             metadata += '<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />'
