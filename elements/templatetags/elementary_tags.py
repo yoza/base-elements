@@ -138,9 +138,7 @@ def site_languages(context, sort=True, fullname=False):
         path = request.META['PATH_INFO']
         clear_path = "/"
         if path != clear_path:
-            items = path.split('/')
-            if str(items[1]) not in SUPPORTED:
-                del items[1]
+            items = path.strip('/').split('/')
             for item in items:
                 clear_path = os.path.join(clear_path, item)
         try:
