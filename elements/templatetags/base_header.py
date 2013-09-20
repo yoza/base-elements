@@ -90,8 +90,8 @@ def header_tags(context):
             browser_label = 'konqueror'
         elif 'WEBKIT' in browser_request:
             browser_label = 'webkit'
-            if 'IPHONE' in browser_request:
-                browser_label = 'iphone'    
+            if 'CHROME' in browser_request:
+                browser_label = 'chrome'
         elif 'OPERA' in browser_request:
             browser_label = 'opera'
         if browser_label:
