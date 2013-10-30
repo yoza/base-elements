@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-05 18:40-0400\n"
+"POT-Creation-Date: 2013-09-25 17:12-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -300,18 +300,18 @@ msgstr "келесі"
 msgid "File-Browser"
 msgstr ""
 
-#: templatetags/elementary_tags.py:248
+#: templatetags/elementary_tags.py:250
 msgid ""
 "Attention! JavaScript must be enabled in order for this page to function "
 "properly. However, it seems that you have JavaScript disabled or not "
 "supported by your browser."
 msgstr ""
 
-#: templatetags/elementary_tags.py:253
+#: templatetags/elementary_tags.py:255
 msgid "Please enable JavaScript in your browser settings."
 msgstr ""
 
-#: templatetags/elementary_tags.py:296
+#: templatetags/elementary_tags.py:298
 msgid "In detail"
 msgstr ""
 
