@@ -104,8 +104,10 @@ def header_tags(context):
                 metadata += '<link rel="stylesheet" type="text/css" href="%seditor_content.css"/>' % (settings.STATIC_URL + 'elements/css/src/')
             else:
                 metadata += '<link rel="stylesheet" type="text/css" href="%seditor_content.css"/>' % (settings.STATIC_URL + 'elements/css/')
-
-        metadata += '<script type="text/javascript" src="%selements/js/jquery.min.js"></script>' % settings.STATIC_URL
+        if settings.DEBUG:
+            metadata += '<script type="text/javascript" src="%selements/js/jquery.min.js"></script>' % settings.STATIC_URL
+        else:
+            metadata += '<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>'
         if use_html5_plugins:
             metadata += '<script src="%selements/js/jquery.details.min.js"></script>' % settings.STATIC_URL
         if 'MSIE' in browser_request:
