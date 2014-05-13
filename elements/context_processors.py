@@ -42,7 +42,7 @@ def locator(request):
                 kwargs['lang'].lower() in dict(settings.LANGUAGES):
             lang = kwargs['lang'].lower()
 
-        if request.COOKIES.has_key('style'):
+        if 'style' in request.COOKIES:
             style = request.COOKIES['style']
 
         return {'current_site': site,
