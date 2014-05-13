@@ -36,7 +36,7 @@ def logo_tag(context):
         tags = 'span p br div sub sup a'
         tags = [re.escape(tag) for tag in tags.split()]
         tags_re = u'(%s)' % u'|'.join(tags)
-        starttag_re = re.compile(ur'<%s(/?>|(\s+[^>]*>))' % tags_re, re.U)
+        starttag_re = re.compile(r'<%s(/?>|(\s+[^>]*>))' % tags_re, re.U)
         endtag_re = re.compile(u'</%s>' % tags_re)
         value = starttag_re.sub(u' - ', params.title)
         value = endtag_re.sub(u'', value)
@@ -66,7 +66,7 @@ def site_param(param, tags=""):
         if tags:
             tags = [re.escape(tag) for tag in tags.split()]
             tags_re = u'(%s)' % u'|'.join(tags)
-            starttag_re = re.compile(ur'<%s(/?>|(\s+[^>]*>))' % tags_re, re.U)
+            starttag_re = re.compile(r'<%s(/?>|(\s+[^>]*>))' % tags_re, re.U)
             endtag_re = re.compile(u'</%s>' % tags_re)
             value = starttag_re.sub(u' - ', entry[param])
             value = endtag_re.sub(u' ', value)

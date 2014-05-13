@@ -45,7 +45,7 @@ def header_tags(context):
                 tags = [re.escape(tag) for tag in tags.split()]
                 tags_re = u'(%s)' % u'|'.join(tags)
                 starttag_re = \
-                    re.compile(ur'<%s(/?>|(\s+[^>]*>))' % tags_re, re.U)
+                    re.compile(r'<%s(/?>|(\s+[^>]*>))' % tags_re, re.U)
                 endtag_re = re.compile(u'</%s>' % tags_re)
                 value = starttag_re.sub(u' - ', entry.title)
                 title = endtag_re.sub(u'', value)
@@ -126,7 +126,7 @@ def header_tags(context):
 
         metadata += '<link rel="shortcut icon" href="%sfavicon.ico" type="image/x-icon"/>' % settings.STATIC_URL
         metadata += '<link rel="apple-touch-icon" href="%sapple_icon.png"/>' % settings.STATIC_URL
-        
+
     return metadata
 
 register.simple_tag(takes_context=True)(header_tags)
