@@ -6,8 +6,9 @@ from django.utils import timezone
 from django.conf import settings
 from django.db import models
 from django.contrib.sites.models import Site
-
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
+
 from hvad.models import TranslatableModel, TranslatedFields
 from hvad.manager import TranslationManager
 
@@ -19,6 +20,7 @@ class SiteParamsManager(TranslationManager):
     pass
 
 
+@python_2_unicode_compatible
 class SiteParams(TranslatableModel):
     '''
     SiteParams model
@@ -30,13 +32,13 @@ class SiteParams(TranslatableModel):
         date_time_now = datetime.utcnow()
 
     site = models.ForeignKey(Site, verbose_name=_('Site'))
-    rb_section = models.BooleanField(verbose_name=_('Right block'),
+    rb_section = models.BooleanField(verbose_name=_('Right sidebar'),
                                      default=False,
-                                     help_text=_('Show/hide right block on '
+                                     help_text=_('Show/hide right sidebar on '
                                                  'the main page'))
-    lb_section = models.BooleanField(verbose_name=_('Left block'),
+    lb_section = models.BooleanField(verbose_name=_('Left sidebar'),
                                      default=False,
-                                     help_text=_('Show/hide left block on '
+                                     help_text=_('Show/hide left sidebar on '
                                                  'the main page'))
     ga_code = models.TextField(_('GA code'), null=True, blank=True,
                                help_text=_('Custom JavaScript: Google '
@@ -83,7 +85,7 @@ class SiteParams(TranslatableModel):
         """
         pass
 
-    def __unicode__(self):
+    def __str__(self):
         """
         unicode
         """

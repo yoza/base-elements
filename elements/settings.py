@@ -3,7 +3,7 @@ from os.path import join
 
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
-
+from django.utils.encoding import smart_text
 
 # tiny_mce #
 USE_TINY_MCE = getattr(settings, 'USE_TINY_MCE', False)
@@ -23,7 +23,7 @@ PAGES_PER_PAGER = getattr(settings, 'PAGES_PER_PAGER', 4)
 # base header #
 ALTERNATE_STYLES = getattr(settings, 'ALTERNATE_STYLES', ())
 
-settings.SEARCH_LABEL = getattr(settings, 'SEARCH_LABEL', unicode(_("Search...")))
+settings.SEARCH_LABEL = getattr(settings, 'SEARCH_LABEL', smart_text(_("Search...")))
 
 TEMPLATE_PAGINATOR_PATH = getattr(settings, 'TEMPLATE_PAGINATOR', 'block')
 
