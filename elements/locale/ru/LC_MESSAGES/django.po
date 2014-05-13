@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-25 17:12-0400\n"
+"POT-Creation-Date: 2014-05-13 12:30-0400\n"
 "PO-Revision-Date: 2012-06-05 15:34-0500\n"
 "Last-Translator: Oleg Prans <yozapr@gmail.com>\n"
 "Language-Team: Russian <>\n"
@@ -30,31 +30,31 @@ msgstr ""
 msgid "Thumbnail creation failed."
 msgstr "Создание иконки закончилось неудачей."
 
-#: models.py:32
+#: models.py:34
 msgid "Site"
 msgstr "Сайт"
 
-#: models.py:33
-msgid "Right block"
-msgstr "Блок справа"
-
 #: models.py:35
-msgid "Show/hide right block on the main page"
-msgstr "Показать/скрыть правый блок главной страницы"
+msgid "Right sidebar"
+msgstr "Колонка справа"
 
 #: models.py:37
-msgid "Left block"
-msgstr "Блок слева"
+msgid "Show/hide right sidebar on the main page"
+msgstr "Показать/скрыть на главной странице колонку справа"
 
 #: models.py:39
-msgid "Show/hide left block on the main page"
-msgstr "Показать/скрыть левый блок главной страницы"
+msgid "Left sidebar"
+msgstr "Колонка слева"
 
 #: models.py:41
+msgid "Show/hide left sidebar on the main page"
+msgstr "Показать/скрыть на главной странице колонку слева"
+
+#: models.py:43
 msgid "GA code"
 msgstr "GA код"
 
-#: models.py:42
+#: models.py:44
 msgid ""
 "Custom JavaScript: Google Analitics JS code etc. Copy and paste it on this "
 "field."
@@ -62,75 +62,75 @@ msgstr ""
 "Ваш JavaScript: например Google Analitics js код. Скопируйте его и вставьте "
 "в это поле."
 
-#: models.py:45
+#: models.py:47
 msgid "slug"
 msgstr "слуг"
 
-#: models.py:47
+#: models.py:49
 msgid "site params slug"
 msgstr "слуг коллекции параметров сайта"
 
-#: models.py:48
+#: models.py:50
 msgid "last update time"
 msgstr "дата последнего обновления"
 
-#: models.py:55
+#: models.py:57
 msgid "site parameter"
 msgstr "параметр сайта"
 
-#: models.py:56
+#: models.py:58
 msgid "site parameters"
 msgstr "параметры сайта"
 
-#: models.py:60
+#: models.py:62
 msgid "Site title"
 msgstr "Заголовок сайта"
 
-#: models.py:62
+#: models.py:64
 msgid "Put here alternative text for logo image and site name"
 msgstr "Добавьте сюда альтернативный текст для картинки лого и названия сайта"
 
-#: models.py:64
+#: models.py:66
 msgid "copyright"
 msgstr "копирайт"
 
-#: models.py:66
+#: models.py:68
 msgid "Site copyright"
 msgstr "Копирайт сайта"
 
-#: models.py:67
+#: models.py:69
 msgid "Site slogan"
 msgstr "Слоган сайта"
 
-#: models.py:69
+#: models.py:71
 msgid "Put here text for site slogan"
 msgstr "Добавьте сюда текст слогана сайта"
 
-#: models.py:70
+#: models.py:72
 msgid "description"
 msgstr "описание"
 
-#: models.py:71
+#: models.py:73
 msgid "Site Description"
 msgstr "Описание сайта"
 
-#: models.py:72
+#: models.py:74
 msgid "Meta description"
 msgstr "Мета описание"
 
-#: models.py:73
+#: models.py:75
 msgid "The site meta description"
 msgstr "Описание сайта"
 
-#: models.py:74
+#: models.py:76
 msgid "Meta keywords"
 msgstr "Мета ключи"
 
-#: models.py:76
+#: models.py:78
 msgid "Site meta keywords. Please write a comma separated."
 msgstr "Мета ключи сайта. Пожалуйста пишите разделяя запятой."
 
-#: models.py:90
+#: models.py:92
 msgid "Parameters data for site"
 msgstr "Данные параметров для сайта"
 
@@ -288,17 +288,17 @@ msgstr ""
 msgid "Manage"
 msgstr "Управление"
 
-#: templates/admin/edit_inline/stacked.html:16
+#: templates/admin/edit_inline/stacked.html:17
 #: templates/admin/edit_inline/hvad/stacked.html:17
 msgid "View on site"
 msgstr "Посмотреть на сайте"
 
-#: templates/admin/edit_inline/stacked.html:35
+#: templates/admin/edit_inline/stacked.html:37
 #: templates/admin/edit_inline/hvad/stacked.html:93
 msgid "Remove"
 msgstr "Удалить"
 
-#: templates/admin/edit_inline/stacked.html:36
+#: templates/admin/edit_inline/stacked.html:38
 #: templates/admin/edit_inline/hvad/stacked.html:90
 #, python-format
 msgid "Add another %(verbose_name)s"
@@ -336,6 +336,3 @@ msgstr "Подробней"
 #: templatetags/options_list.py:303
 msgid "All dates"
 msgstr "Все даты"
-
-#~ msgid "Search ..."
-#~ msgstr "Искать ..."

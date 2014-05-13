@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-25 17:12-0400\n"
+"POT-Creation-Date: 2014-05-13 12:30-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,105 +28,105 @@ msgstr ""
 msgid "Thumbnail creation failed."
 msgstr ""
 
-#: models.py:32
+#: models.py:34
 msgid "Site"
 msgstr ""
 
-#: models.py:33
-msgid "Right block"
-msgstr ""
-
 #: models.py:35
-msgid "Show/hide right block on the main page"
+msgid "Right sidebar"
 msgstr ""
 
 #: models.py:37
-msgid "Left block"
+msgid "Show/hide right sidebar on the main page"
 msgstr ""
 
 #: models.py:39
-msgid "Show/hide left block on the main page"
+msgid "Left sidebar"
 msgstr ""
 
 #: models.py:41
+msgid "Show/hide left sidebar on the main page"
+msgstr ""
+
+#: models.py:43
 msgid "GA code"
 msgstr ""
 
-#: models.py:42
+#: models.py:44
 msgid ""
 "Custom JavaScript: Google Analitics JS code etc. Copy and paste it on this "
 "field."
 msgstr ""
 
-#: models.py:45
+#: models.py:47
 msgid "slug"
 msgstr ""
 
-#: models.py:47
+#: models.py:49
 msgid "site params slug"
 msgstr ""
 
-#: models.py:48
+#: models.py:50
 msgid "last update time"
 msgstr ""
 
-#: models.py:55
+#: models.py:57
 msgid "site parameter"
 msgstr ""
 
-#: models.py:56
+#: models.py:58
 msgid "site parameters"
 msgstr ""
 
-#: models.py:60
+#: models.py:62
 msgid "Site title"
 msgstr ""
 
-#: models.py:62
+#: models.py:64
 msgid "Put here alternative text for logo image and site name"
 msgstr ""
 
-#: models.py:64
+#: models.py:66
 msgid "copyright"
 msgstr ""
 
-#: models.py:66
+#: models.py:68
 msgid "Site copyright"
 msgstr ""
 
-#: models.py:67
+#: models.py:69
 msgid "Site slogan"
 msgstr ""
 
-#: models.py:69
+#: models.py:71
 msgid "Put here text for site slogan"
 msgstr ""
 
-#: models.py:70
+#: models.py:72
 msgid "description"
 msgstr ""
 
-#: models.py:71
+#: models.py:73
 msgid "Site Description"
 msgstr ""
 
-#: models.py:72
+#: models.py:74
 msgid "Meta description"
 msgstr ""
 
-#: models.py:73
+#: models.py:75
 msgid "The site meta description"
 msgstr ""
 
-#: models.py:74
+#: models.py:76
 msgid "Meta keywords"
 msgstr ""
 
-#: models.py:76
+#: models.py:78
 msgid "Site meta keywords. Please write a comma separated."
 msgstr ""
 
-#: models.py:90
+#: models.py:92
 msgid "Parameters data for site"
 msgstr ""
 
@@ -272,17 +272,17 @@ msgstr ""
 msgid "Manage"
 msgstr ""
 
-#: templates/admin/edit_inline/stacked.html:16
+#: templates/admin/edit_inline/stacked.html:17
 #: templates/admin/edit_inline/hvad/stacked.html:17
 msgid "View on site"
 msgstr ""
 
-#: templates/admin/edit_inline/stacked.html:35
+#: templates/admin/edit_inline/stacked.html:37
 #: templates/admin/edit_inline/hvad/stacked.html:93
 msgid "Remove"
 msgstr ""
 
-#: templates/admin/edit_inline/stacked.html:36
+#: templates/admin/edit_inline/stacked.html:38
 #: templates/admin/edit_inline/hvad/stacked.html:90
 #, python-format
 msgid "Add another %(verbose_name)s"
