@@ -51,6 +51,7 @@ class SiteParams(TranslatableModel):
                                        editable=False,
                                        db_column='last_update_time',
                                        default=date_time_now)
+
     objects = SiteParamsManager()
 
     class Meta:

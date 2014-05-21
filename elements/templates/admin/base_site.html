@@ -9,7 +9,7 @@
 <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon" />{% endblock %}
 
 {% block branding %}
-    {% if LANGUAGES %}
+    {% if COUNT_LANG > 1 %}
     <form action="{% url 'setlanguage-view' %}" method="post" id="lang-form">{% csrf_token %}
         <h1 id="site-name"><a href="/admin/">{{ site_name }}</a></h1>
         {% for l in LANGUAGES %}

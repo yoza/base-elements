@@ -7,6 +7,7 @@ from django.utils.encoding import smart_text
 
 # tiny_mce #
 USE_TINY_MCE = getattr(settings, 'USE_TINY_MCE', False)
+DEFAULT_URL_TINYMCE = getattr(settings, 'DEFAULT_URL_TINYMCE', 'tinymce/tinymce.js')
 # end tiny_mce #
 
 # hierathy manager #
@@ -23,9 +24,19 @@ PAGES_PER_PAGER = getattr(settings, 'PAGES_PER_PAGER', 4)
 # base header #
 ALTERNATE_STYLES = getattr(settings, 'ALTERNATE_STYLES', ())
 
-settings.SEARCH_LABEL = getattr(settings, 'SEARCH_LABEL', smart_text(_("Search...")))
+settings.SEARCH_LABEL = getattr(settings, 'SEARCH_LABEL',
+                                smart_text(_("Search...")))
 
 TEMPLATE_PAGINATOR_PATH = getattr(settings, 'TEMPLATE_PAGINATOR', 'block')
 
 #
 FILEBROWSER_ADMIN = getattr(settings, 'FILEBROWSER_ADMIN', False)
+
+# languages #
+gettext_noop = lambda s: s
+LANGUAGES = getattr(settings, 'LANGUAGES', (
+    ('en', gettext_noop('English')),
+))
+HVAD_FALLBACK_LANGUAGES = getattr(settings, 'HVAD_FALLBACK_LANGUAGES', 'en')
+
+COUNT_LANG = getattr(settings, 'COUNT_LANG', len(LANGUAGES))

@@ -203,3 +203,7 @@ A.selector-clearall {
 .calendarbox {
     width: 260px;
 }
+
+.mce-tinymce {
+  display: inline-block!important;
+}

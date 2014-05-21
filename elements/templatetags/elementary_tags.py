@@ -43,7 +43,7 @@ def logo_tag(context):
         logo = u'<div class="logo_layer">\
                     <img usemap ="#logo_map" src="%s" alt="%s" id="img_logo"/>\
                     <map id ="logo_map" name="logo_map">\
-                        <area href="/%s/" target="_self" id="area_logo_map" \
+                        <area href="/%s" target="_self" id="area_logo_map" \
                               shape ="rect" coords ="%s" alt="%s"/>\
                     </map>\
                     <span class="logo-text">%s</span>\
@@ -128,7 +128,7 @@ def site_languages(context, sort=True, fullname=False):
     site language tag
     """
     languages = ""
-    if 'request' in context:
+    if 'request' in context and settings.COUNT_LANG > 1:
         request = context['request']
         lang = None
         if 'lang' in context:

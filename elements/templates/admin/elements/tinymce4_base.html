@@ -1,0 +1,121 @@
+{% load i18n %}
+{% get_current_language as lang %}
+{% block tinymce_file_browser %}
+<script type="text/javascript">
+
+function CustomFileBrowser(field_name, url, type, win) {
+
+    var cmsURL = "/admin/filebrowser/?pop=1";
+    cmsURL = cmsURL + "&type=" + type;
+
+    //win.document.getElementById(field_name).value = 'my browser value';
+
+    tinyMCE.activeEditor.windowManager.open({
+        url: cmsURL,
+        width: 820,  // Your dimensions may differ - toy around with them!
+        height: 500,
+        //resizable: "yes",
+        //scrollbars: "yes",
+        //inline: "no",  // This parameter only has an effect if you use the inlinepopups plugin!
+        //close_previous: "no"
+    }, {
+        window: win,
+        input: field_name,
+        //editor_id: tinyMCE.selectedInstance.editorId
+    });
+    return false;
+}
+
+</script>
+{% endblock %}
+
+{% block tinymce_config %}
+<script type="text/javascript">
+tinymce_config = {
+  elements : "id_{{name}}",
+  language : "{{lang|default:language}}",
+  lang_list :"{{lang_list}}",
+  mode: "exact",
+  theme: "modern",
+  content_css : "{{content_css}}",
+  importcss_append: true,
+  importcss_file_filter: "{{content_css}}",
+  importcss_merge_classes: true,
+
+
+  skin: "lightgray",
+  dialog_type: "modal",
+  object_resizing: true,
+  cleanup_on_startup: true,
+  forced_root_block: "p",
+  remove_trailing_nbsp: true,
+  width: '700',
+  height: '200',
+  toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent",
+
+  plugins: [
+      "advlist autolink lists link image charmap print preview anchor",
+      "searchreplace visualblocks visualchars code fullscreen",
+      "insertdatetime media table contextmenu paste importcss"
+  ],
+
+  image_styles: "",
+  link_styles: "",
+  image_update_dimensions_onchange: true,
+  //file_browser_callback: "CustomFileBrowser",
+
+  file_browser_callback: function(field_name, input_value, type, win) {
+    var cmsURL = "/admin/filebrowser/?pop=4";
+    cmsURL = cmsURL + "&type=" + type;
+
+    tinyMCE.activeEditor.windowManager.open({
+        title: "Insert " + type + " file in your page",
+        url: cmsURL,
+        width: 820,
+        height: 500,
+        resizable: "yes",
+        scrollbars: "yes",
+        inline: "yes",
+        close_previous: "no"
+    }, {
+        window: win,
+        input: field_name,
+    });
+    return false;
+  },
+  
+  relative_urls: false,
+  valid_elements : "" +
+    "-p," +
+    "a[href|target=_blank|class]," +
+    "-strong/-b," +
+  "-em/-i," +
+    "-u," +
+    "-ol," +
+  "-ul," +
+  "-li," +
+    "img[class|src|alt=|width|height]," +
+    "-h2,-h3,-h4,",
+    extended_valid_elements: "" +
+    "a[name|class|href|target|title|onclick|style|id]," +
+    "img[class|style|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name|obj|param|embed]," +
+    "video[id|src|class]," +
+    "object[class|style|type|data|id|classid|codebase|width|height|align]," +
+    "param[name|value|_value|id|valuetype|type]," +
+    "embed[quality|type|pluginspage|width|height|src|align|scale|wmode|salign|name|background|menu]," +
+    "hr[class|width|size|noshade]," +
+    "quote[class|align|style]," +
+    "blockquote[class|align|style]," +
+    "q[class|align|style]" +
+    "-p[class|style]," +
+    "h2[class<clearfix],h3[class<clearfix],h4[class<clearfix]," +
+    "ul[class<clearfix],ol[class<clearfix]"
+};
+</script>
+{% endblock %}
+
+{% block tinymce_init %}
+<script type="text/javascript">
+tinyMCE.init(tinymce_config);
+</script>
+{% endblock %}

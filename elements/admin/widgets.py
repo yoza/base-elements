@@ -1,5 +1,7 @@
 import re
 import os
+import warnings
+
 from os.path import join
 from django.conf import settings
 from django.utils.safestring import mark_safe
@@ -20,13 +22,8 @@ class TinyMCE(Textarea):
     }
 
     class Media:
-        #if settings.DEBUG:
-            #js = [join(PAGES_MEDIA_URL, path) for path in (
-                #'tiny_mce/tiny_mce_src.js',
-            #)]
-        #else:
         js = [join(settings.STATIC_URL, path) for path in (
-            'tiny_mce/tiny_mce.js',
+            settings.DEFAULT_URL_TINYMCE,
         )]
 
     def __init__(self, language=None, attrs=None):
@@ -54,8 +51,15 @@ class TinyMCE(Textarea):
             'content_css':      self.content_css,
             'lang_list':        self.lang_list,
         }
-        return rendered + mark_safe(render_to_string(
-            'admin/elements/tinymce.html', context))
+        template = 'admin/elements/tinymce4.html'
+        if 'tiny_mce' in settings.DEFAULT_URL_TINYMCE:
+            # for deprecated tinymce 3.* versions
+            template = 'admin/elements/tinymce.html'
+            warnings.warn('The tinyMCE 3.x is deprecated. '
+                          'Please use the new modern tinyMCE 4.x version.',
+                          category=DeprecationWarning)
+
+        return rendered + mark_safe(render_to_string(template, context))
 
     def do_cleanup(self, content):
         for pattern, replacement in self.cleanup_res.items():

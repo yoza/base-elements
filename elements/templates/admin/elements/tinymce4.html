@@ -1,0 +1,39 @@
+{% extends 'admin/elements/tinymce4_base.html' %}
+{% block tinymce_config %}
+{{ block.super }}
+
+<script type="text/javascript">
+local_tinymce_config = {
+  remove_script_host : true,
+  fix_list_elements : true,
+  height : 470,
+  width : 797,
+  plugins : tinymce_config.plugins + ",nonbreaking, emoticons, textcolor ",
+  toolbar1 : tinymce_config.toolbar1 +
+    "link image | forecolor backcolor emoticons ",
+  valid_elements : tinymce_config.valid_elements +
+    "br," +
+    "-h1," +
+    "-table,-thead,-tbody,-tr,-td,-th," +
+    "-pre," +
+    "-code," +
+    "-div," +
+    "-sub,-sup",
+  extended_valid_elements: tinymce_config.extended_valid_elements +
+    "br[clearfix]," +
+    "div[class|style]," +
+    "p[class|style]," +
+    "span[class|align|style]," +
+    "font[face|size|color|style]," +
+    "table[class|style],td[rowspan|colspan|style|class]," +
+    "th[rowspan|colspan|style|class],tr[class|style]," +
+    "tbody[class|style],thead[class|style],tfoot[class|style]" +
+    "h2[class<clearfix],h3[class<clearfix],h4[class<clearfix]," +
+    "ul[class],ol[class]"
+};
+
+(function($) {
+    $.extend(tinymce_config, local_tinymce_config);
+})(django ? django.jQuery : jQuery);
+</script>
+{% endblock %}
