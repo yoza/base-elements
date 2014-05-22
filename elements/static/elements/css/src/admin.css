@@ -207,3 +207,9 @@ A.selector-clearall {
 .mce-tinymce {
   display: inline-block!important;
 }
+
+.mce-reset .mce-title {
+  font-family: Arial,Verdana,sans-serif!important;
+  font-size: 24px!important;
+  font-weight: normal!important;
+}

@@ -37,7 +37,7 @@ class TinyMCE(Textarea):
 
         self.attrs = {'class': 'tinymce'}
         self.content_css = join(settings.STATIC_URL,
-                                'elements/css/src/editor_content.css')
+                                'elements/css/editor_content.css')
         if attrs:
             self.attrs.update(attrs)
         super(TinyMCE, self).__init__(attrs)

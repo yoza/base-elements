@@ -102,7 +102,7 @@ UL.inline_list LI {
     float: left;
     width: 39.6%;
     overflow: hidden;
-    clear: bottom;
+    clear: both;
     margin: 0;
     padding:0;
 }

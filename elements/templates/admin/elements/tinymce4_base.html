@@ -1,36 +1,34 @@
 {% load i18n %}
 {% get_current_language as lang %}
+
+
 {% block tinymce_file_browser %}
-<script type="text/javascript">
-
-function CustomFileBrowser(field_name, url, type, win) {
-
-    var cmsURL = "/admin/filebrowser/?pop=1";
-    cmsURL = cmsURL + "&type=" + type;
-
-    //win.document.getElementById(field_name).value = 'my browser value';
+  <script type="text/javascript">
+  fileBrowserCalback = function(field_name, url, type, win) {
+    var fb_url = "/admin/filebrowser/?pop=4";
 
     tinyMCE.activeEditor.windowManager.open({
-        url: cmsURL,
-        width: 820,  // Your dimensions may differ - toy around with them!
-        height: 500,
-        //resizable: "yes",
-        //scrollbars: "yes",
-        //inline: "no",  // This parameter only has an effect if you use the inlinepopups plugin!
-        //close_previous: "no"
+      title: "Insert " + type + " file in your page",
+      url: fb_url + "&type=" + type,
+      width: 820,
+      height: 500,
+      resizable: "yes",
+      scrollbars: "yes",
+      inline: "yes",
+      close_previous: "no"
     }, {
-        window: win,
-        input: field_name,
-        //editor_id: tinyMCE.selectedInstance.editorId
+      window: win,
+      input: field_name,
     });
     return false;
-}
-
+  };
 </script>
 {% endblock %}
 
+
 {% block tinymce_config %}
 <script type="text/javascript">
+
 tinymce_config = {
   elements : "id_{{name}}",
   language : "{{lang|default:language}}",
@@ -39,9 +37,7 @@ tinymce_config = {
   theme: "modern",
   content_css : "{{content_css}}",
   importcss_append: true,
-  importcss_file_filter: "{{content_css}}",
   importcss_merge_classes: true,
-
 
   skin: "lightgray",
   dialog_type: "modal",
@@ -62,28 +58,8 @@ tinymce_config = {
   image_styles: "",
   link_styles: "",
   image_update_dimensions_onchange: true,
-  //file_browser_callback: "CustomFileBrowser",
+  file_browser_callback: fileBrowserCalback,
 
-  file_browser_callback: function(field_name, input_value, type, win) {
-    var cmsURL = "/admin/filebrowser/?pop=4";
-    cmsURL = cmsURL + "&type=" + type;
-
-    tinyMCE.activeEditor.windowManager.open({
-        title: "Insert " + type + " file in your page",
-        url: cmsURL,
-        width: 820,
-        height: 500,
-        resizable: "yes",
-        scrollbars: "yes",
-        inline: "yes",
-        close_previous: "no"
-    }, {
-        window: win,
-        input: field_name,
-    });
-    return false;
-  },
-  
   relative_urls: false,
   valid_elements : "" +
     "-p," +
