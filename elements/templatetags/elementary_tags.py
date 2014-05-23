@@ -123,7 +123,7 @@ def ganalitics(context):
             site_name = site_name[-2] + "." + site_name[-1]
     ga_account = site_param(context, "ga_account")
 
-    return {'ga_account': ga_account,
+    return {'ga_account': ga_account.strip(),
             'site_name': site_name}
 
 
