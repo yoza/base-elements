@@ -1,5 +1,6 @@
-from os.path import join
-from django.contrib import admin
+"""
+site params admin
+"""
 from django.conf import settings
 
 from hvad.admin import TranslatableAdmin
@@ -15,7 +16,7 @@ class SiteParamsAdmin(TranslatableAdmin):
 
     save_on_top = True
     actions = None
-    #use_prepopulated_fields = {'slug': ('title', )}
+
     if not settings.DEBUG:
         exclude = ('ga_code',)
 
@@ -28,7 +29,3 @@ class SiteParamsAdmin(TranslatableAdmin):
                 return db_field.formfield(**kwargs)
             return super(SiteParamsAdmin, self).formfield_for_dbfield(db_field,
                                                                       **kwargs)
-
-    #use_fieldset = (
-        #(None, {'fields': ('site', 'rb_section', 'lb_section', 'ga_code', 'slug')}),
-    #)

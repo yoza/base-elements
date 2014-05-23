@@ -2,6 +2,7 @@
 from os.path import join
 
 from django.conf import settings
+
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import smart_text
 
@@ -40,3 +41,11 @@ LANGUAGES = getattr(settings, 'LANGUAGES', (
 HVAD_FALLBACK_LANGUAGES = getattr(settings, 'HVAD_FALLBACK_LANGUAGES', 'en')
 
 COUNT_LANG = getattr(settings, 'COUNT_LANG', len(LANGUAGES))
+
+# """
+# LOGO
+# """
+APP_LABEL = getattr(settings, 'APP_LABEL', 'elements')
+LOGO_IMAGE = getattr(settings, 'LOGO_IMAGE',
+                     ("/static/%s/img/logo.png" % APP_LABEL, "0,0,133,133"))
+GRAVATAR_EMAIL = getattr(settings, 'GRAVATAR_EMAIL', '')

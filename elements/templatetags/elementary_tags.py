@@ -3,8 +3,14 @@ site params tags
 """
 import os
 import re
-import urllib
+
+try:
+    import urllib.parse as urllib
+except ImportError:
+    import urllib
+
 import hashlib
+import warnings
 from django.conf import settings
 from django import template
 from django.utils.safestring import mark_safe
@@ -12,85 +18,113 @@ from django.utils.encoding import iri_to_uri
 from django.utils.translation import ugettext_lazy as _
 
 from elements.models import SiteParams
+from elements import settings as settings_local
+
 
 register = template.Library()
 SUPPORTED = dict(settings.LANGUAGES)
 
 
 @register.simple_tag(takes_context=True)
-def logo_tag(context):
+def site_param(context, param, tags=""):
+    """
+    site param tag
+    """
+    entry = ''
+    if 'site_params' in context:
+        params = context['site_params']
+        entry = getattr(params, param, entry)
+    if not entry:
+        try:
+            s_id = settings.SITE_ID
+            entry = SiteParams.objects.language().values().get(site__id=s_id)
+            entry = entry[param]
+        except SiteParams.DoesNotExist:
+            pass
+        except KeyError:
+            return ''
+    if tags:
+        tags = [re.escape(tag) for tag in tags.split()]
+        tags_re = u'(%s)' % u'|'.join(tags)
+        starttag_re = re.compile(r'<%s(/?>|(\s+[^>]*>))' % tags_re, re.U)
+        endtag_re = re.compile(u'</%s>' % tags_re)
+        value = starttag_re.sub(u' - ', entry)
+        value = endtag_re.sub(u' ', value)
+    else:
+        value = entry
+
+    return mark_safe(value)
+
+
+@register.simple_tag(takes_context=True)
+def logo_tag(context, gravatar=False):
     """
     logo tag
     """
-    logo = ""
-    site_logo = getattr(settings, 'LOGO_IMAGE', ("../img/logo.png",
-                                                 "0,0,85,85"))
+    gr_email = getattr(settings_local,'GRAVATAR_EMAIL', '')
+    site_logo = getattr(settings_local, 'LOGO_IMAGE', ("../img/logo.png",
+                                                       "0,0,85,85"))
+    if gravatar and gr_email:
+        site_logo = (get_gravatar(gr_email.encode('utf-8'),
+                                 int(site_logo[1].split(',')[-1])),
+                     site_logo[1])
+
     logo_text = getattr(settings, 'LOGO_TEXT', '')
     lang = ''
     if 'lang' in context and len(SUPPORTED) > 1:
         lang = context['lang']
         if lang is None or lang not in SUPPORTED:
             lang = settings.LANGUAGE_CODE
-    try:
-        params = SiteParams.objects.language().get(site__id=settings.SITE_ID)
-        tags = 'span p br div sub sup a'
-        tags = [re.escape(tag) for tag in tags.split()]
-        tags_re = u'(%s)' % u'|'.join(tags)
-        starttag_re = re.compile(r'<%s(/?>|(\s+[^>]*>))' % tags_re, re.U)
-        endtag_re = re.compile(u'</%s>' % tags_re)
-        value = starttag_re.sub(u' - ', params.title)
-        value = endtag_re.sub(u'', value)
-        logo = u'<div class="logo_layer">\
-                    <img usemap ="#logo_map" src="%s" alt="%s" id="img_logo"/>\
-                    <map id ="logo_map" name="logo_map">\
-                        <area href="/%s" target="_self" id="area_logo_map" \
-                              shape ="rect" coords ="%s" alt="%s"/>\
-                    </map>\
-                    <span class="logo-text">%s</span>\
-                </div>' % (site_logo[0], value, lang, site_logo[1], value,
-                           logo_text)
-    except SiteParams.DoesNotExist:
-        pass
+
+    tags = 'span p br div sub sup a'
+    value = site_param(context, "title", tags)
+
+    logo = u'<div class="logo_layer">\
+                <img usemap ="#logo_map" src="%s" alt="%s" id="img_logo"/>\
+                <map id ="logo_map" name="logo_map">\
+                    <area href="/%s" target="_self" id="area_logo_map" \
+                          shape ="rect" coords ="%s" alt="%s"/>\
+                </map>\
+                <span class="logo-text">%s</span>\
+            </div>' % (site_logo[0], value, lang, site_logo[1], value,
+                       logo_text)
 
     return mark_safe(logo)
 
 
 @register.simple_tag
-def site_param(param, tags=""):
-    """
-    site param tag
-    """
-    try:
-        s_id = settings.SITE_ID
-        entry = SiteParams.objects.language().values(param).get(site__id=s_id)
-        if tags:
-            tags = [re.escape(tag) for tag in tags.split()]
-            tags_re = u'(%s)' % u'|'.join(tags)
-            starttag_re = re.compile(r'<%s(/?>|(\s+[^>]*>))' % tags_re, re.U)
-            endtag_re = re.compile(u'</%s>' % tags_re)
-            value = starttag_re.sub(u' - ', entry[param])
-            value = endtag_re.sub(u' ', value)
-        else:
-            value = entry[param]
-
-        return mark_safe(value)
-
-    except SiteParams.DoesNotExist:
-        return ""
-
-
-@register.simple_tag
 def google_analitics():
     """
-    google analitics tag
+    google analitics tag. deprecated 23 may 2014
     """
+    warnings.warn('The google_analitics tag is deprecated. '
+                  'Please use the new ganalitics tag.',
+                  category=DeprecationWarning)
     code = ""
     try:
         params = SiteParams.objects.language().get(site__id=settings.SITE_ID)
         code = u"%s" % (params.ga_code)
     except SiteParams.DoesNotExist:
         pass
+
     return mark_safe(code)
+
+
+@register.inclusion_tag('blocks/ganalitics.html', takes_context=True)
+def ganalitics(context):
+    """
+    new ga tag
+    """
+    site_name = ''
+    if 'request' in context:
+        request = context['request']
+        if hasattr(request, 'site'):
+            site_name = request.site.name.split(".")
+            site_name = site_name[-2] + "." + site_name[-1]
+    ga_account = site_param(context, "ga_account")
+
+    return {'ga_account': ga_account,
+            'site_name': site_name}
 
 
 @register.simple_tag
@@ -109,17 +143,12 @@ def get_gravatar(email, size=40, rating='g', default=None):
     return gravatar_url
 
 
-@register.simple_tag
-def footer():
+@register.simple_tag(takes_context=True)
+def footer(context):
     """
     footer tag
     """
-    try:
-        params = SiteParams.objects.get(site__id=settings.SITE_ID)
-        return params.footer
-
-    except SiteParams.DoesNotExist:
-        return ""
+    return site_param(context, "footer")
 
 
 @register.simple_tag(takes_context=True)
@@ -229,9 +258,9 @@ def search_tag(context):
                         '"#searchform","#query", "%s")});</script>' \
                         % settings.SEARCH_LABEL
         elif ('MSIE' in request.META.get('HTTP_USER_AGENT',
-                                       '').upper() and
+                                         '').upper() and
               'MSIE 10.0' not in request.META.get('HTTP_USER_AGENT',
-                                                 '').upper()):
+                                                  '').upper()):
             searches += u'<script type="text/javascript">'\
                         'jQuery(document).ready(function(){clearInput('\
                         '"#searchform","#query", "%s")});</script>' \
