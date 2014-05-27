@@ -19,6 +19,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from elements.models import SiteParams
 from elements import settings as settings_local
+from elements.filters import linkify, mark_down
 
 
 register = template.Library()
@@ -61,12 +62,12 @@ def logo_tag(context, gravatar=False):
     """
     logo tag
     """
-    gr_email = getattr(settings_local,'GRAVATAR_EMAIL', '')
+    gr_email = getattr(settings_local, 'GRAVATAR_EMAIL', '')
     site_logo = getattr(settings_local, 'LOGO_IMAGE', ("../img/logo.png",
                                                        "0,0,85,85"))
     if gravatar and gr_email:
         site_logo = (get_gravatar(gr_email.encode('utf-8'),
-                                 int(site_logo[1].split(',')[-1])),
+                                  int(site_logo[1].split(',')[-1])),
                      site_logo[1])
 
     logo_text = getattr(settings, 'LOGO_TEXT', '')
@@ -149,6 +150,26 @@ def footer(context):
     footer tag
     """
     return site_param(context, "footer")
+
+
+@register.simple_tag(takes_context=True)
+def urlize_param(context, param, tags=''):
+    """
+    urlize param
+    """
+    tag = site_param(context, param, tags)
+
+    return linkify(tag)
+
+
+@register.simple_tag(takes_context=True)
+def markdown_param(context, param, tags=''):
+    """
+    markdown param
+    """
+    tag = site_param(context, param, tags)
+
+    return mark_down(tag)
 
 
 @register.simple_tag(takes_context=True)

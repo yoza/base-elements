@@ -43,9 +43,9 @@ class SiteParams(TranslatableModel):
     ga_code = models.TextField(_('JS code'), null=True, blank=True,
                                help_text=_('Custom JavaScript: Copy '
                                            'and paste it on this field.'))
-    ga_account = models.CharField(_('GA account'), null=True, blank=True,
+    ga_account = models.CharField(_('GA Tracking ID'), null=True, blank=True,
                                   max_length=32,
-                                  help_text=_('Google Analitics Account'))
+                                  help_text=_('Google Analitics Tracking ID'))
     slug = models.SlugField(_(u'slug'), null=False, blank=False,
                             max_length=128, unique=True,
                             help_text=_('site params slug'))
