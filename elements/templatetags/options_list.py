@@ -12,7 +12,7 @@ from django.utils.html import escape, conditional_escape
 from django.utils.safestring import mark_safe
 from django.utils.text import capfirst
 from django.utils.translation import ugettext as _
-from django.utils.encoding import smart_unicode, force_unicode
+from django.utils.encoding import smart_text, force_text
 from django.template import Library, RequestContext, Context, loader
 from django.template.loader import get_template
 
@@ -173,7 +173,7 @@ def items_for_result(cl, result, form, template, request):
                     allow_tags = True
                     result_repr = _boolean_icon(value)
                 else:
-                    result_repr = smart_unicode(value)
+                    result_repr = smart_text(value)
                 # Strip HTML tags in the resulting text, except if the
                 # function has an "allow_tags" attribute set to True.
                 if not allow_tags:
@@ -189,7 +189,7 @@ def items_for_result(cl, result, form, template, request):
                     result_repr = display_for_field(value, f)
                 if isinstance(f, models.DateField) or isinstance(f, models.TimeField):
                     row_class = ' class="nowrap"'
-        if force_unicode(result_repr) == '':
+        if force_text(result_repr) == '':
             result_repr = mark_safe('&nbsp;')
 
         if field_name in cl.list_display_links:
@@ -201,7 +201,7 @@ def items_for_result(cl, result, form, template, request):
             else:
                 attr = pk
             value = result.serializable_value(attr)
-            result_id = repr(force_unicode(value))[1:]
+            result_id = repr(force_text(value))[1:]
             yield render_template(result, template, request, cl)
         else:
             # By default the fields come from ModelAdmin.list_editable, but if we pull
@@ -209,11 +209,11 @@ def items_for_result(cl, result, form, template, request):
             # can provide fields on a per request basis
             if form and field_name in form.fields:
                 bf = form[field_name]
-                result_repr = mark_safe(force_unicode(bf.errors) + force_unicode(bf))
+                result_repr = mark_safe(force_text(bf.errors) + force_text(bf))
             else:
                 result_repr = conditional_escape(result_repr)
     if form:
-        yield mark_safe(force_unicode(form[cl.model._meta.pk.name]))
+        yield mark_safe(force_text(form[cl.model._meta.pk.name]))
 
 def expanded(request, item):
     expand = False

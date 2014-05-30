@@ -49,3 +49,8 @@ APP_LABEL = getattr(settings, 'APP_LABEL', 'elements')
 LOGO_IMAGE = getattr(settings, 'LOGO_IMAGE',
                      ("/static/%s/img/logo.png" % APP_LABEL, "0,0,133,133"))
 GRAVATAR_EMAIL = getattr(settings, 'GRAVATAR_EMAIL', '')
+
+# """
+# Admin
+# """
+CSS_PATH = 'css'

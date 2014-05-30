@@ -55,7 +55,7 @@ class ImageManager(HierarchyManager):
             err = _(u'Uploaded \'%s\' file is not an image. '
                     'You can upload only valid image file!') % filetype
             raise ValidationError(err)
-    
+
     def make_thumbnail(self, obj):
         """
         make custom thumbnail
@@ -63,6 +63,7 @@ class ImageManager(HierarchyManager):
         if obj.image:
             imfile = obj.image.name.split("/")[-1]
             path = "/".join(obj.image.path.split("/")[:-1])
+            msg = ''
             try:
                 img = Image.open(obj.image.path)
                 img.thumbnail((settings.IMAGE_THUMB_SIZE), Image.ANTIALIAS)

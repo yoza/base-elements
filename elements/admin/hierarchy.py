@@ -14,7 +14,7 @@ from django.utils.translation import ugettext as _
 from django.db import transaction
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
-from django.utils.encoding import force_unicode, force_text
+from django.utils.encoding import force_text
 from django.conf import settings
 from django import template
 from django.utils.safestring import mark_safe
@@ -22,7 +22,7 @@ from django import VERSION as DjangoVersion
 from django.template.response import SimpleTemplateResponse
 
 from elements.forms import dynamicforms
-from elements.settings import HIERARHY_STATIC_URL
+from elements.settings import HIERARHY_STATIC_URL, CSS_PATH
 
 
 if DjangoVersion[:2] >= (1, 5):
@@ -44,6 +44,7 @@ class NavigationForm(dynamicforms.Form):
     """
     nav form
     """
+
     status = BooleanField(required=False)
 
 
@@ -67,17 +68,20 @@ class HierarhyModelAdmin(admin.ModelAdmin):
     """
     hierahy model admin
     """
+
     class Media:
+        """
+        model media
+        """
+
         if settings.DEBUG:
-            css_path = 'css/src'
-        else:
-            css_path = 'css'
+            CSS_PATH = '%s/src' % CSS_PATH
 
         css = {
-            'all': [os.path.join(HIERARHY_STATIC_URL, css_path, path)
-            for path in (
-                'navigation.css',
-            )]
+            'all': [os.path.join(HIERARHY_STATIC_URL, CSS_PATH, path)
+                    for path in (
+                        'navigation.css',
+                    )]
         }
 
     def process_item(self, item, form):
@@ -120,7 +124,6 @@ class HierarhyModelAdmin(admin.ModelAdmin):
             redata = request.POST.get('navigation')
             hierarchy_data = json.loads(redata)
             realign(items, hierarchy_data)
-
             for form in NavigationForm.get_forms(request):
                 assert form.is_valid()
                 try:
@@ -136,7 +139,7 @@ class HierarhyModelAdmin(admin.ModelAdmin):
 
             return HttpResponseRedirect(path)
 
-    save_changed.short_description = unicode(_("Save selected changes"))
+    save_changed.short_description = "%s" % _("Save selected changes")
     ordering = ["position"]
     item_template = 'admin/nav_item.html'
 
@@ -146,6 +149,7 @@ class HierarhyModelAdmin(admin.ModelAdmin):
         """
         changelist_view
         """
+        #super(HierarhyModelAdmin, self).changelist_view(request)
         media = self.media
         model = self.model
         opts = self.model._meta
@@ -215,10 +219,9 @@ class HierarhyModelAdmin(admin.ModelAdmin):
         if (actions and request.method == 'POST' and
                 'index' in request.POST and '_save' not in request.POST):
             if selected:
-                response = \
-                    self.response_action(request,
-                                         queryset=cli.get_query_set(request,
-                                                                    False))
+                response = self.response_action(
+                    request,
+                    queryset=cli.get_query_set(request, False))
                 if response:
                     return response
                 else:
