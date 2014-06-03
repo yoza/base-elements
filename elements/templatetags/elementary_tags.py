@@ -4,10 +4,11 @@ site params tags
 import os
 import re
 
-try:
-    import urllib.parse as urllib
-except ImportError:
-    import urllib
+from django.utils import six
+if six.PY2:
+    from urllib import urlencode
+else:
+    from urllib.parse import urlencode
 
 import hashlib
 import warnings
@@ -139,7 +140,7 @@ def get_gravatar(email, size=40, rating='g', default=None):
     # construct the url
     gravatar_url = "http://www.gravatar.com/avatar/" + \
                    hashlib.md5(email.lower()).hexdigest() + "?"
-    gravatar_url += urllib.urlencode(params)
+    gravatar_url += urlencode(params)
 
     return gravatar_url
 
@@ -250,11 +251,8 @@ def search_tag(context):
             lang = context['lang']
         if lang is None or lang not in dict(settings.LANGUAGES):
             lang = settings.LANGUAGE_CODE
-
-        if ('MSIE 6.0' in request.META.get('HTTP_USER_AGENT',
-                                           '').upper() or
-            'MSIE 7.0') in request.META.get('HTTP_USER_AGENT',
-                                            '').upper():
+        mu_agent = request.META.get('HTTP_USER_AGENT', '').upper()
+        if 'MSIE 6.0' in mu_agent or 'MSIE 7.0' in mu_agent:
             btn_img = getattr(settings,
                               'SEARCH_BTN_IMG_IE6',
                               '/static/elements/img/btn_search_ie6.gif')
@@ -298,9 +296,9 @@ def noscript_warning():
     warning += u'<div class="global-warning">'
     warning += u'<p class="site-message interface-text-dark">%s</p>' % \
                (unicode(_('Attention! JavaScript must be enabled in order '
-                'for this page to function properly. However, '
-                'it seems that you have JavaScript disabled or not '
-                'supported by your browser.')))
+                          'for this page to function properly. However, '
+                          'it seems that you have JavaScript disabled or not '
+                          'supported by your browser.')))
     warning += u'<p class="site-message interface-text-dark">%s</p>' % \
         (unicode(_('Please enable JavaScript in your browser settings.')))
     warning += u'</div>'
