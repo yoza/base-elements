@@ -4,11 +4,8 @@ site params tags
 import os
 import re
 
-from django.utils import six
-if six.PY2:
-    from urllib import urlencode
-else:
-    from urllib.parse import urlencode
+import six
+import urllib
 
 import hashlib
 import warnings
@@ -140,7 +137,11 @@ def get_gravatar(email, size=40, rating='g', default=None):
     # construct the url
     gravatar_url = "http://www.gravatar.com/avatar/" + \
                    hashlib.md5(email.lower()).hexdigest() + "?"
-    gravatar_url += urlencode(params)
+
+    if six.PY3:
+        gravatar_url += urllib.parse.urlencode(params)
+    else:
+        gravatar_url += urllib.urlencode(params)
 
     return gravatar_url
 

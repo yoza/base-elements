@@ -1,3 +1,5 @@
+from django.utils import six
+from django.forms.forms import DeclarativeFieldsMetaclass
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.forms import Widget, Field, BaseForm, Form, ValidationError
@@ -8,21 +10,24 @@ from recaptcha.client import captcha
 
 
 class RecaptchaWidget(Widget):
-    def __init__(self, theme=None, tabindex=None):
+    def __init__(self, theme=None, tabindex=None, use_ssl=None):
         options = {}
         if theme:
             options['theme'] = theme
         if tabindex:
             options['tabindex'] = tabindex
         self.options = options
+        self.use_ssl = \
+            use_ssl if use_ssl is not None else getattr(settings,
+                                                        'RECAPTCHA_USE_SSL',
+                                                        False)
         super(RecaptchaWidget, self).__init__()
 
     def render(self, name, value, attrs=None):
-        self.options['lang'] = translation.get_language()
-        if len(settings.RECAPTCHA_CUSTOM_TRANSLATIONS[self.options['lang']]) >\
-                                                                             0:
+        self.options['lang'] = lang = translation.get_language()
+        if len(settings.RECAPTCHA_CUSTOM_TRANSLATIONS[lang]) > 0:
             self.options['custom_translations'] = \
-                   settings.RECAPTCHA_CUSTOM_TRANSLATIONS[self.options['lang']]
+                settings.RECAPTCHA_CUSTOM_TRANSLATIONS[lang]
             options = '%r' % self.options
             options = options.replace("u'", "'")
         else:
@@ -31,18 +36,19 @@ class RecaptchaWidget(Widget):
                     var RecaptchaOptions = %s;
                  </script>""" % options
 
-        result = mark_safe(res + \
-                           captcha.displayhtml(settings.RECAPTCHA_PUB_KEY))
-        return result
+        return mark_safe(
+            res + captcha.displayhtml(settings.RECAPTCHA_PUB_KEY,
+                                      self.use_ssl))
 
     def value_from_datadict(self, data, files, name):
         challenge = data.get('recaptcha_challenge_field')
         response = data.get('recaptcha_response_field')
         return (challenge, response)
 
-    def id_for_label(self, id_):
-        return id_
-    id_for_label = classmethod(id_for_label)
+    @classmethod
+    def id_for_label(cls, _id):
+        return _id
+    #id_for_label = classmethod(id_for_label)
         #return None
 
 
@@ -57,8 +63,8 @@ class RecaptchaField(Field):
         value = super(RecaptchaField, self).clean(value)
         challenge, response = value
         if not challenge:
-            e = _('An error occured with the CAPTCHA service. Please try again.')
-            raise ValidationError(e)
+            raise ValidationError(_('An error occured with the CAPTCHA '
+                                    'service. Please try again.'))
         if not response:
             raise ValidationError(_('Please enter the CAPTCHA solution.'))
 
@@ -68,8 +74,8 @@ class RecaptchaField(Field):
                                        self.remote_ip)
 
         if not check_captcha.is_valid:
-            e = _('An incorrect CAPTCHA solution was entered.')
-            raise ValidationError(e)
+            raise ValidationError(_('An incorrect CAPTCHA solution was '
+                                    'entered.'))
         return value
 
 
@@ -80,19 +86,28 @@ class RecaptchaFieldPlaceholder(Field):
     initialised.
     '''
     def __init__(self, *args, **kwargs):
+        super(RecaptchaFieldPlaceholder, self).__init__(*args, **kwargs)
         self.args = args
         self.kwargs = kwargs
 
 
-class RecaptchaBaseForm(BaseForm):
+class RecaptchaBaseForm(six.with_metaclass(DeclarativeFieldsMetaclass,
+                                           BaseForm)):
+
+    __metaclass__ = DeclarativeFieldsMetaclass
+
     def __init__(self, request, *args, **kwargs):
         for key, field in self.base_fields.items():
             if isinstance(field, RecaptchaFieldPlaceholder):
                 self.base_fields[key] = \
-                        RecaptchaField(request.META.get('REMOTE_ADDR', ''),
-                                       *field.args, **field.kwargs)
+                    RecaptchaField(request.META.get('REMOTE_ADDR', ''),
+                                   *field.args, **field.kwargs)
         super(RecaptchaBaseForm, self).__init__(*args, **kwargs)
 
 
-class RecaptchaForm(RecaptchaBaseForm, Form):
-    pass
+class RecaptchaForm(six.with_metaclass(DeclarativeFieldsMetaclass,
+                                       RecaptchaBaseForm, Form)):
+    """
+    RECAPTCHA form
+    """
+    __metaclass__ = DeclarativeFieldsMetaclass
