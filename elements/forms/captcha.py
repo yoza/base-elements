@@ -48,8 +48,6 @@ class RecaptchaWidget(Widget):
     @classmethod
     def id_for_label(cls, _id):
         return _id
-    #id_for_label = classmethod(id_for_label)
-        #return None
 
 
 class RecaptchaField(Field):
