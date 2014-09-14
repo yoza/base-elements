@@ -50,9 +50,9 @@ class NavigationForm(dynamicforms.Form):
 
 class MyChangeList(ChangeList):
     """
-    chnge list
+    change list
     """
-    def get_query_set(self, request, root=True):
+    def get_queryset(self, request, root=True):
         """
         override get queryset
         """
@@ -60,7 +60,7 @@ class MyChangeList(ChangeList):
             self.params['parent'] = None
         else:
             self.params = {}
-        qus = super(MyChangeList, self).get_query_set(request)
+        qus = super(MyChangeList, self).get_queryset(request)
         return qus
 
 
@@ -144,7 +144,6 @@ class HierarhyModelAdmin(admin.ModelAdmin):
     item_template = 'admin/nav_item.html'
 
     @csrf_protect_m
-    @transaction.commit_on_success
     def changelist_view(self, request, extra_context=None):
         """
         changelist_view

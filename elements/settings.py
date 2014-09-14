@@ -55,3 +55,8 @@ GRAVATAR_EMAIL = getattr(settings, 'GRAVATAR_EMAIL', '')
 # Admin
 # """
 CSS_PATH = 'css'
+
+# """
+# FAVICON_PNG
+# """
+FAVICON_PNG = getattr(settings, 'FAVICON_PNG', False)

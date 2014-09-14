@@ -125,6 +125,10 @@ def header_tags(context):
         metadata += '<script type="text/javascript" src="%sbase.%s" charset="utf-8"></script>' % (js_path, js_suf)
 
         metadata += '<link rel="shortcut icon" href="%sfavicon.ico" type="image/x-icon"/>' % settings.STATIC_URL
+        if getattr(settings, 'FAVICON_PNG', False):
+            metadata += '''
+                <link rel="icon" type="image/png" href="%s%s" sizes="48x48">
+                ''' % (settings.STATIC_URL, settings.FAVICON_PNG)
         metadata += '<link rel="apple-touch-icon" href="%sapple_icon.png"/>' % settings.STATIC_URL
 
     return metadata
