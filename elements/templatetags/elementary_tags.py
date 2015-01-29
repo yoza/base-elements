@@ -14,6 +14,7 @@ from django import template
 from django.utils.safestring import mark_safe
 from django.utils.encoding import iri_to_uri
 from django.utils.translation import ugettext_lazy as _
+from django.utils.encoding import python_2_unicode_compatible
 
 from elements.models import SiteParams
 from elements import settings as settings_local
@@ -288,6 +289,7 @@ def search_tag(context):
     return mark_safe(searches)
 
 
+@python_2_unicode_compatible
 @register.simple_tag
 def noscript_warning():
     """
@@ -296,12 +298,12 @@ def noscript_warning():
     warning = u'<noscript>'
     warning += u'<div class="global-warning">'
     warning += u'<p class="site-message interface-text-dark">%s</p>' % \
-               (unicode(_('Attention! JavaScript must be enabled in order '
+               (str(_('Attention! JavaScript must be enabled in order '
                           'for this page to function properly. However, '
                           'it seems that you have JavaScript disabled or not '
                           'supported by your browser.')))
     warning += u'<p class="site-message interface-text-dark">%s</p>' % \
-        (unicode(_('Please enable JavaScript in your browser settings.')))
+        (str(_('Please enable JavaScript in your browser settings.')))
     warning += u'</div>'
     warning += u'</noscript>'
 

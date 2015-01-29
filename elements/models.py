@@ -93,7 +93,10 @@ class SiteParams(TranslatableModel):
         unicode
         """
         prefix = _('Parameters data for site')
-        return prefix + ' - ' + self.title + ' (' + self.site.domain + ')'
+        if self.title:
+            prefix += ' - ' + self.title
+
+        return prefix + ' (' + self.site.domain + ')'
 
     def save(self, *args, **kwargs):
         """
