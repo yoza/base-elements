@@ -14,7 +14,6 @@ from django import template
 from django.utils.safestring import mark_safe
 from django.utils.encoding import iri_to_uri
 from django.utils.translation import ugettext_lazy as _
-from django.utils.encoding import python_2_unicode_compatible
 
 from elements.models import SiteParams
 from elements import settings as settings_local
@@ -289,7 +288,6 @@ def search_tag(context):
     return mark_safe(searches)
 
 
-@python_2_unicode_compatible
 @register.simple_tag
 def noscript_warning():
     """
