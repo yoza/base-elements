@@ -18,6 +18,7 @@ from django.utils.translation import ugettext_lazy as _
 from elements.models import SiteParams
 from elements import settings as settings_local
 from elements.filters import linkify, mark_down
+from django.utils.encoding import python_2_unicode_compatible
 
 
 register = template.Library()
@@ -261,17 +262,21 @@ def search_tag(context):
             btn_img = getattr(settings,
                               'SEARCH_BTN_IMG',
                               '/static/elements/img/btn_search.png')
-        placeholder = getattr(settings, 'SEARCH_PLACEHOLDER', "")
+        placeholder = _(getattr(settings, 'SEARCH_PLACEHOLDER', ""))
+
+        sinp_name = getattr(settings, 'SEARCH_INPUT_NAME', "query")
         plhol = ""
         if placeholder:
-            plhol = 'placeholder="%s"' % unicode(_(placeholder))
+            if six.PY3 is False:
+                placeholder = unicode(placeholder)
+            plhol = 'placeholder="%s"' % placeholder
         searches = u'<div id="search">'\
                    '<form method="get" action="/%s/search" id="searchform" '\
                    'autocomplete="off">'\
-                   '<div class="line"><input type="search" name="query" '\
+                   '<div class="line"><input type="search" name="%s" '\
                    'id="query" %s /><input type="image" class="imgbtn" '\
                    'src="%s" alt="Search" />'\
-                   '</div></form></div>' % (lang, plhol, btn_img)
+                   '</div></form></div>' % (lang, sinp_name, plhol, btn_img)
         if getattr(settings, 'SEARCH_LABEL', None):
             searches += u'<script type="text/javascript">'\
                         'jQuery(document).ready(function(){clearInput('\
