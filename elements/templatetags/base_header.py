@@ -5,6 +5,7 @@ from os.path import join
 import re
 from django import template
 from django.conf import settings
+from django.utils.safestring import mark_safe
 
 from elements.models import SiteParams
 
@@ -143,8 +144,9 @@ def header_tags(context):
                     % settings.STATIC_URL
 
         metadata += '<script type="text/javascript" src='\
-            '%selements/js/elements.%s" charset="utf-8"></script>'\
+            '%selements/js/elements.%s charset="utf-8"></script>'\
             % (settings.STATIC_URL, js_suf)
+
         if alternate_styles:
             metadata += '<script type="text/javascript" src='\
                 '"%selements/js/stylesheetToggle.%s" '\
@@ -162,4 +164,4 @@ def header_tags(context):
         metadata += '<link rel="apple-touch-icon" href="%sapple_icon.png"/>'\
             % settings.STATIC_URL
 
-    return metadata
+    return mark_safe(metadata)
