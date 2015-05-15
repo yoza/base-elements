@@ -23,4 +23,4 @@ class SiteParamsTestCase(TestCase):
         check params read
         """
         params = SiteParams.objects.get(site_id=settings.SITE_ID)
-        print params.last_update
+        print(params.last_update)

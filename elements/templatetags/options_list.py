@@ -4,7 +4,7 @@ try:
 except ImportError:
     import urllib as parse
 from django.conf import settings
-from django.contrib.admin.util import (
+from django.contrib.admin.utils import (
     lookup_field, display_for_field, label_for_field)
 from django.contrib.admin.views.main import ALL_VAR, EMPTY_CHANGELIST_VALUE
 from django.contrib.admin.views.main import (

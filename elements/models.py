@@ -14,6 +14,7 @@ from hvad.manager import TranslationManager
 
 
 class SiteParamsManager(TranslationManager):
+
     """
     manager
     """
@@ -22,6 +23,7 @@ class SiteParamsManager(TranslationManager):
 
 @python_2_unicode_compatible
 class SiteParams(TranslatableModel):
+
     '''
     SiteParams model
 
