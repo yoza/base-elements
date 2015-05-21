@@ -11,7 +11,7 @@ from django.contrib.admin import helpers
 from django.core.exceptions import PermissionDenied
 from django.contrib import admin
 from django.utils.translation import ugettext as _
-from django.db import transaction
+
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.utils.encoding import force_text
@@ -81,7 +81,7 @@ class HierarhyModelAdmin(admin.ModelAdmin):
             'all': [os.path.join(HIERARHY_STATIC_URL, CSS_PATH, path)
                     for path in (
                         'navigation.css',
-                    )]
+                        )]
         }
 
     def process_item(self, item, form):
@@ -132,7 +132,8 @@ class HierarhyModelAdmin(admin.ModelAdmin):
                 except KeyError:
                     pass  # Should we fail silently?
 
-            [item.save() for item in items.values()]
+            [entry.save() for entry in items.values()]
+
             self.message_user(
                 request, _('The navigation was updated successfully. '
                            'You may edit it again below.'))
@@ -148,9 +149,9 @@ class HierarhyModelAdmin(admin.ModelAdmin):
         """
         changelist_view
         """
-        #super(HierarhyModelAdmin, self).changelist_view(request)
+        # super(HierarhyModelAdmin, self).changelist_view(request)
         media = self.media
-        model = self.model
+
         opts = self.model._meta
         app_label = opts.app_label
         if not self.has_change_permission(request, None):
@@ -212,7 +213,7 @@ class HierarhyModelAdmin(admin.ModelAdmin):
         # edit. Try to look up an action or confirmation first, but if this
         # isn't an action the POST will fall through to the bulk edit check,
         # below.
-        action_failed = False
+
         selected = request.POST.getlist(helpers.ACTION_CHECKBOX_NAME)
         # Actions with no confirmation
         if (actions and request.method == 'POST' and
@@ -220,16 +221,14 @@ class HierarhyModelAdmin(admin.ModelAdmin):
             if selected:
                 response = self.response_action(
                     request,
-                    queryset=cli.get_query_set(request, False))
+                    queryset=cli.get_queryset(request, False))
                 if response:
                     return response
-                else:
-                    action_failed = True
+
             else:
                 msg = _("Items must be selected in order to perform "
                         "actions on them. No items have been changed.")
                 self.message_user(request, msg)
-                action_failed = True
 
         # Actions with confirmation
         if (actions and request.method == 'POST' and
@@ -242,8 +241,6 @@ class HierarhyModelAdmin(admin.ModelAdmin):
                                                                     False))
                 if response:
                     return response
-                else:
-                    action_failed = True
 
         # If we're allowing changelist editing, we need to construct a formset
         # for the changelist given all the fields to be edited. Then we'll
