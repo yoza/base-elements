@@ -4,21 +4,24 @@ try:
 except ImportError:
     import urllib as parse
 from django.conf import settings
-from django.contrib.admin.utils import (
-    lookup_field, display_for_field, label_for_field)
-from django.contrib.admin.views.main import ALL_VAR, EMPTY_CHANGELIST_VALUE
+try:
+    from django.contrib.admin.utils import (
+        lookup_field, display_for_field, label_for_field)
+except ImportError:
+    from django.contrib.admin.util import (
+        lookup_field, display_for_field, label_for_field)
+
 from django.contrib.admin.views.main import (
-    ORDER_VAR, ORDER_TYPE_VAR, PAGE_VAR, SEARCH_VAR)
+    ALL_VAR, EMPTY_CHANGELIST_VALUE, ORDER_VAR, PAGE_VAR, SEARCH_VAR)
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
-from django.forms.forms import pretty_name
 from django.utils import formats
 from django.utils.html import escape, conditional_escape
 from django.utils.safestring import mark_safe
 from django.utils.text import capfirst
 from django.utils.translation import ugettext as _
 from django.utils.encoding import smart_text, force_text
-from django.template import Library, RequestContext, Context, loader
+from django.template import Library, Context, loader
 from django.template.loader import get_template
 
 register = Library()
