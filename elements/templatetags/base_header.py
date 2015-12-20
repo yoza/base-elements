@@ -37,8 +37,7 @@ def header_tags(context):
         entry = []
         if not current_page or current_page.slug() in ('/', 'home'):
             try:
-                entry = SiteParams.objects.language(lang)
-                entry = entry.get(site__id=settings.SITE_ID)
+                entry = SiteParams.objects.get(site__id=settings.SITE_ID)
             except SiteParams.DoesNotExist:
                 pass
             if entry:

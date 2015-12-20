@@ -18,7 +18,6 @@ from django.utils.translation import ugettext_lazy as _
 from elements.models import SiteParams
 from elements import settings as settings_local
 from elements.filters import linkify, mark_down
-from django.utils.encoding import python_2_unicode_compatible
 
 
 register = template.Library()
@@ -31,16 +30,17 @@ def site_param(context, param, tags=""):
     site param tag
     """
     entry = ''
+
     if 'site_params' in context:
         params = context['site_params']
         entry = getattr(params, param, entry)
     if not entry:
         try:
             s_id = settings.SITE_ID
-            entry = SiteParams.objects.language().values().get(site__id=s_id)
+            entry = SiteParams.objects.values().get(site__id=s_id)
             entry = entry[param]
         except SiteParams.DoesNotExist:
-            pass
+            return ''
         except KeyError:
             return ''
     if tags:
@@ -79,15 +79,13 @@ def logo_tag(context, gravatar=False):
     tags = 'span p br div sub sup a'
     value = site_param(context, "title", tags)
 
-    logo = u'<div class="logo_layer">\
-                <img usemap ="#logo_map" src="%s" alt="%s" id="img_logo"/>\
-                <map id ="logo_map" name="logo_map">\
-                    <area href="/%s" target="_self" id="area_logo_map" \
-                          shape ="rect" coords ="%s" alt="%s"/>\
-                </map>\
-                <span class="logo-text">%s</span>\
-            </div>' % (site_logo[0], value, lang, site_logo[1], value,
-                       logo_text)
+    logo = '''<div class="logo_layer">
+              <img usemap ="#logo_map" src="{}" alt="{}" id="img_logo"/>
+              <map id ="logo_map" name="logo_map">
+              <area href="/{}" target="_self" id="area_logo_map"
+                    shape ="rect" coords ="{}" alt="{}"/></map>
+              <span class="logo-text">{}</span></div>'''.format(
+        site_logo[0], value, lang, site_logo[1], value, logo_text)
 
     return mark_safe(logo)
 

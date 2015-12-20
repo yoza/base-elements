@@ -39,7 +39,6 @@ gettext_noop = lambda s: s
 LANGUAGES = getattr(settings, 'LANGUAGES', (
     ('en', gettext_noop('English')),
 ))
-HVAD_FALLBACK_LANGUAGES = getattr(settings, 'HVAD_FALLBACK_LANGUAGES', 'en')
 
 COUNT_LANG = getattr(settings, 'COUNT_LANG', len(LANGUAGES))
 

@@ -52,7 +52,7 @@ def locator(request):
                 kwargs['lang'].lower() in dict(settings.LANGUAGES):
             lang = kwargs['lang'].lower()
         try:
-            params = SiteParams.objects.language().get(
+            params = SiteParams.objects.get(
                 site__id=settings.SITE_ID)
         except SiteParams.DoesNotExist:
             pass

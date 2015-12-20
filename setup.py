@@ -4,7 +4,7 @@ from setuptools import find_packages, setup
 
 
 setup(name='elements',
-      version='1.0',
+      version='1.1',
       description='Django base templatetags',
       author='Oleg Prans',
       author_email='oleg@prans.net',
@@ -13,12 +13,12 @@ setup(name='elements',
       include_package_data=True,
       package_data={'elements': ['templates/admin/*.html',
                                  'templates/admin/edit_inline/*.html',
-                                 'templates/admin/edit_inline/hvad/*.html',
                                  'templates/admin/elements/*.html',
                                  'templates/blocks/*.html',
                                  'templates/elements/*.html',
                                  'static/elements/*/*.*',
                                  'static/elements/*/src/*.css',
                                  'locale/*/*/*.*']},
-      install_requires=['django-hvad'],
+      install_requires=['six',
+                        'markdown2'],
       zip_safe=False)

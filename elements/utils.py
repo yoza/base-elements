@@ -1,3 +1,5 @@
+import warnings
+
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponse, HttpResponseRedirect
@@ -52,6 +54,8 @@ def get_site_from_request(request, check_subdomain=True):
     The returned ``Site`` or ``RequestSite`` object is cached for the host
     name retrieved from ``request``.
     """
+    warnings.warn('in django 1.9 it will be removed', DeprecationWarning,
+                  stacklevel=2)
     host = request.get_host().lower()
     if host in SITE_CACHE:
         # The host name was found in cache, return it. A cache value

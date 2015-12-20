@@ -3,14 +3,12 @@ site params admin
 
 """
 from django.conf import settings
-
-from hvad.admin import TranslatableAdmin
-
+from django.contrib import admin
 from elements import settings as local_settings
 from elements.admin.widgets import TinyMCE
 
 
-class SiteParamsAdmin(TranslatableAdmin):
+class SiteParamsAdmin(admin.ModelAdmin):
     """
     Site params admin
     """

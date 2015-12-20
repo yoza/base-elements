@@ -12,7 +12,7 @@ except ImportError:
         lookup_field, display_for_field, label_for_field)
 
 from django.contrib.admin.views.main import (
-    ALL_VAR, EMPTY_CHANGELIST_VALUE, ORDER_VAR, PAGE_VAR, SEARCH_VAR)
+    ALL_VAR, ORDER_VAR, PAGE_VAR, SEARCH_VAR)
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.utils import formats
@@ -183,11 +183,12 @@ def _boolean_icon(field_val):
 def items_for_result(cl, result, form, template, request):
     pk = cl.lookup_opts.pk.attname
     for field_name in cl.list_display:
+        empty_value_display = cl.model_admin.get_empty_value_display()
         row_class = ''
         try:
             f, attr, value = lookup_field(field_name, result, cl.model_admin)
         except (AttributeError, ObjectDoesNotExist):
-            result_repr = EMPTY_CHANGELIST_VALUE
+            result_repr = empty_value_display
         else:
             if f is None:
                 allow_tags = getattr(attr, 'allow_tags', False)
@@ -205,7 +206,7 @@ def items_for_result(cl, result, form, template, request):
                     result_repr = mark_safe(result_repr)
             else:
                 if value is None:
-                    result_repr = EMPTY_CHANGELIST_VALUE
+                    result_repr = empty_value_display
                 if isinstance(f.rel, models.ManyToOneRel):
                     result_repr = escape(getattr(result, f.name))
                 else:

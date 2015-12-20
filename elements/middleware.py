@@ -6,13 +6,13 @@ from django.core import urlresolvers
 from django.contrib.sites.models import Site
 from django.conf import settings
 
-from elements.utils import get_site_from_request
+# from elements.utils import get_site_from_request
 
 
 class LazySite(object):
     def __get__(self, request, obj_type=None):
         if not hasattr(request, '_cached_site'):
-            request._cached_site = get_site_from_request(request)
+            request._cached_site = Site.objects.get_current(request)
             if len(request._cached_site.domain.split(".")[-1]) == 0:
                 request._cached_site = Site.objects.get(id=settings.SITE_ID)
 
