@@ -20,5 +20,6 @@ setup(name='elements',
                                  'static/elements/*/src/*.css',
                                  'locale/*/*/*.*']},
       install_requires=['six',
-                        'markdown2'],
+                        'markdown2',
+                        'Pillow'],
       zip_safe=False)
