@@ -14,11 +14,11 @@ from django.template.loader import render_to_string
 
 class TinyMCE(Textarea):
     cleanup_res = {
-        re.compile(r'(\p{Zs}*)class="MsoNormal"', re.I | re.L | re.U) : '',
-        re.compile(r'<p(\p{Zs}*)/>', re.I | re.L | re.U) : '',
-        re.compile(r'<p>(\p{Zs}|&nbsp;)*</p>', re.I | re.L | re.U) : '',
-        re.compile(r'<p>(\p{Zs}|&nbsp;)+', re.I | re.L | re.U) : '<p>',
-        re.compile(r'(\p{Zs}|&nbsp;){2,}', re.I | re.L | re.U) : '',
+        re.compile(r'(\p{Zs}*)class="MsoNormal"', re.I | re.L | re.U): '',
+        re.compile(r'<p(\p{Zs}*)/>', re.I | re.L | re.U): '',
+        re.compile(r'<p>(\p{Zs}|&nbsp;)*</p>', re.I | re.L | re.U): '',
+        re.compile(r'<p>(\p{Zs}|&nbsp;)+', re.I | re.L | re.U): '<p>',
+        re.compile(r'(\p{Zs}|&nbsp;){2,}', re.I | re.L | re.U): '',
     }
 
     class Media:
@@ -26,7 +26,9 @@ class TinyMCE(Textarea):
             settings.DEFAULT_URL_TINYMCE,
         )]
 
-    def __init__(self, language=None, attrs=None):
+    def __init__(self, language=None, attrs=None, **kwargs):
+        template = 'admin/elements/tinymce4.html'
+        self.template = kwargs.get('template', template)
         self.language = settings.LANGUAGE_CODE
         self.lang_list = ""
         for lang, name in settings.LANGUAGES:
@@ -51,15 +53,16 @@ class TinyMCE(Textarea):
             'content_css':      self.content_css,
             'lang_list':        self.lang_list,
         }
-        template = 'admin/elements/tinymce4.html'
+
+        # template = 'admin/elements/tinymce4.html'
         if 'tiny_mce' in settings.DEFAULT_URL_TINYMCE:
             # for deprecated tinymce 3.* versions
-            template = 'admin/elements/tinymce.html'
+            self.template = 'admin/elements/tinymce.html'
             warnings.warn('The tinyMCE 3.x is deprecated. '
                           'Please use the new modern tinyMCE 4.x version.',
                           category=DeprecationWarning)
 
-        return rendered + mark_safe(render_to_string(template, context))
+        return rendered + mark_safe(render_to_string(self.template, context))
 
     def do_cleanup(self, content):
         for pattern, replacement in self.cleanup_res.items():
