@@ -38,7 +38,7 @@ class SiteParams(models.Model):
                               help_text=_('Site copyright'))
     slogan = models.CharField(_('Site slogan'), null=True,
                               blank=True, max_length=512,
-                              help_text=_('Put here text for site slogan')),
+                              help_text=_('Put here text for site slogan'))
     description = models.TextField(_('description'), null=True, blank=True,
                                    help_text=_('Site Description'))
     mdescrip = models.TextField(_('Meta description'), null=True, blank=True,

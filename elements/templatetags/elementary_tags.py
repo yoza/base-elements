@@ -160,7 +160,7 @@ def urlize_param(context, param, tags=''):
     """
     tag = site_param(context, param, tags)
 
-    return linkify(tag)
+    return mark_safe(linkify(tag))
 
 
 @register.simple_tag(takes_context=True)
