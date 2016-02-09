@@ -25,9 +25,9 @@ class RecaptchaWidget(Widget):
 
     def render(self, name, value, attrs=None):
         self.options['lang'] = lang = translation.get_language()
-        if len(settings.RECAPTCHA_CUSTOM_TRANSLATIONS[lang]) > 0:
-            self.options['custom_translations'] = \
-                settings.RECAPTCHA_CUSTOM_TRANSLATIONS[lang]
+        custom_trn = getattr(settings, 'RECAPTCHA_CUSTOM_TRANSLATIONS', None)
+        if custom_trn and len(custom_trn[lang]) > 0:
+            self.options['custom_translations'] = custom_trn[lang]
             options = '%r' % self.options
             options = options.replace("u'", "'")
         else:
