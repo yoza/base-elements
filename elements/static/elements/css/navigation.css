@@ -1,1 +1,221 @@
-#navigation{padding-right:0;}#navigation-form .submit-row INPUT.default{float:none;}#navigation UL{margin:0;padding:0;padding-left:40px;}#navigation LI{list-style:none;margin:0;padding:0;}#navigation LI DIV.border{margin:3px 0 0;}#navigation{padding-bottom:0.5em;padding-left:0px;padding-top:0.5em;}#navigation LI{clear:both;}#navigation LI SPAN{color:#777;}#navigation LI A SPAN{color:#5B80B2;font-weight:bold;}#navigation LI A:hover SPAN{color:#036;text-decoration:none;}#navigation LI.changed .border{background-color:#FFC !important;}#navigation .toolbox{float:right;}#navigation .toolbox A,#navigation .toolbox LABEL{margin:0 0.5em;}#navigation .toolbox LABEL{margin-left:0;}.toolbox{display:none;}#navigation .toolbox{display:block;}#navigation .toolbox LABEL{font-size:1em;}#navigation .toolbox LABEL.left{margin-left:0.5em;}#navigation .toolbox IMG{margin-right:1em;}#navigation DIV.border:hover{background-color:#EEE;}#navigation DIV.border{background-color:#F1F6FF;border-bottom:1px solid #DDD;padding:5px 5px 5px 10px;}#navigation .path{display:block;float:left;overflow:hidden;text-align:left;width:10em;}#navigation .path A{color:#666;font-size:0.9em;font-weight:normal;overflow:hidden;}#navigation .movespan{background:url(/static/elements/img/icon_move.gif) 0 0 no-repeat;color:#999;cursor:move;font-size:0.9em;font-weight:normal;margin-right:10px;padding-left:15px;}#navigation .movespan:link{color:#036;text-decoration:none;}#navigation .movespan:hover{color:#036;text-decoration:none;}#navigation .view{background:url(/static/elements/img/selector-addall.gif) 0 0.1em no-repeat;color:#999;font-weight:normal;margin-right:0px;padding-left:15px;}#navigation .link_id{color:#999;cursor:default;font-size:0.9em;font-weight:normal;padding-left:1em;}#navigation .navi-item{padding-right:0.8em;}#navigation .border SPAN.movespan,#navigation .border A.expand-collapse,#navigation .border INPUT.action-select{vertical-align:middle;}#navigation .border INPUT.action-select{margin-top:-1px;}#changelist{border:none;}#changelist UL{margin-left:0;margin-right:0;}#content-pages DIV.actions{text-align:left;}#header_forlist SPAN{vertical-align:middle;white-space:nowrap;}SPAN.addpadd{font-family:monospace;font-size:16px;margin:2px 4px;}
+/* - Navigation styles - */
+/* line 3, ../sass/navigation.scss */
+#navigation {
+  padding-right: 0;
+}
+
+/* line 7, ../sass/navigation.scss */
+#navigation-form .submit-row INPUT.default {
+  float: none;
+}
+
+/* line 11, ../sass/navigation.scss */
+#navigation UL {
+  padding: 0;
+  margin: 0;
+  padding-left: 40px;
+}
+
+/* line 17, ../sass/navigation.scss */
+#navigation LI {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* line 23, ../sass/navigation.scss */
+#navigation LI DIV.border {
+  margin: 3px 0 0;
+}
+
+/* line 27, ../sass/navigation.scss */
+#navigation {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  padding-left: 0px;
+}
+
+/* line 33, ../sass/navigation.scss */
+#navigation LI {
+  clear: both;
+}
+
+/* line 37, ../sass/navigation.scss */
+#navigation LI SPAN {
+  color: #777;
+}
+
+/* line 41, ../sass/navigation.scss */
+#navigation LI A SPAN {
+  color: #5B80B2;
+  font-weight: bold;
+}
+
+/* line 46, ../sass/navigation.scss */
+#navigation LI A:hover SPAN {
+  color: #036;
+  text-decoration: none;
+}
+
+/* line 51, ../sass/navigation.scss */
+#navigation LI.changed .border {
+  background-color: #FFC !important;
+}
+
+/* line 55, ../sass/navigation.scss */
+#navigation .toolbox {
+  float: right;
+}
+
+/* line 59, ../sass/navigation.scss */
+#navigation .toolbox A,
+#navigation .toolbox LABEL {
+  margin: 0 0.5em;
+}
+
+/* line 64, ../sass/navigation.scss */
+#navigation .toolbox LABEL {
+  margin-left: 0;
+}
+
+/* line 68, ../sass/navigation.scss */
+.toolbox {
+  display: none;
+}
+
+/* don't display in drag shadow */
+/* line 72, ../sass/navigation.scss */
+#navigation .toolbox {
+  display: block;
+}
+
+/* line 76, ../sass/navigation.scss */
+#navigation .toolbox LABEL {
+  font-size: 1em;
+}
+
+/* line 80, ../sass/navigation.scss */
+#navigation .toolbox LABEL.left {
+  margin-left: 0.5em;
+}
+
+/* line 84, ../sass/navigation.scss */
+#navigation .toolbox IMG {
+  margin-right: 1em;
+}
+
+/* line 88, ../sass/navigation.scss */
+#navigation DIV.border:hover {
+  background-color: #EEE;
+}
+
+/* line 92, ../sass/navigation.scss */
+#navigation DIV.border {
+  border-bottom: 1px solid #DDD;
+  padding: 5px 5px 5px 10px;
+  background-color: #F1F6FF;
+}
+
+/* line 98, ../sass/navigation.scss */
+#navigation .path {
+  width: 10em;
+  display: block;
+  float: left;
+  overflow: hidden;
+  text-align: left;
+}
+
+/* line 106, ../sass/navigation.scss */
+#navigation .path A {
+  font-weight: normal;
+  color: #666;
+  font-size: 0.9em;
+  overflow: hidden;
+}
+
+/* line 113, ../sass/navigation.scss */
+#navigation .movespan {
+  font-weight: normal;
+  margin-right: 10px;
+  color: #999;
+  font-size: 0.9em;
+  padding-left: 15px;
+  background: url(/static/elements/img/icon_move.gif) 0 0 no-repeat;
+  cursor: move;
+}
+
+/* line 123, ../sass/navigation.scss */
+#navigation .movespan:link {
+  text-decoration: none;
+  color: #036;
+}
+
+/* line 128, ../sass/navigation.scss */
+#navigation .movespan:hover {
+  text-decoration: none;
+  color: #036;
+}
+
+/* line 133, ../sass/navigation.scss */
+#navigation .view {
+  font-weight: normal;
+  margin-right: 0px;
+  color: #999;
+  padding-left: 15px;
+  background: url(/static/elements/img/selector-addall.gif) 0 0.1em no-repeat;
+}
+
+/* line 141, ../sass/navigation.scss */
+#navigation .link_id {
+  cursor: default;
+  font-weight: normal;
+  padding-left: 1em;
+  color: #999;
+  font-size: 0.9em;
+}
+
+/* line 149, ../sass/navigation.scss */
+#navigation .navi-item {
+  padding-right: 0.8em;
+}
+
+/* line 153, ../sass/navigation.scss */
+#navigation .border SPAN.movespan,
+#navigation .border A.expand-collapse,
+#navigation .border INPUT.action-select {
+  vertical-align: middle;
+}
+
+/* line 159, ../sass/navigation.scss */
+#navigation .border INPUT.action-select {
+  margin-top: -1px;
+}
+
+/* line 164, ../sass/navigation.scss */
+#changelist {
+  border: none;
+}
+
+/* line 168, ../sass/navigation.scss */
+#changelist UL {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* line 173, ../sass/navigation.scss */
+#content-pages DIV.actions {
+  text-align: left;
+}
+
+/* line 177, ../sass/navigation.scss */
+#header_forlist SPAN {
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+/* line 182, ../sass/navigation.scss */
+SPAN.addpadd {
+  font-family: monospace;
+  font-size: 16px;
+  margin: 2px 4px;
+}

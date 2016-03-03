@@ -1,1 +1,164 @@
-.placeholder-row textarea, .placeholder-row input{float:left;}.placeholder-row .revisions{float:left;margin-left:2em;}.placeholder-row .revisions ul{margin-left:0;padding:0;}.revisions-list .selected{font-weight:bold;}#status-row ul li{list-style-type:none;}#traduction-helper-content{background:#ffc;display:none;margin-top:1em;overflow:hidden;padding:1em;}span.addpadd,.expand-collapse span{font-family:monospace;font-size:16px;margin:2px 4px;}.expand-collapse .collapse{display:none;}.expand-collapse .expand{display:inline;}.expanded .collapse{display:inline;}.expanded .expand{display:none;}.sidebar{float:left;margin-right:1em;width:32em;}.sidebar div.description{margin:5px;}.clear{clear:both;}.float-left{float:left;width:60%;}.ac_results{background-color:white;border:1px solid #ccc;overflow:hidden;padding:0px;z-index:99999;}.ac_results ul{list-style:none;list-style-position:outside;margin:0;padding:0;width:100%;}.ac_results li{cursor:default;display:block;font:menu;font-size:11px;line-height:14px;margin:0px;overflow:hidden;padding:2px 4px;}.ac_loading{background:white url('../img/indicator.gif') right center no-repeat;}.ac_odd{background-color:#eee;}.ac_over{background-color:#999;color:white;}#id_parent{width:220px;}SELECT#id_parent OPTIONS{overflow:scroll;width:auto;}#page_form .lastchange_date DIV LABEL{display:none;}DIV.closed,UL.closed{display:none;}
+/* specific CSS for the django page admin application */
+/* line 3, ../sass/pages.scss */
+.placeholder-row textarea, .placeholder-row input {
+  float: left;
+}
+
+/* line 7, ../sass/pages.scss */
+.placeholder-row .revisions {
+  float: left;
+  margin-left: 2em;
+}
+
+/* line 12, ../sass/pages.scss */
+.placeholder-row .revisions ul {
+  padding: 0;
+  margin-left: 0;
+}
+
+/* line 17, ../sass/pages.scss */
+.revisions-list .selected {
+  font-weight: bold;
+}
+
+/* line 21, ../sass/pages.scss */
+#status-row ul li {
+  list-style-type: none;
+}
+
+/* line 25, ../sass/pages.scss */
+#traduction-helper-content {
+  margin-top: 1em;
+  background: #ffc;
+  padding: 1em;
+  display: none;
+  overflow: hidden;
+}
+
+/* line 33, ../sass/pages.scss */
+span.addpadd,
+.expand-collapse span {
+  font-family: monospace;
+  font-size: 16px;
+  margin: 2px 4px;
+}
+
+/* line 40, ../sass/pages.scss */
+.expand-collapse .collapse {
+  display: none;
+}
+
+/* line 44, ../sass/pages.scss */
+.expand-collapse .expand {
+  display: inline;
+}
+
+/* line 48, ../sass/pages.scss */
+.expanded .collapse {
+  display: inline;
+}
+
+/* line 52, ../sass/pages.scss */
+.expanded .expand {
+  display: none;
+}
+
+/* line 56, ../sass/pages.scss */
+.sidebar {
+  width: 32em;
+  float: left;
+  margin-right: 1em;
+}
+
+/* line 62, ../sass/pages.scss */
+.sidebar div.description {
+  margin: 5px;
+}
+
+/* line 66, ../sass/pages.scss */
+.clear {
+  clear: both;
+}
+
+/* line 70, ../sass/pages.scss */
+.float-left {
+  float: left;
+  width: 60%;
+}
+
+/* line 75, ../sass/pages.scss */
+.ac_results {
+  padding: 0px;
+  border: 1px solid #ccc;
+  background-color: white;
+  overflow: hidden;
+  z-index: 99999;
+}
+
+/* line 83, ../sass/pages.scss */
+.ac_results ul {
+  width: 100%;
+  list-style-position: outside;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* line 91, ../sass/pages.scss */
+.ac_results li {
+  margin: 0px;
+  padding: 2px 4px;
+  cursor: default;
+  display: block;
+  /*
+  if width will be 100% horizontal scrollbar will apear
+  when scroll mode will be used
+  */
+  /*width: 100%;*/
+  font: menu;
+  font-size: 11px;
+  /*
+  it is very important, if line-height not setted or setted
+  in relative units scroll will be broken in firefox
+  */
+  line-height: 14px;
+  overflow: hidden;
+}
+
+/* line 111, ../sass/pages.scss */
+.ac_loading {
+  background: white url("../img/indicator.gif") right center no-repeat;
+}
+
+/* line 115, ../sass/pages.scss */
+.ac_odd {
+  background-color: #eee;
+}
+
+/* line 119, ../sass/pages.scss */
+.ac_over {
+  background-color: #999;
+  color: white;
+}
+
+/* line 124, ../sass/pages.scss */
+#id_parent {
+  width: 220px;
+}
+
+/* line 128, ../sass/pages.scss */
+SELECT#id_parent OPTIONS {
+  width: auto;
+  overflow: scroll;
+}
+
+/* line 133, ../sass/pages.scss */
+#page_form .lastchange_date DIV LABEL {
+  display: none;
+}
+
+/* line 137, ../sass/pages.scss */
+DIV.closed,
+UL.closed {
+  display: none;
+}
