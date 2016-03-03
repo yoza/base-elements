@@ -4,7 +4,7 @@ from setuptools import find_packages, setup
 
 
 setup(name='elements',
-      version='1.1',
+      version='1.2',
       description='Django base templatetags',
       author='Oleg Prans',
       author_email='oleg@prans.net',
