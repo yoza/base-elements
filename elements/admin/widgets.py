@@ -88,10 +88,11 @@ class AdminImageWidget(AdminFileWidget):
             thumb_url = os.path.join(path,
                                      settings.IMAGE_THUMB_PREFIX + imfile)
 
-            output.append(u' <a style="display:block;float:left;\
-                            margin-right:10px;" href="%s" target="_blank">\
-                            <img src="%s" alt="%s" /></a> ' % \
-                            (image_url, thumb_url, file_name))
+            output.append(u' <a style="display:block;float:left;'
+                          u' margin-right:10px;" href="%s" target="_blank">'
+                          u'<img src="%s" alt="%s" /></a> '.format(image_url,
+                                                                   thumb_url,
+                                                                   file_name))
 
         output.append(super(AdminFileWidget, self).render(name, value, attrs))
 

@@ -23,37 +23,41 @@ def locator(request):
     lang = settings.LANGUAGE_CODE
     style = 'screen'
     debug = getattr(settings, 'DEBUG', False)
-    site_id = getattr(settings, 'SITE_ID', 1)
-    site_name = getattr(settings, 'SITE_NAME', '')
+    site_id = getattr(settings, 'SITE_ID', None)
     params = None
     rpi = None
+    site = None
     try:
         rpi = urlresolvers.resolve(request.path_info)
     except urlresolvers.Resolver404:
         pass
 
     if rpi:
-        site = request.site
+        if hasattr(request, 'site'):
+            site = getattr(request, 'site', None)
+        else:
+            host = request.get_host()
+            matches = Site.objects.filter(domain__iexact=host)
+            if matches.exists():
+                site = matches.first()
         if site:
+            setattr(settings, 'SITE_ID', site.id)
+        elif site_id:
             try:
-                site = Site.objects.filter(domain=site.domain)
-                if site.count():
-                    site_id = site[0].id
-                    site_name = site[0].name
+                site = Site.objects.get(id=settings.SITE_ID)
             except Site.DoesNotExist:
                 pass
-        setattr(settings, 'SITE_ID', site_id)
 
         (handler, args, kwargs) = rpi
 
         slug = kwargs['slug'] if 'slug' in kwargs else None
 
-        if 'lang' in kwargs and kwargs['lang'] and \
-                kwargs['lang'].lower() in dict(settings.LANGUAGES):
+        if ('lang' in kwargs and kwargs['lang'] and
+                kwargs['lang'].lower() in dict(settings.LANGUAGES)):
             lang = kwargs['lang'].lower()
         try:
             params = SiteParams.objects.get(
-                site__id=settings.SITE_ID)
+                site__id=site.id)
         except SiteParams.DoesNotExist:
             pass
 
@@ -65,7 +69,7 @@ def locator(request):
                 'lang': lang,
                 'slug': slug,
                 'debug': debug,
-                'site_name': site_name,
+                'site_name': site.name,
                 'site_params': params,
                 'url_name': rpi.url_name,
                 'args': args,
@@ -75,5 +79,5 @@ def locator(request):
         return {'lang': lang,
                 'debug': debug,
                 'site_params': params,
-                'site_name': site_name,
+                'site_name': site.name,
                 'current_style': style}

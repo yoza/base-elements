@@ -9,7 +9,7 @@ from django.utils.encoding import smart_text
 # tiny_mce #
 USE_TINY_MCE = getattr(settings, 'USE_TINY_MCE', False)
 DEFAULT_URL_TINYMCE = getattr(settings, 'DEFAULT_URL_TINYMCE',
-                              'tinymce/tinymce.js')
+                              'elements/tinymce-dist/tinymce.min.js')
 # end tiny_mce #
 
 # hierathy manager #
