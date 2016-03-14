@@ -88,11 +88,11 @@ class AdminImageWidget(AdminFileWidget):
             thumb_url = os.path.join(path,
                                      settings.IMAGE_THUMB_PREFIX + imfile)
 
-            output.append(u' <a style="display:block;float:left;'
-                          u' margin-right:10px;" href="%s" target="_blank">'
-                          u'<img src="%s" alt="%s" /></a> '.format(image_url,
-                                                                   thumb_url,
-                                                                   file_name))
+            output.append('<a style="display:block;float:left;'
+                          'margin-right:10px;" href="{}" target="_blank">'
+                          '<img src="{}" alt="{}" /></a> '.format(image_url,
+                                                                  thumb_url,
+                                                                  file_name))
 
         output.append(super(AdminFileWidget, self).render(name, value, attrs))
 
@@ -112,26 +112,28 @@ class AdminBannerWidget(AdminFileWidget):
                     height = instance.slot.height
                     width = instance.slot.width
                 else:
-                    return mark_safe(u'<span style="color:red;">%s</span>' % \
-                _("To allow for insert banner on this place, please insert \
-                  true 'width' and 'height' on the banner slot before!"))
+                    return mark_safe(
+                        '<span style="color:red;">{}</span>'.format(
+                            '_("To allow for insert banner on this place, '
+                            'please insert true `width` and `height` on the '
+                            'banner slot before!")'))
 
-                output.append(\
-                u'<script type="text/javascript"> var flashvars = {}; \
-                  var params = {allowScriptAccess: "sameDomain", \
-                  allowFullScreen: "false",quality:"high",wmode:"transparent",\
-                  movie: "%s"};\
-                  var attributes = {id: "banner_flash", name: "banner"};\
-                  swfobject.embedSWF("%s", "banner_flash","%s", "%s", \
-                  "10.0.0","/media/flash/expressInstall.swf", flashvars, \
-                  params, attributes);</script><span id="banner_flash"></span>\
-                  %s' % (image_url, image_url, width, height, _('Change:')))
+                output.append(
+                    '<script type="text/javascript"> var flashvars={};'
+                    'var params={allowScriptAccess: "sameDomain",'
+                    'allowFullScreen: "false",quality:"high",'
+                    'wmode:"transparent",movie: "{}"};'
+                    'var attributes={id: "banner_flash", name: "banner"};'
+                    'swfobject.embedSWF("{}", "banner_flash","{}", "{}",'
+                    '10.0.0","/media/flash/expressInstall.swf", flashvars,'
+                    'params, attributes);</script><span id="banner_flash">'
+                    '</span>{}'.format(image_url, image_url, width, height,
+                                       _('Change:')))
             else:
-                output.append(u' <a href="%s" target="_blank" \
-                                 style="display:block;float:left;\
-                                 margin-right:10px;">\
-                                 <img src="%s" alt="%s" /></a> ' % \
-                                 (image_url, image_url, file_name))
+                output.append('<a href="{}" target="_blank" '
+                              'style="display:block;float:left;'
+                              'margin-right:10px;"><img src="{}" alt="{}"/>'
+                              '</a>'.format(image_url, image_url, file_name))
 
         output.append(super(AdminFileWidget, self).render(name, value, attrs))
 
@@ -156,9 +158,10 @@ class AdminForeignImageWidget(RelatedFieldWidgetWrapper):
 
             thumb_url = os.path.join(path,
                                      settings.IMAGE_THUMB_PREFIX + imfile)
-            output.append(u' <a href="%s" target="_blank">\
-                             <img src="%s" alt="%s" /></a> %s ' % \
-                             (image_url, thumb_url, file_name, _('Change:')))
+            output.append('<a href="{}" target="_blank">'
+                          '<img src="{}" alt="{}" />'
+                          '</a> {} '.format(image_url, thumb_url, file_name,
+                                            _('Change:')))
 
         output.append(super(AdminForeignImageWidget,
                             self).render(name, value, attrs))
@@ -171,10 +174,10 @@ class AdminIconWidget(AdminFileWidget):
         if value and getattr(value, "url", None):
             image_url = value.url
             file_name = str(value)
-            output.append(u' <a href="%s" target="_blank" style=\
-                             "display:block;float:left;margin-right:10px;">\
-                             <img src="%s" alt="%s" /></a>' % \
-                             (image_url, image_url, file_name))
+            output.append('<a href="{}" target="_blank" style='
+                          '"display:block;float:left;margin-right:10px;">'
+                          '<img src="%s" alt="%s" />'
+                          '</a>'.format(image_url, image_url, file_name))
 
         output.append(super(AdminFileWidget, self).render(name, value, attrs))
 
